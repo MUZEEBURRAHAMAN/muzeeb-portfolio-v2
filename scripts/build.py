@@ -1,0 +1,485 @@
+"""Regenerates the six HTML pages from the data lists below. Run: python3 scripts/build.py"""
+import html, os, re
+OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+E = html.escape
+EMAIL = 'rahamanmuzeeb1108@gmail.com'
+CDN = 'https://cdn-images-1.medium.com/max/400/'
+
+ARTICLES = [  # (year, mm/dd, title, url, thumb, topic, claps, read min, views or None)
+ # Titles, claps and read time from medium.com/@Muzeebdesign; views from medium.com/me/stats (lifetime), both 2026-11-01.
+ # When views is set it replaces the claps badge; None falls back to claps, then read time.
+ (2026,'10/24',"How to show AI skills in a design portfolio without faking it",'https://medium.com/@Muzeebdesign/how-to-show-ai-skills-in-a-design-portfolio-without-faking-it-f863b02a95d0','https://miro.medium.com/v2/resize:fill:208:136/1*JZGFjuslXuKkrSGvR6_QDw.png','AI in design',0,8,None),
+ (2026,'10/16',"A notetaker lawyers can trust",'https://medium.com/design-bootcamp/a-notetaker-lawyers-can-trust-8b4b56bed58a','https://miro.medium.com/v2/resize:fill:208:136/1*8dgXbrYcMr9KYBcrNloOQw.jpeg','Case studies',0,19,10),
+ (2026,'09/30',"100+ screens in 4 days",'https://medium.com/design-bootcamp/i-designed-100-screens-in-4-days-heres-what-speed-without-research-really-costs-f80333be1bbc','https://miro.medium.com/v2/resize:fill:208:136/1*eOvUUxxtSH1M6f81s-wd1Q.jpeg','User research',0,7,28),
+ (2025,'07/20',"Test with five users",'https://medium.com/design-bootcamp/the-1-reason-most-digital-products-fail-hint-its-usability-157f8f70ef72','https://miro.medium.com/v2/resize:fill:208:136/1*W3ZAT4EUcaE4FQmTofmgmg.png','Usability',19,3,41),
+ (2025,'07/14',"Designing for Real People: Why Human Experience (HX) Matters More Than Just UX",'https://medium.com/design-bootcamp/designing-for-real-people-why-human-experience-hx-matters-more-than-just-ux-bda7dfb24ec6','https://cdn-images-1.medium.com/max/400/1*vjNXDUbz1gxGVueVNGi6RA.png','Human experience',26,4,29),
+ (2025,'05/22',"Engaging or addictive?",'https://medium.com/design-bootcamp/the-secret-to-designing-products-people-love-without-making-them-addictive-655ad97f4efa','https://miro.medium.com/v2/da:true/resize:fill:208:136/0*dYWM2MqO7z-ePCwM','Psychology',17,4,93),
+ (2025,'04/21',"A poll assistant for live chat",'https://medium.com/design-bootcamp/how-ai-polls-could-save-youtube-and-twitch-streamers-from-chat-chaos-ce1c5997e054','https://miro.medium.com/v2/da:true/resize:fill:208:136/0*nNWI6cdpHbaLG2L_','AI concepts',1,3,25),
+ (2025,'04/16',"UI vs UX for new designers",'https://medium.com/design-bootcamp/from-pretty-pixels-to-user-wins-your-ui-ux-guide-to-designing-with-impact-7b16b7071790','https://cdn-images-1.medium.com/max/400/1*lu52ukmZ0KptXp_X2PuTRg.jpeg','UI/UX',41,5,41),
+ (2024,'06/05',"The full UX case study",'https://medium.com/design-bootcamp/unlock-your-talent-the-case-study-formula-for-ui-ux-design-success-part-2-da1ba2453dbd','https://cdn-images-1.medium.com/max/400/0*IaRl_ixUhkLVUDLb.jpg','Portfolio',10,10,188),
+ (2024,'05/27',"Unlock Your Talent: The Case Study Formula for UI/UX Design Success, Part 1",'https://medium.com/design-bootcamp/unlock-your-talent-the-case-study-formula-for-ui-ux-design-success-part-1-8df5010c02af','https://cdn-images-1.medium.com/max/400/1*X6H8l_wWpILV7_HA5HnGRg.png','Portfolio',9,5,234),
+ (2024,'05/06',"Design Like a Pro: Mastering Metrics, Testing, and Human Touch",'https://medium.com/design-bootcamp/design-like-a-pro-mastering-metrics-testing-and-human-touch-4585a9e71704','https://cdn-images-1.medium.com/max/400/0*0gSESdZm7330BNta.png','Metrics & testing',8,4,45),
+ (2024,'04/04',"Mastering Interaction Design and Prototyping: Your Essential Guide to Product Management",'https://medium.com/@Muzeebdesign/mastering-interaction-design-and-prototyping-your-essential-guide-to-product-management-ac7b64b00e4c','https://cdn-images-1.medium.com/max/400/0*P24BI59qPVWTittD.gif','Prototyping',0,3,192),
+ (2024,'04/03',"UX for PMs: The Secret to Building Products Users Love",'https://medium.com/@Muzeebdesign/ux-for-pms-the-secret-to-building-products-users-love-30996ff37c02','https://cdn-images-1.medium.com/max/400/0*4A3PcLvmMtRtpnbJ.png','Product',0,6,22),
+ (2024,'03/03',"Making Customers Happy: Your Guide to the Kano Framework in Product Management",'https://medium.com/@Muzeebdesign/making-customers-happy-your-guide-to-the-kano-framework-in-product-management-b8d84e39101e','https://miro.medium.com/v2/resize:fill:208:136/0*53_N-BpNd7kOgay6.png','Product strategy',8,7,158),
+ (2024,'02/21',"Choosing What’s Best: The Simple Guide to Feature Prioritization for Product Managers",'https://medium.com/@Muzeebdesign/choosing-whats-best-the-simple-guide-to-feature-prioritization-for-product-managers-12333490cd13','https://miro.medium.com/v2/resize:fill:208:136/0*RedwdM305vlFqjmx.png','Prioritization',0,7,355),
+ (2024,'02/12',"Mastering Competitor Research: A Strategic Guide for Product Managers",'https://medium.com/@Muzeebdesign/mastering-competitor-research-a-strategic-guide-for-product-managers-f91622727434','https://miro.medium.com/v2/da:true/resize:fill:208:136/0*YD5ezBkV3jxRS1hj','Competitor research',0,5,203),
+ (2023,'06/22',"User Observation in UX Research",'https://medium.com/@Muzeebdesign/user-observation-in-ux-research-c15357142f9b','https://miro.medium.com/v2/resize:fill:208:136/1*LgIVRE8N76wGkUrn6DcaxA.png','User research',36,5,1400),
+ (2023,'03/27',"E-commerce “Search” button",'https://medium.com/@Muzeebdesign/e-commerce-search-button-4bee4bf3ba6a','https://miro.medium.com/v2/resize:fill:208:136/0*m9IEv0nzc3Kb_vO8.png','E-commerce',2,19,143),
+]
+
+PROJECTS = [  # (name, domain, desc, cover, url)
+ ('OmnisProof','omnisai.io','Replaced a modal wizard with a persistent canvas and reviewable AI field detection. E-signature setup went from 11 steps to 8.','omnisproof','projects/omnisproof.html'),
+ ('CaseNotes','omnisai.io','An AI notetaker where every word carries legal privilege, anchored to the matter’s discovery files.','casenotes','projects/casenotes.html'),
+ ('AI UX Audit Engine','internal tool','Reviews staging builds and posts annotated reports to Slack. Replaced 4+ hours of manual design QA per sprint.','audit-engine','projects/audit-engine.html'),
+ ('CasePro Matter Redesign','omnisai.io','Split one merged form into intake and matter creation, with an AI-assisted path and a manual one.','casepro','projects/casepro.html'),
+ ('GoFully','chrome web store','A screenshot extension rebuilt around privacy: new brand, token system, 70+ screens and a site that says nothing leaves your device.','gofully','projects/gofully.html'),
+ ('LitBox','omnisai.io','A matter-scoped file layer Omnis AI owns, embedded live in AutoDoc, MedChron and OmnisProof.','litbox','projects/litbox.html'),
+]
+
+LAB = [  # (name, where, desc, cover, url)
+ ('AI UX Audit Assistant','github.com','An AI agent that reviews UI for accessibility, visual and interaction issues.','ux-audit-assistant-cover','https://github.com/MUZEEBURRAHAMAN/AI-UX-Audit-Assistant'),
+ ('Catchly','chrome web store','A Chrome extension for visual QA that stitches screenshots across the viewport.','catchly-cover','https://chromewebstore.google.com/detail/catchly/ogfdfheefhnmgkafcahpelmcofmgcobk'),
+ ('Cutcliply','railway.app','A video tool that smart-crops long recordings into clips.','cutcliply-cover','https://cutcliply.up.railway.app/'),
+ ('Blobby','figma.com','A Figma plugin that generates editable organic blobs as SVG.','blobby-plugin','https://www.figma.com/community/plugin/1672948027574838944/blobby-editable-blob-generator'),
+ ('Avatarly','figma plugin','A Figma plugin that fills designs with generated avatars.','avatarly-cover','#avatarly'),
+ ('Tooltips & Snackbars','figma.com','A Figma kit of tooltips, toasts and snackbars, built on tokens.','ui-kits','https://www.figma.com/community/file/1535935401113364323/tooltips-toastssnackbar'),
+ ('Claude Skills & MCP','claude code','My design reviews packaged as reusable Claude Code skills, so every session starts from the same rules.','forge-skill','#claude-skills'),
+ ('Omnis AI Design System','multi-product','One token and component system across 7 legal-tech products.','omnis-design-system-cover','#omnis-design-system'),
+ ('Mobile Apps','safeside · anchor · photoly','Three small mobile app concepts, from flows to final screens.','mobile-apps-cover','#mobile-apps'),
+ ('Web Apps','web tool','Small web tools for creators, designed and coded end to end.','thumbly-cover','#web-apps'),
+]
+
+# (brand svg in assets/brands, name, what I use it for, tile colour, logo colour) — logos from Simple Icons (CC0)
+TOOLS = [
+ ('figma','Figma','design','#F24E1E','#fff'),
+ ('claude','Claude Code','build + skills','#D97757','#fff'),
+ ('jira','Jira','delivery','#0052CC','#fff'),
+ ('slack','Slack','QA reports','#4A154B','#fff'),
+ ('github','GitHub','side projects','#181717','#fff'),
+ ('react','React','production UI','#20232A','#61DAFB'),
+ ('tailwindcss','Tailwind CSS','styling','#0B1120','#38BDF8'),
+ ('html5','HTML & CSS','prototypes in code','#E34F26','#fff'),
+ ('googlechrome','Chrome','extensions','#1A73E8','#fff'),
+ ('vercel','Vercel','shipping sites','#000000','#fff'),
+ ('railway','Railway','hosting web apps','#13111C','#fff'),
+ ('medium','Medium','writing','#000000','#fff'),
+]
+def tool(b, name, use, bg, fg):
+    logo = open(os.path.join(OUT, 'assets', 'brands', b + '.svg')).read().strip().replace('<svg ', '<svg aria-hidden="true" focusable="false" ', 1)
+    return f'<div class="tool"><span class="mk" style="background:{bg};color:{fg}">{logo}</span><b>{E(name)}</b><small>{E(use)}</small></div>'
+
+# (file id, title, note, category); order = curated best first
+WORKS = [
+ ('21','Sales Dashboard','Metrics, graphs and sales at a glance','product'),
+ ('01','Eve Wellness','Employee mental wellness app and flows','mobile'),
+ ('46','E-sign Components','Signature field and signing components','product'),
+ ('03','Pharmflow','Medical e-commerce app','mobile'),
+ ('11','Affil.ai','Affiliate marketing dashboard','product'),
+ ('47','Mental Health Landing','Wellness landing page','web'),
+ ('8','We Forest','YC website redesign','web'),
+ ('18','Math AI Tutor','Onboarding for an AI math tutor','mobile'),
+ ('22','Analytics Dashboard','Data-heavy dashboard with clean panels','product'),
+ ('7','Oodle','Dating app screens and matching','mobile'),
+ ('04','Eve Landing Page','Landing page for the Eve platform','web'),
+ ('41','Screenshot Redesign','Screenshot tool interface','product'),
+ ('13','Rivet','YC devtools website redesign','web'),
+ ('02','Eve Wellness App','Wellness tracking screens','mobile'),
+ ('48','E-commerce Landing','Business landing page','web'),
+ ('20','Pricing Modal','SaaS plan selection dialog','product'),
+ ('12','Relaw','YC legal-tech website redesign','web'),
+ ('23','Donation App','Light and dark theme exploration','mobile'),
+ ('38','Component Library','Figma-ready UI components','product'),
+ ('9','Mail Tester','YC website redesign','web'),
+ ('19','Rosify','Dating app onboarding','mobile'),
+ ('37','Chat UI','Message history and composer','product'),
+ ('10','Healthtech Platform','YC healthtech website concept','web'),
+ ('24','Math AI Workspace','Main screens of the AI math helper','mobile'),
+ ('40','Upload Flow','File upload states','product'),
+ ('44','Shopify Home Page','Store home page design','web'),
+ ('36','Oodle Discovery','Match discovery and profiles','mobile'),
+ ('35','LetMeGrab Login','E-commerce login and brand tokens','product'),
+ ('49','How It Works · Eve AI','Explainer section','web'),
+ ('06','Wellness Tracking','Employee wellness section','web'),
+ ('15','RemoveBG','Background removal app','mobile'),
+ ('43','Screenshot Redesign II','Alternate screenshot tool layout','product'),
+ ('16','Eve Footer','Responsive footer','web'),
+ ('17','Bundled','App screen and component layout','mobile'),
+ ('32','Splash Screen','App intro screen','mobile'),
+ ('33','Onboarding Flow','Step-by-step onboarding','mobile'),
+ ('39','Landing Page','Marketing landing page','web'),
+ ('05','Q Group','Logo and corporate identity','brand'),
+ ('6','Pharmflow Brand','Guidelines, colour and assets','brand'),
+ ('14','Click','Logo and identity concepts','brand'),
+ ('27','Roomlocker','Corporate identity and logo','brand'),
+ ('25','LinkedIn Cover','Feature banner design','social'),
+ ('26','Instagram Templates','Post templates and styling','social'),
+ ('29','Instagram Post','Brand messaging layout','social'),
+ ('34','Social Post','Creative post template','social'),
+ ('28','Thumbnail','Video and blog thumbnail','social'),
+ ('30','Thumbnail Concept','Video preview layout','social'),
+ ('31','Thumbnail Mockup','Alternate thumbnail options','social'),
+]
+CATS = [('all','All'),('product','Product UI'),('mobile','Mobile'),('web','Web'),('brand','Branding'),('social','Social')]
+
+# Iconsax "Bulk" duotone icons (github.com/lusaxweb/iconsax), stored in assets/icons and inlined at build time.
+# The 40%-opacity layer carries class="duo" so CSS can tint it.
+ICON_DIR = os.path.join(OUT, 'assets', 'icons')
+def svg(k, cls=''):
+    s = open(os.path.join(ICON_DIR, k + '.svg')).read().strip()
+    attrs = ' class="ico' + (' ' + cls if cls else '') + '" aria-hidden="true" focusable="false"'
+    return s.replace('<svg ', '<svg' + attrs + ' ', 1)
+
+NAV = [('index.html','home','Home'),('writing.html','writing','Writing'),('projects.html','projects','Projects'),('best-design.html','design','Best Design'),('lab.html','lab','Lab'),('journey.html','journey','Journey')]
+
+SHORTCUT = {'home': 'H', 'writing': 'W', 'projects': 'P', 'design': 'D', 'lab': 'L', 'journey': 'J'}
+
+def tip(label, keys):
+    return f'<span class="tip" aria-hidden="true"><span class="tl">{E(label)}</span>' + ''.join(f'<kbd>{k}</kbd>' for k in keys) + '</span>'
+
+def dock(cur):
+    items = []
+    for href, key, label in NAV:
+        ac = ' aria-current="page"' if key == cur else ''
+        t = tip(label, ['G', SHORTCUT[key]])
+        attrs = f'href="{href}" aria-label="{label}" aria-keyshortcuts="G {SHORTCUT[key]}" data-key="{SHORTCUT[key].lower()}"{ac}'
+        if key == 'home':
+            items.append(f'<a {attrs} class="me"><canvas aria-hidden="true"></canvas>{t}</a><span class="sep"></span>')
+        else:
+            items.append(f'<a {attrs}>{svg(key)}{t}</a>')
+    items.append('<span class="sep"></span>')
+    items.append(f'<button class="snd" type="button" aria-pressed="true" aria-keyshortcuts="M">{svg("sound-on", "on")}{svg("sound-off", "off")}{tip("Sound", ["M"])}</button>')
+    items.append(f'<button class="thm" type="button" aria-keyshortcuts="T">{svg("sun", "sun")}{svg("moon", "moon")}{tip("Theme", ["T"])}</button>')
+    return '<nav class="dock" aria-label="Site">' + ''.join(items) + '</nav>'
+
+FOOT = f'''<footer class="foot"><span>© 2026 Muzeeb Urrahaman</span><button class="copy" type="button" data-copy="{EMAIL}" data-done="Copied">{svg("copy", "i-copy")}{svg("tick", "i-tick")}<span class="lbl" aria-live="polite">Copy email</span></button><a href="https://www.linkedin.com/in/muzeeburrahaman" rel="noopener">LinkedIn ↗</a></footer>'''
+
+def page(fname, key, title, desc, body, base=''):
+    doc = f'''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{E(title)}</title>
+<meta name="description" content="{E(desc)}">
+<meta property="og:title" content="{E(title)}">
+<meta property="og:description" content="{E(desc)}">
+<meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0e" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@200;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>try{{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}}catch(e){{}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<main id="main" class="col">
+{body}
+{FOOT}
+</main>
+</div>
+{dock(key)}
+<script src="assets/js/portrait-dots.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
+'''
+    if base:  # pages in a subfolder: point local links and assets one level up
+        doc = re.sub(r'(href|src|data-full)="(?!https?:|#|mailto:|data:)', lambda m: m.group(0) + base, doc)
+    path = os.path.join(OUT, fname); os.makedirs(os.path.dirname(path), exist_ok=True)
+    open(path, 'w').write(doc)
+
+def prow(name, where, desc, img, url):
+    ext = url.startswith('http')
+    pop = f' data-dialog="{url[1:]}" aria-haspopup="dialog"' if url.startswith('#') else ''
+    return (f'<a class="prow" href="{E(url)}"{" rel=noopener" if ext else ""}{pop}>'
+            f'<span class="icon"><img src="{img}" alt="" loading="lazy" decoding="async" width="44" height="44"></span>'
+            f'<span><b>{E(name)}</b><span class="arr" aria-hidden="true">{"↗" if ext else ("+" if pop else "→")}</span><small>{E(where)}</small></span>'
+            f'<p>{E(desc)}</p></a>')
+
+TOPIC_TONE = {  # tag -> badge tint, shared by writing topics, case study tags and skills
+ 'Legal tech': 'slate', 'Legal SaaS': 'slate', 'AI': 'amber', 'AI tooling': 'amber', 'AI-assisted': 'amber',
+ '0 → 1': 'sage', 'Design QA': 'sage', 'Chrome extension': 'rose', 'Brand + product': 'sand', 'Secure storage': 'plum',
+ 'User research': 'slate', 'Usability': 'slate', 'Metrics & testing': 'slate',
+ 'Human experience': 'plum', 'Psychology': 'plum',
+ 'AI concepts': 'amber', 'AI in design': 'amber', 'UI/UX': 'sage', 'Prototyping': 'sage',
+ 'Portfolio': 'sand', 'Case studies': 'sand', 'Product': 'rose',
+ 'Product strategy': 'rose', 'Prioritization': 'sand', 'Competitor research': 'slate', 'E-commerce': 'sage'}
+
+def tag(text, tone=None):
+    return f'<span class="badge topic {tone or TOPIC_TONE.get(text, "slate")}">{E(text)}</span>'
+
+def stat_badge(claps, read, views):
+    if views:
+        short = f'{views / 1000:.1f}K'.replace('.0K', 'K') if views >= 1000 else str(views)
+        return f'<span class="badge stat" title="{views:,} views on Medium">{svg("eye")}<span>{short}</span><span class="visually-hidden"> views</span></span>'
+    if claps: return f'<span class="badge stat" title="{claps} claps on Medium">{svg("flash")}<span>{claps}</span><span class="visually-hidden"> claps</span></span>'
+    return f'<span class="badge stat" title="{read} minute read">{svg("clock")}<span>{read} min</span><span class="visually-hidden"> read</span></span>'
+
+def post(a, full_date=False):
+    y, d, t, u, th, topic, claps, read, views = a
+    date = f'{str(y)[2:]}/{d}' if full_date else d
+    return (f'<a class="post" href="{E(u)}" rel="noopener"><span class="th"><img src="{E(th)}" alt="" loading="lazy" decoding="async" width="52" height="34"></span>'
+            f'<span class="t">{E(t)}</span><span class="lead" aria-hidden="true"></span>'
+            f'<span class="badges">{tag(topic)}{stat_badge(claps, read, views)}</span>'
+            f'<span class="d">{date}</span></a>')
+
+def work(w, i):
+    fid, t, note, cat = w
+    return (f'<button class="work" type="button" data-cat="{cat}" data-full="assets/img/work/{fid}.webp">'
+            f'<span class="im"><img src="assets/img/work/{fid}-thumb.webp" alt="{E(t)}: {E(note)}" loading="{"eager" if i < 4 else "lazy"}" decoding="async" width="600" height="450"></span>'
+            f'<b>{E(t)}</b><small>{E(note)}</small></button>')
+
+# ---------------- HOME ----------------
+home = f'''
+<section class="hero" aria-label="Intro">
+  <div>
+    <h1>Muzeeb Urrahaman <span class="dot" role="img" title="Open to work" aria-label="Open to work"></span></h1>
+    <p>I’m Muzeeb, a <span class="chip">product designer</span> and design engineer. I design the system, then ship it in code.</p>
+    <p>For <strong>4.8+ years</strong> I’ve taken AI, legal and SaaS products from <span class="chip">0 → 1</span>, most recently 7 legal-tech products at Omnis AI.</p>
+    <p>I was the only designer on most of my teams, so I’m used to making calls without a clear answer. I ask questions until the problem is clear, then move fast.</p>
+    <p class="find">Find me on <a href="https://www.linkedin.com/in/muzeeburrahaman" rel="noopener">LinkedIn</a>, <a href="https://github.com/MUZEEBURRAHAMAN" rel="noopener">GitHub</a>, <a href="https://dribbble.com/Muzeeburrahaman" rel="noopener">Dribbble</a> and <a href="#" data-copy="{EMAIL}">{EMAIL}</a></p>
+  </div>
+  <div class="portrait" role="img" aria-label="Dot portrait of Muzeeb in a black cap. Move the pointer over it to scatter the dots."><canvas></canvas><span class="hint" aria-hidden="true"><span class="h-ptr">poke me</span><span class="h-tch">tap me</span></span></div>
+</section>
+
+<nav class="tiles" aria-label="Sections">
+  <a class="tile" href="writing.html"><span class="ic">{svg('writing')}</span><b>Writing</b><small>{len(ARTICLES)} posts</small></a>
+  <a class="tile" href="best-design.html"><span class="ic">{svg('design')}</span><b>Best Design</b><small>{len(WORKS)} works</small></a>
+  <a class="tile" href="projects.html"><span class="ic">{svg('projects')}</span><b>Projects</b><small>{len(PROJECTS)} case studies</small></a>
+</nav>
+
+<section class="sec" aria-labelledby="h-proj">
+  <div class="eyebrow" id="h-proj"><span class="n">01</span> Projects <a class="more" href="projects.html">View all {len(PROJECTS)} →</a></div>
+  <div class="plist">{''.join(prow(n, w, d, f'assets/img/cover/{c}.webp', u) for n, w, d, c, u in PROJECTS[:2])}</div>
+</section>
+
+<section class="sec" aria-labelledby="h-exp">
+  <div class="eyebrow" id="h-exp"><span class="n">02</span> Experience</div>
+  <div class="rows">
+    <div class="row"><div class="t"><b>Omnis AI</b><small>Product Designer / Design Engineer</small></div><span class="d">2024–2026</span></div>
+    <div class="row"><div class="t"><b>LetMeGrab</b><small>UI/UX Designer & Researcher</small></div><span class="d">2023–2024</span></div>
+    <div class="row"><div class="t"><b>Photoshooto</b><small>UI/UX Designer</small></div><span class="d">2022–2023</span></div>
+    <div class="row"><div class="t"><b>EngineerHUB · Kartexa</b><small>Jr. UI/UX Designer · Design Intern</small></div><span class="d">2022</span></div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-wr">
+  <div class="eyebrow" id="h-wr"><span class="n">03</span> Writing <a class="more" href="writing.html">View all {len(ARTICLES)} →</a></div>
+  <div class="posts">{''.join(post(a, True) for a in ARTICLES[:5])}</div>
+</section>
+
+<section class="sec" aria-labelledby="h-bd">
+  <div class="eyebrow" id="h-bd"><span class="n">04</span> Best Design <a class="more" href="best-design.html">View all {len(WORKS)} →</a></div>
+  <div class="grid2">
+    <a class="work" href="best-design.html"><span class="im"><img src="assets/img/work/01-thumb.webp" alt="Eve Wellness mobile app screens" loading="lazy" decoding="async" width="600" height="450"></span><b>Eve Wellness</b><small>Employee mental wellness app</small></a>
+    <a class="work" href="best-design.html"><span class="im"><img src="assets/img/work/21-thumb.webp" alt="Sales dashboard design" loading="lazy" decoding="async" width="600" height="450"></span><b>Sales Dashboard</b><small>Metrics, graphs and sales</small></a>
+  </div>
+</section>
+
+<section class="sec tools" aria-labelledby="h-tools">
+  <div class="eyebrow" id="h-tools"><span class="n">05</span> Tools I live in <span class="nav"><button class="prev" type="button" aria-label="Previous tools" aria-controls="tool-track">{svg("prev")}</button><button class="next" type="button" aria-label="Next tools" aria-controls="tool-track">{svg("next")}</button></span></div>
+  <div class="track" id="tool-track" tabindex="0" role="region" aria-label="Tools, scroll sideways">{''.join(tool(*t) for t in TOOLS)}</div>
+</section>
+'''
+page('index.html','home','Muzeeb Urrahaman · Product Designer & Design Engineer','Product designer and design engineer with 4.8+ years shipping AI, legal and SaaS products from 0 to 1.',home)
+
+# ---------------- WRITING ----------------
+years = {}
+for a in ARTICLES: years.setdefault(a[0], []).append(a)
+wr = '<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Writing<h1 class="visually-hidden">Writing</h1> <a class="more" href="https://medium.com/@Muzeebdesign" rel="noopener">Medium ↗</a></div><p class="lede">Notes on usability, research and building products people use. All published on Medium.</p></header>'
+for y in sorted(years, reverse=True):
+    wr += f'<section class="year" aria-labelledby="y{y}"><span class="big" aria-hidden="true" data-y="{str(y)[2:]}"></span><h2 id="y{y}" class="badge stat year-badge">{y}</h2><div class="posts">{"".join(post(a) for a in years[y])}</div></section>'
+page('writing.html','writing','Writing · Muzeeb Urrahaman','Articles by Muzeeb Urrahaman on usability, research and product design, published on Medium.',wr)
+
+# ---------------- PROJECTS ----------------
+pr = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Projects<h1 class="visually-hidden">Projects</h1></div><p class="lede">Products I designed end to end, mostly AI tools for law firms. Each one opens the full case study.</p></header>
+<div class="plist">{''.join(prow(n, w, d, f'assets/img/cover/{c}.webp', u) for n, w, d, c, u in PROJECTS)}</div>'''
+page('projects.html','projects','Projects · Muzeeb Urrahaman','Six product design case studies: OmnisProof, CaseNotes, AI UX Audit Engine, CasePro, GoFully and LitBox.',pr)
+
+# ---------------- BEST DESIGN ----------------
+counts = {k: sum(1 for w in WORKS if w[3] == k) for k, _ in CATS}; counts['all'] = len(WORKS)
+chips = ''.join(f'<button type="button" data-filter="{k}" aria-pressed="{"true" if k == "all" else "false"}">{l}<span>{counts[k]}</span></button>' for k, l in CATS)
+bd = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Best Design<h1 class="visually-hidden">Best Design</h1></div><p class="lede">{len(WORKS)} visual works: product UI, dashboards, mobile apps, landing pages and branding. Click any piece to see it full size.</p>
+<div class="chips" role="group" aria-label="Filter by type">{chips}</div></header>
+<div class="grid2 works">{''.join(work(w, i) for i, w in enumerate(WORKS))}</div>'''
+page('best-design.html','design','Best Design · Muzeeb Urrahaman','A visual archive of product UI, dashboards, mobile apps, landing pages and branding by Muzeeb Urrahaman.',bd)
+
+# ---------------- LAB ----------------
+lb = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Lab<h1 class="visually-hidden">Lab</h1></div><p class="lede">Side projects I designed and built to try new interactions and tools: Chrome extensions, Figma plugins, Claude skills and small apps.</p></header>
+<div class="plist">{''.join(prow(n, w, d, f'assets/img/cover/lab-{c}.webp', u) for n, w, d, c, u in LAB)}</div>
+<section class="sec" aria-labelledby="h-ai"><div class="eyebrow" id="h-ai"><span class="n">AI</span> How I use AI in design <a class="more" href="#ai-workflow" data-dialog="ai-workflow" aria-haspopup="dialog">How I work with AI +</a></div>
+<p class="lede">AI speeds up research synthesis, edge-case hunting and early prototypes. Taste, empathy and trade-offs stay with me.</p>
+<div class="stats"><div><b>10×</b><small>Faster context ingestion</small></div><div><b>3×</b><small>Faster prototype validation</small></div><div><b>100%</b><small>Human-owned decisions</small></div></div></section>'''
+
+# ---------------- JOURNEY ----------------
+jr = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Journey<h1 class="visually-hidden">Journey</h1> <a class="more dl" href="assets/files/Muzeeb-Urrahaman-Resume.pdf">{svg("download")}Download PDF</a></div>
+<p class="lede">Product Designer & Design Engineer. AI product design, SaaS and design systems. Based in Uttar Pradesh, India, open to remote and relocation.</p></header>
+<div class="stats"><div><b>4.8+</b><small>Years designing</small></div><div><b>7</b><small>AI products shipped</small></div><div><b>40%</b><small>Fewer UI inconsistencies</small></div></div>
+<section class="sec" aria-labelledby="h-jx"><div class="eyebrow" id="h-jx"><span class="n">01</span> Experience</div>
+<div class="rows">
+ <div class="row"><div class="t"><b>Omnis AI LLC</b><small>Product Designer / Design Engineer · Texas, remote</small><ul>
+  <li>Led end-to-end design across 7 AI legal-tech products, from research to prototypes, with founders and engineering.</li>
+  <li>Built the Omnis Design System: one component library and token set. UI inconsistencies dropped 40% and feature design went from days to hours.</li>
+  <li>Cut legal case-management workflows from 8 steps to 3 and raised internal efficiency 25%.</li>
+  <li>Built AI design-QA automation that replaced 4+ hours of manual review per sprint.</li></ul></div><span class="d">12/24–07/26</span></div>
+ <div class="row"><div class="t"><b>LetMeGrab</b><small>UI/UX Designer & Researcher · Surat, on-site</small><ul>
+  <li>Owned UX across seller, customer and admin platforms, from onboarding to checkout.</li>
+  <li>Redesigned seller onboarding and checkout: conversion up 18%, drop-off down 22%.</li>
+  <li>Set up reusable component libraries across 3 platform verticals.</li></ul></div><span class="d">01/23–12/24</span></div>
+ <div class="row"><div class="t"><b>Photoshooto · EngineerHUB · Kartexa</b><small>UI/UX Designer · Jr. UI/UX Designer · Design Intern</small><ul>
+  <li>Web and mobile experiences across SaaS, e-commerce and consumer products.</li></ul></div><span class="d">2022–2023</span></div>
+</div></section>
+<section class="sec" aria-labelledby="h-js"><div class="eyebrow" id="h-js"><span class="n">02</span> Skills</div>
+<div class="tags">{tag('UX strategy','slate')}{tag('Interaction design','sage')}{tag('Design systems','sage')}{tag('Prototyping','sage')}{tag('User research','slate')}{tag('Front-end (HTML, CSS, React)','plum')}{tag('AI-assisted workflows','amber')}{tag('0 → 1 products','sand')}</div></section>
+<section class="sec" aria-labelledby="h-jq"><div class="eyebrow" id="h-jq"><span class="n">03</span> Kind words</div>
+<div class="quotes">
+ <blockquote class="quote"><p>“Muzeeb’s creative vision is top-notch. He keeps teams aligned and infuses craft into every product detail.”</p><footer><img src="assets/img/people/danielle-caldwell.webp" alt="" width="32" height="32" loading="lazy"><span>Danielle Caldwell<small>Product Design Lead, PatientPoint</small></span></footer></blockquote>
+ <blockquote class="quote"><p>“Our speed is intense and every design challenge is met with relentless craft.”</p><footer><img src="assets/img/people/nicoletta-pizzocheri.webp" alt="" width="32" height="32" loading="lazy"><span>Nicoletta Pizzocheri<small>Lead Product Designer, Femme Palette</small></span></footer></blockquote>
+</div></section>'''
+page('journey.html','journey','Journey · Muzeeb Urrahaman','Experience, skills and résumé of Muzeeb Urrahaman, product designer and design engineer.',jr)
+
+# ---------------- CASE STUDIES ----------------
+from case_studies import CASES
+
+def md(t):
+    return re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', E(t))
+
+def img_size(path):
+    """Width and height of a WebP, read from its header."""
+    b = open(os.path.join(OUT, path), 'rb').read(40)
+    if b[12:16] == b'VP8X': return 1 + int.from_bytes(b[24:27], 'little'), 1 + int.from_bytes(b[27:30], 'little')
+    if b[12:16] == b'VP8 ': return int.from_bytes(b[26:28], 'little') & 0x3fff, int.from_bytes(b[28:30], 'little') & 0x3fff
+    v = int.from_bytes(b[21:25], 'little'); return (v & 0x3fff) + 1, ((v >> 14) & 0x3fff) + 1
+
+def img_kind(w, h):
+    r = h / w
+    if 1.9 <= r <= 2.4: return 'phone'   # mobile screens: shown in a phone-sized frame
+    if r > 1.6: return 'long'            # full-page captures: cropped preview, full size on click
+    if r > 1.1: return 'tall'            # portrait panels: narrower so they don't dominate
+    return 'wide'
+
+def cs_img(slug, f, cap, eager=False):
+    src = f'assets/img/cs/{slug}/{f}'; w, h = img_size(src); kind = img_kind(w, h)
+    more = '<span class="more-hint" aria-hidden="true">View full page</span>' if kind == 'long' else ''
+    return (f'<figure class="cs-fig {kind}"><button type="button" class="zoom" data-full="{src}" aria-label="Open image full size">'
+            f'<img src="{src}" alt="{E(cap)}" width="{w}" height="{h}" loading="{"eager" if eager else "lazy"}" decoding="async">{more}</button>'
+            f'<figcaption>{md(cap)}</figcaption></figure>')
+
+def pill(kind, text): return f'<span class="cs-pill {kind}">{E(text)}</span>'
+
+def block(slug, b):
+    k = b[0]
+    if k == 'p': return f'<p class="cs-p">{md(b[1])}</p>'
+    if k == 'lead': return f'<p class="cs-lead">{md(b[1])}</p>'
+    if k == 'list': return '<ul class="cs-list">' + ''.join(f'<li>{md(i)}</li>' for i in b[1]) + '</ul>'
+    if k == 'flow': return '<div class="cs-flow">' + ''.join(f'<span>{md(i)}</span>' for i in b[1]) + '</div>'
+    if k == 'quote': return f'<p class="cs-quote">{md(b[1])}</p>'
+    if k == 'callout': return f'<p class="cs-callout"><small>{E(b[1])}</small>{md(b[2])}</p>'
+    if k == 'honest': return f'<p class="cs-honest"><strong>{E(b[1])}</strong> {md(b[2])}</p>'
+    if k == 'rows':
+        labels = b[2]; out = []
+        for n, it in enumerate(b[1], 1):
+            body = f'<h3>{md(it[0])}</h3>'
+            if len(it) == 3 and labels:
+                body += f'<p class="cs-p"><small>{labels[0]}</small>{md(it[1])}</p><p><small>{labels[1]}</small>{md(it[2])}</p>'
+            else:
+                body += f'<p class="cs-p">{md(it[1])}</p>'
+            out.append(f'<div class="cs-row"><span>{n:02d}</span><div>{body}</div></div>')
+        return '<div class="cs-rows">' + ''.join(out) + '</div>'
+    if k == 'panels':
+        return f'<div class="cs-panels n{len(b[1])}">' + ''.join(
+            f'<div class="cs-panel"><h3>{pill(pk, pt)} {E(t)}</h3><ul>' + ''.join(f'<li>{md(i)}</li>' for i in items) + '</ul></div>'
+            for pk, pt, t, items in b[1]) + '</div>'
+    if k == 'cards':
+        return '<div class="cs-cards">' + ''.join(f'<div><b>{E(t)}</b><small>{md(x)}</small></div>' for t, x in b[1]) + '</div>'
+    if k == 'stats':
+        return '<div class="stats cs-stats">' + ''.join(f'<div><b>{E(big)}</b><em>{E(l)}</em><small>{md(sub)}</small></div>' for big, l, sub in b[1]) + '</div>'
+    if k == 'table':
+        head = ''.join(f'<th scope="col">{E(h)}</th>' for h in b[1])
+        rows = ''.join('<tr>' + ''.join(f'<td>{md(c)}</td>' for c in r) + '</tr>' for r in b[2])
+        return f'<div class="cs-tbl" tabindex="0" role="region" aria-label="Table: {E(" vs ".join(b[1]))}"><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
+    if k == 'tldr':
+        return '<div class="cs-tldr">' + ''.join(f'<div><small>{pill(pk, l)}</small><p>{md(t)}</p></div>' for pk, l, t in b[1]) + '</div>'
+    if k == 'iters':
+        out = []
+        for pk, pt, t, x, q in b[1]:
+            out.append(f'<div class="cs-iter{" win" if pk == "good" else ""}"><header>{pill(pk, pt)}<h3>{E(t)}</h3></header><p class="cs-p">{md(x)}</p>'
+                       + (f'<q>{E(q)}</q>' if q else '') + '</div>')
+        return '<div class="cs-iters">' + ''.join(out) + '</div>'
+    if k == 'fig': return cs_img(slug, b[1], b[2])
+    if k == 'figs':
+        kinds = {img_kind(*img_size(f'assets/img/cs/{slug}/{f}')) for f, _ in b[1]}
+        # matching shapes sit side by side; mixed shapes (wide next to a long capture) stack full width
+        cls = ' phones' if kinds == {'phone'} else (' stack' if len(kinds) > 1 else '')
+        return f'<div class="cs-figs n{len(b[1])}{cls}">' + ''.join(cs_img(slug, f, c) for f, c in b[1]) + '</div>'
+    if k == 'cmp':
+        _, bf, af, bl, al = b
+        aw, ah = img_size(f'assets/img/cs/{slug}/{af}')
+        return (f'<figure class="cs-cmp"><div class="frame"><img src="assets/img/cs/{slug}/{af}" alt="{E(al)}" width="{aw}" height="{ah}" loading="lazy" decoding="async">'
+                f'<div class="before"><img src="assets/img/cs/{slug}/{bf}" alt="{E(bl)}" loading="lazy" decoding="async"></div>'
+                f'<span class="tag l">{E(bl)}</span><span class="tag r">{E(al)}</span><span class="handle" aria-hidden="true"></span></div>'
+                f'<input type="range" min="0" max="100" value="50" aria-label="Drag to compare {E(bl)} and {E(al)}"></figure>')
+    if k == 'details':
+        return f'<details class="cs-details"><summary>{E(b[1])}</summary><ul>' + ''.join(f'<li>{md(i)}</li>' for i in b[2]) + '</ul></details>'
+    raise ValueError('unknown block ' + k)
+
+def case_page(i, c):
+    slug = c['slug']
+    secs = list(c['sections']) + ([('Questions I expect', None, None)] if c.get('faq') else [])
+    toc = ''.join(f'<a href="#s{n}"><span>{n:02d}</span>{E(t)}</a>' for n, (t, _, _) in enumerate(secs, 1))
+    body = [f'''<header class="cs-head">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="projects.html">← Projects</a><span aria-hidden="true">/</span><span aria-current="page">{E(c["name"])}</span></nav>
+  <div class="eyebrow"><span class="slash">//</span> Case study {"".join(tag(t) for t in c["tags"])}<span class="more">{c["read"]} min read</span></div>
+  <h1 class="cs-title">{E(c["title"])}</h1>
+  <p class="cs-lead">{md(c["lede"])}</p>
+</header>
+<dl class="cs-meta">{"".join(f'<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>' for k, v in c["meta"])}</dl>
+<figure class="cs-fig cs-hero"><button type="button" class="zoom" data-full="{c["cover"]}" aria-label="Open cover image full size"><img src="{c["cover"]}" alt="{E(c["name"])} cover" width="{img_size(c["cover"])[0]}" height="{img_size(c["cover"])[1]}" decoding="async" fetchpriority="high"></button></figure>
+{block(slug, ('stats', c['stats']))}
+<section class="sec" aria-label="Summary"><div class="eyebrow">TL;DR</div><div class="cs-tldr">{"".join(f'<div><small>{E(k)}</small><p>{md(v)}</p></div>' for k, v in c["tldr"])}</div></section>
+<nav class="sec" aria-label="Contents"><div class="eyebrow">Contents</div><div class="cs-toc">{toc}</div></nav>''']
+    for n, (eb, h, blocks) in enumerate(c['sections'], 1):
+        body.append(f'<section class="sec cs-sec" id="s{n}" aria-labelledby="h{n}"><div class="eyebrow"><span class="n">{n:02d}</span> {E(eb)}</div>'
+                    f'<h2 class="cs-h" id="h{n}">{E(h)}</h2>' + ''.join(block(slug, b) for b in blocks) + '</section>')
+    if c.get('faq'):
+        n = len(secs)
+        body.append(f'<section class="sec cs-sec" id="s{n}" aria-labelledby="h{n}"><div class="eyebrow"><span class="n">{n:02d}</span> Questions I expect</div>'
+                    f'<h2 class="cs-h visually-hidden" id="h{n}">Questions I expect</h2><div class="cs-faq">'
+                    + ''.join(f'<details{" open" if j == 0 else ""}><summary>{E(q)}</summary><p>{md(a)}</p></details>' for j, (q, a) in enumerate(c['faq'])) + '</div></section>')
+    nxt = [PROJECTS[(i + k) % len(PROJECTS)] for k in (1, 2)]
+    body.append('<section class="sec"><div class="eyebrow">Next case study <a class="more" href="projects.html">All projects →</a></div><div class="plist">'
+                + ''.join(prow(nm, w, d, f'assets/img/cover/{cv}.webp', u) for nm, w, d, cv, u in nxt) + '</div></section>')
+    body.append('<div class="cs-progress" aria-hidden="true"><b></b></div>')
+    page(f'projects/{slug}.html', 'projects', f'{c["name"]} · Case Study · Muzeeb Urrahaman', re.sub(r'\*\*', '', c['lede'])[:155], '\n'.join(body), base='../')
+
+for i, c in enumerate(CASES):
+    case_page(i, c)
+
+# ---------------- LAB POPUPS ----------------
+from lab_popups import POPUPS
+
+def popup(d):
+    pid = d['id']
+    secs = ''
+    for n, (eb, h, blocks) in enumerate(d['sections'], 1):
+        secs += (f'<section class="sec"><div class="eyebrow"><span class="n">{n:02d}</span> {E(eb)}</div>'
+                 + (f'<h3 class="cs-h">{E(h)}</h3>' if h else '') + ''.join(block(pid, b) for b in blocks) + '</section>')
+    links = ''.join(
+        f'<a class="btn" href="{E(u)}"' + (' rel="noopener"' if u.startswith('http') else '')
+        + (f' data-dialog="{u[1:]}"' if u.startswith('#') else '') + f'>{E(l)} {"↗" if u.startswith("http") else "→"}</a>'
+        for l, u in d['links'])
+    return (f'<dialog class="pop" id="dlg-{pid}" aria-labelledby="dlg-{pid}-t">'
+            f'<div class="pop-bar"><div class="eyebrow"><span class="slash">//</span> {E(d["eyebrow"])}</div>'
+            f'<button class="pop-x" type="button" aria-label="Close">{svg("close")}</button></div>'
+            f'<div class="pop-scroll"><div class="pop-in"><header class="pop-head"><h2 class="pop-title" id="dlg-{pid}-t">{E(d["title"])}</h2><p class="cs-lead">{md(d["lede"])}</p></header>'
+            f'{secs}' + (f'<div class="pop-links">{links}</div>' if links else '') + '</div></div></dialog>')
+
+page('lab.html','lab','Lab · Muzeeb Urrahaman','Side projects by Muzeeb Urrahaman: Chrome extensions, Figma plugins, Claude skills and small apps.', lb + '\n' + ''.join(popup(d) for d in POPUPS))
+print('built', sorted(f for f in os.listdir(OUT) if f.endswith('.html')), sorted(os.listdir(os.path.join(OUT, 'projects'))))
