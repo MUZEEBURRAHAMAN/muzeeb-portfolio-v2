@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@200;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
-<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script><script>try{var q=location.search,d=document.documentElement;if(!/nobuild/.test(q)&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&(/[?&]build/.test(q)||!sessionStorage.getItem('built'))){d.classList.add('pre-build');setTimeout(function(){if(!d.classList.contains('building'))d.classList.remove('pre-build')},5000)}}catch(e){}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -165,5 +165,6 @@
 </svg><span class="tip" aria-hidden="true"><span class="tl">Theme</span><kbd>T</kbd></span></button></nav>
 <script src="assets/js/portrait-dots.js"></script>
 <script src="assets/js/site.js"></script>
+<script src="assets/js/build-anim.js"></script>
 </body>
 </html>
