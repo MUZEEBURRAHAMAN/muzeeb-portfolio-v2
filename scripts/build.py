@@ -145,6 +145,9 @@ FOOT = f'''<footer class="foot"><span>© 2026 Muzeeb Urrahaman</span><button cla
 PREBUILD = """<script>try{var q=location.search,d=document.documentElement;if(!/nobuild/.test(q)&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&(/[?&]build/.test(q)||!sessionStorage.getItem('built'))){d.classList.add('pre-build');setTimeout(function(){if(!d.classList.contains('building'))d.classList.remove('pre-build')},5000)}}catch(e){}</script>"""
 BUILD_JS = '\n<script src="assets/js/build-anim.js"></script>'
 
+import hashlib
+ASSET_V = hashlib.md5(b''.join(open(os.path.join(OUT, f), 'rb').read() for f in ('assets/css/site.css', 'assets/js/site.js', 'assets/js/portrait-dots.js'))).hexdigest()[:8]
+
 def page(fname, key, title, desc, body, base=''):
     doc = f'''<!doctype html>
 <html lang="en">
@@ -164,7 +167,7 @@ def page(fname, key, title, desc, body, base=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@200;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v={ASSET_V}">
 <script>try{{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}}catch(e){{}}</script>{PREBUILD if key == 'home' else ''}
 </head>
 <body>
@@ -176,8 +179,8 @@ def page(fname, key, title, desc, body, base=''):
 </main>
 </div>
 {dock(key)}
-<script src="assets/js/portrait-dots.js"></script>
-<script src="assets/js/site.js"></script>{BUILD_JS if key == 'home' else ''}
+<script src="assets/js/portrait-dots.js?v={ASSET_V}"></script>
+<script src="assets/js/site.js?v={ASSET_V}"></script>{BUILD_JS if key == 'home' else ''}
 </body>
 </html>
 '''
