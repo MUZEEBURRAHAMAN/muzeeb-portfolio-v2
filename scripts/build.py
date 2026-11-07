@@ -28,27 +28,13 @@ ARTICLES = [  # (year, mm/dd, title, url, thumb, topic, claps, read min, views o
  (2023,'03/27',"E-commerce “Search” button",'https://medium.com/@Muzeebdesign/e-commerce-search-button-4bee4bf3ba6a','https://miro.medium.com/v2/resize:fill:208:136/0*m9IEv0nzc3Kb_vO8.png','E-commerce',2,19,143),
 ]
 
-PROJECTS = [  # (name, domain, desc, cover, url)
- ('OmnisProof','omnisai.io','Replaced a modal wizard with a persistent canvas and reviewable AI field detection. E-signature setup went from 11 steps to 8.','omnisproof','projects/omnisproof.html'),
- ('CaseNotes','omnisai.io','An AI notetaker where every word carries legal privilege, anchored to the matter’s discovery files.','casenotes','projects/casenotes.html'),
- ('AI UX Audit Engine','internal tool','Reviews staging builds and posts annotated reports to Slack. Replaced 4+ hours of manual design QA per sprint.','audit-engine','projects/audit-engine.html'),
- ('CasePro Matter Redesign','omnisai.io','Split one merged form into intake and matter creation, with an AI-assisted path and a manual one.','casepro','projects/casepro.html'),
+PROJECTS = [  # (name, domain, desc, cover, url); same order as CASES in case_studies.py
  ('GoFully','chrome web store','A screenshot extension rebuilt around privacy: new brand, token system, 70+ screens and a site that says nothing leaves your device.','gofully','projects/gofully.html'),
- ('LitBox','omnisai.io','A matter-scoped file layer Omnis AI owns, embedded live in AutoDoc, MedChron and OmnisProof.','litbox','projects/litbox.html'),
+ ('Jobly','chrome extension · web','Fresh jobs from 2,000+ company career pages, with the real posting date on every card. No account, no server.','jobly','projects/jobly.html'),
+ ('Assistantly','ai design qa','Clicks through every state of a web app and reports each design problem with its exact code fix, for about $0.30 a screen.','assistantly','projects/assistantly.html'),
+ ('Careway Landing Page','healthcare · landing page','A landing page that sells cancer navigation software to clinical leaders and nurse navigators, with two heroes for an A/B test.','careway','projects/careway.html'),
 ]
 
-LAB = [  # (name, where, desc, cover, url)
- ('AI UX Audit Assistant','github.com','An AI agent that reviews UI for accessibility, visual and interaction issues.','ux-audit-assistant-cover','https://github.com/MUZEEBURRAHAMAN/AI-UX-Audit-Assistant'),
- ('Catchly','chrome web store','A Chrome extension for visual QA that stitches screenshots across the viewport.','catchly-cover','https://chromewebstore.google.com/detail/catchly/ogfdfheefhnmgkafcahpelmcofmgcobk'),
- ('Cutcliply','railway.app','A video tool that smart-crops long recordings into clips.','cutcliply-cover','https://cutcliply.up.railway.app/'),
- ('Blobby','figma.com','A Figma plugin that generates editable organic blobs as SVG.','blobby-plugin','https://www.figma.com/community/plugin/1672948027574838944/blobby-editable-blob-generator'),
- ('Avatarly','figma plugin','A Figma plugin that fills designs with generated avatars.','avatarly-cover','#avatarly'),
- ('Tooltips & Snackbars','figma.com','A Figma kit of tooltips, toasts and snackbars, built on tokens.','ui-kits','https://www.figma.com/community/file/1535935401113364323/tooltips-toastssnackbar'),
- ('Claude Skills & MCP','claude code','My design reviews packaged as reusable Claude Code skills, so every session starts from the same rules.','forge-skill','#claude-skills'),
- ('Omnis AI Design System','multi-product','One token and component system across 7 legal-tech products.','omnis-design-system-cover','#omnis-design-system'),
- ('Mobile Apps','safeside · anchor · photoly','Three small mobile app concepts, from flows to final screens.','mobile-apps-cover','#mobile-apps'),
- ('Web Apps','web tool','Small web tools for creators, designed and coded end to end.','thumbly-cover','#web-apps'),
-]
 
 # (brand svg in assets/brands, name, what I use it for, tile colour, logo colour) — logos from Simple Icons (CC0)
 TOOLS = [
@@ -130,9 +116,9 @@ def svg(k, cls=''):
     attrs = ' class="ico' + (' ' + cls if cls else '') + '" aria-hidden="true" focusable="false"'
     return s.replace('<svg ', '<svg' + attrs + ' ', 1)
 
-NAV = [('index.html','home','Home'),('writing.html','writing','Writing'),('projects.html','projects','Projects'),('best-design.html','design','Best Design'),('lab.html','lab','Lab'),('journey.html','journey','Journey')]
+NAV = [('index.html','home','Home'),('writing.html','writing','Writing'),('projects.html','projects','Projects'),('best-design.html','design','Best Design'),('skills.html','skills','AI Skills'),('journey.html','journey','Journey')]
 
-SHORTCUT = {'home': 'H', 'writing': 'W', 'projects': 'P', 'design': 'D', 'lab': 'L', 'journey': 'J'}
+SHORTCUT = {'home': 'H', 'writing': 'W', 'projects': 'P', 'design': 'D', 'skills': 'S', 'journey': 'J'}
 
 def tip(label, keys):
     return f'<span class="tip" aria-hidden="true"><span class="tl">{E(label)}</span>' + ''.join(f'<kbd>{k}</kbd>' for k in keys) + '</span>'
@@ -196,7 +182,7 @@ def page(fname, key, title, desc, body, base=''):
 </html>
 '''
     if base:  # pages in a subfolder: point local links and assets one level up
-        doc = re.sub(r'(href|src|data-full)="(?!https?:|#|mailto:|data:)', lambda m: m.group(0) + base, doc)
+        doc = re.sub(r'(href|src|data-full)="(?!https?:|#|mailto:|data:|/)', lambda m: m.group(0) + base, doc)
     path = os.path.join(OUT, fname); os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, 'w').write(doc)
 
@@ -304,9 +290,9 @@ for y in sorted(years, reverse=True):
 page('writing.html','writing','Writing · Muzeeb Urrahaman','Articles by Muzeeb Urrahaman on usability, research and product design, published on Medium.',wr)
 
 # ---------------- PROJECTS ----------------
-pr = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Projects<h1 class="visually-hidden">Projects</h1></div><p class="lede">Products I designed end to end, mostly AI tools for law firms. Each one opens the full case study.</p></header>
+pr = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Projects<h1 class="visually-hidden">Projects</h1></div><p class="lede">Four products I designed end to end: two browser tools, an AI design-QA engine and a healthcare landing page. Each one opens the full case study.</p></header>
 <div class="plist">{''.join(prow(n, w, d, f'assets/img/cover/{c}.webp', u) for n, w, d, c, u in PROJECTS)}</div>'''
-page('projects.html','projects','Projects · Muzeeb Urrahaman','Six product design case studies: OmnisProof, CaseNotes, AI UX Audit Engine, CasePro, GoFully and LitBox.',pr)
+page('projects.html','projects','Projects · Muzeeb Urrahaman','Four product design case studies: GoFully, Jobly, Assistantly and the Careway landing page.',pr)
 
 # ---------------- BEST DESIGN ----------------
 counts = {k: sum(1 for w in WORKS if w[3] == k) for k, _ in CATS}; counts['all'] = len(WORKS)
@@ -315,13 +301,6 @@ bd = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</s
 <div class="chips" role="group" aria-label="Filter by type">{chips}</div></header>
 <div class="grid2 works">{''.join(work(w, i) for i, w in enumerate(WORKS))}</div>'''
 page('best-design.html','design','Best Design · Muzeeb Urrahaman','A visual archive of product UI, dashboards, mobile apps, landing pages and branding by Muzeeb Urrahaman.',bd)
-
-# ---------------- LAB ----------------
-lb = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Lab<h1 class="visually-hidden">Lab</h1></div><p class="lede">Side projects I designed and built to try new interactions and tools: Chrome extensions, Figma plugins, Claude skills and small apps.</p></header>
-<div class="plist">{''.join(prow(n, w, d, f'assets/img/cover/lab-{c}.webp', u) for n, w, d, c, u in LAB)}</div>
-<section class="sec" aria-labelledby="h-ai"><div class="eyebrow" id="h-ai"><span class="n">AI</span> How I use AI in design <a class="more" href="#ai-workflow" data-dialog="ai-workflow" aria-haspopup="dialog">How I work with AI +</a></div>
-<p class="lede">AI speeds up research synthesis, edge-case hunting and early prototypes. Taste, empathy and trade-offs stay with me.</p>
-<div class="stats"><div><b>10×</b><small>Faster context ingestion</small></div><div><b>3×</b><small>Faster prototype validation</small></div><div><b>100%</b><small>Human-owned decisions</small></div></div></section>'''
 
 # ---------------- JOURNEY ----------------
 jr = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Journey<h1 class="visually-hidden">Journey</h1> <a class="more dl" href="assets/files/Muzeeb-Urrahaman-Resume.pdf">{svg("download")}Download PDF</a></div>
@@ -433,6 +412,10 @@ def block(slug, b):
                 f'<input type="range" min="0" max="100" value="50" aria-label="Drag to compare {E(bl)} and {E(al)}"></figure>')
     if k == 'details':
         return f'<details class="cs-details"><summary>{E(b[1])}</summary><ul>' + ''.join(f'<li>{md(i)}</li>' for i in b[2]) + '</ul></details>'
+    if k == 'links':
+        return '<div class="cs-links">' + ''.join(
+            f'<a class="btn" href="{E(u)}"' + (' rel="noopener" target="_blank"' if u.startswith('http') else '')
+            + f'>{E(l)} {"↗" if u.startswith("http") or u.endswith((".html", ".md")) else "↓"}</a>' for l, u in b[1]) + '</div>'
     raise ValueError('unknown block ' + k)
 
 def case_page(i, c):
@@ -449,6 +432,7 @@ def case_page(i, c):
 <figure class="cs-fig cs-hero"><button type="button" class="zoom" data-full="{c["cover"]}" aria-label="Open cover image full size"><img src="{c["cover"]}" alt="{E(c["name"])} cover" width="{img_size(c["cover"])[0]}" height="{img_size(c["cover"])[1]}" decoding="async" fetchpriority="high"></button></figure>
 {block(slug, ('stats', c['stats']))}
 <section class="sec" aria-label="Summary"><div class="eyebrow">TL;DR</div><div class="cs-tldr">{"".join(f'<div><small>{E(k)}</small><p>{md(v)}</p></div>' for k, v in c["tldr"])}</div></section>
+{block(slug, ('links', c['links'])) if c.get('links') else ''}
 <nav class="sec" aria-label="Contents"><div class="eyebrow">Contents</div><div class="cs-toc">{toc}</div></nav>''']
     for n, (eb, h, blocks) in enumerate(c['sections'], 1):
         body.append(f'<section class="sec cs-sec" id="s{n}" aria-labelledby="h{n}"><div class="eyebrow"><span class="n">{n:02d}</span> {E(eb)}</div>'
@@ -467,24 +451,43 @@ def case_page(i, c):
 for i, c in enumerate(CASES):
     case_page(i, c)
 
-# ---------------- LAB POPUPS ----------------
-from lab_popups import POPUPS
+# ---------------- AI SKILLS ----------------
+# (icon in assets/icons, name, what it does, [what you get], status, optional (label, url))
+SKILLS = [
+ ('sk-honest', 'Honest Review', 'A design-manager critique you can run on any screen. It separates facts from opinions and skips the flattery.',
+  ['Type hierarchy, density and layout', 'Engineering feasibility', 'What to fix first'], 'Coming soon', None),
+ ('sk-ux', 'UX Assistant', 'The review engine behind Assistantly, packaged as a skill: usability, accessibility and missing states, each with a fix.',
+  ['229+ UX and accessibility checks', 'Findings tied to real elements', 'HTML and Markdown reports'], 'Coming soon', ('Read the Assistantly case study', 'projects/assistantly.html')),
+ ('sk-portfolio', 'Portfolio Review', 'Reviews a design portfolio the way a hiring manager reads it, in the first minute and in depth.',
+  ['First-impression check', 'Case study structure and evidence', 'A ranked list of fixes'], 'Coming soon', None),
+ ('sk-antislop-copy', 'Antislop · Content', 'Finds the patterns that make writing sound AI-generated and rewrites them in plain, direct language.',
+  ['Filler and empty phrases', 'Formulaic sentence shapes', 'Passive voice and vague claims'], 'Coming soon', None),
+ ('sk-antislop-ui', 'Antislop · UI', 'Flags interface choices that look generic or templated, and suggests what to do instead.',
+  ['Overused fonts and gradients', 'Copy-paste layouts and card soup', 'Missing states and contrast issues'], 'Coming soon', None),
+ ('sk-factcheck', 'Fact Checker', 'Upload a document, an article or any claim, and it checks what is factually correct, what is unsupported and what needs a source.',
+  ['Claim-by-claim verdicts', 'Sources for every verdict', 'A clear “couldn’t verify” when evidence is thin'], 'Coming soon', None),
+ ('sk-flow', 'User Flow Creator', 'Turns a product brief into user flows and wireframes you can open, review and hand off.',
+  ['Flows for each role and edge case', 'Screen-by-screen wireframes', 'Notes on decisions and open questions'], 'Coming soon', ('See the kind of output', 'https://collectivebrain.de/en/skills/ux-flow-wireframer/')),
+ ('sk-brand', 'Brand Kit & Pitch Deck', 'Upload your logo and theme, and it builds a complete brand kit and pitch deck that match them.',
+  ['Colour, type and logo usage', 'A full pitch deck in your theme', 'Consistent slides you can edit'], 'Coming soon', ('See the kind of output', 'https://collectivebrain.de/en/skills/brandkit/')),
+]
 
-def popup(d):
-    pid = d['id']
-    secs = ''
-    for n, (eb, h, blocks) in enumerate(d['sections'], 1):
-        secs += (f'<section class="sec"><div class="eyebrow"><span class="n">{n:02d}</span> {E(eb)}</div>'
-                 + (f'<h3 class="cs-h">{E(h)}</h3>' if h else '') + ''.join(block(pid, b) for b in blocks) + '</section>')
-    links = ''.join(
-        f'<a class="btn" href="{E(u)}"' + (' rel="noopener"' if u.startswith('http') else '')
-        + (f' data-dialog="{u[1:]}"' if u.startswith('#') else '') + f'>{E(l)} {"↗" if u.startswith("http") else "→"}</a>'
-        for l, u in d['links'])
-    return (f'<dialog class="pop" id="dlg-{pid}" aria-labelledby="dlg-{pid}-t">'
-            f'<div class="pop-bar"><div class="eyebrow"><span class="slash">//</span> {E(d["eyebrow"])}</div>'
-            f'<button class="pop-x" type="button" aria-label="Close">{svg("close")}</button></div>'
-            f'<div class="pop-scroll"><div class="pop-in"><header class="pop-head"><h2 class="pop-title" id="dlg-{pid}-t">{E(d["title"])}</h2><p class="cs-lead">{md(d["lede"])}</p></header>'
-            f'{secs}' + (f'<div class="pop-links">{links}</div>' if links else '') + '</div></div></dialog>')
+def skill_card(icon, name, desc, gets, status, link):
+    ln = ''
+    if link:
+        ext = link[1].startswith('http')
+        ln = f'<a class="more sk-link" href="{E(link[1])}"' + (' rel="noopener" target="_blank"' if ext else '') + f'>{E(link[0])} {"↗" if ext else "→"}</a>'
+    return (f'<article class="skill"><div class="sk-top"><span class="sk-ic">{svg(icon)}</span>'
+            f'<span class="badge topic {"sand" if status == "Coming soon" else "sage"}">{E(status)}</span></div>'
+            f'<h2 class="sk-name">{E(name)}</h2><p class="sk-desc">{E(desc)}</p>'
+            f'<ul class="sk-gets">' + ''.join(f'<li>{E(g)}</li>' for g in gets) + f'</ul>{ln}</article>')
 
-page('lab.html','lab','Lab · Muzeeb Urrahaman','Side projects by Muzeeb Urrahaman: Chrome extensions, Figma plugins, Claude skills and small apps.', lb + '\n' + ''.join(popup(d) for d in POPUPS))
+sk = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> AI Skills<h1 class="visually-hidden">AI Skills</h1></div>
+<p class="lede">Claude skills I’m building from the reviews and checks I repeat. Each one turns a process I trust into a tool anyone can run in Claude Code.</p></header>
+<div class="skills">{''.join(skill_card(*x) for x in SKILLS)}</div>
+<section class="sec sk-cta" aria-labelledby="h-early"><div class="eyebrow" id="h-early"><span class="n">✦</span> Early access</div>
+<p class="lede">Want to try a skill before it launches? Email me and I’ll send the early version.</p>
+<div class="cs-links"><button class="btn copy-btn" type="button" data-copy="{EMAIL}" data-done="Copied">{svg("copy")}<span class="lbl">Copy my email</span></button></div></section>'''
+page('skills.html','skills','AI Skills · Muzeeb Urrahaman','Claude skills by Muzeeb Urrahaman: honest design review, UX assistant, portfolio review, antislop, fact checker, user flows and brand kits.', sk)
+
 print('built', sorted(f for f in os.listdir(OUT) if f.endswith('.html')), sorted(os.listdir(os.path.join(OUT, 'projects'))))

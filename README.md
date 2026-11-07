@@ -9,9 +9,9 @@ Static site: plain HTML, one stylesheet, one script. No framework, no build depe
 | `index.html` | Home |
 | `writing.html` | Writing (Medium articles) |
 | `projects.html` | Projects list |
-| `projects/<slug>.html` | 6 case studies |
+| `projects/<slug>.html` | 4 case studies: GoFully, Jobly, Assistantly, Careway |
 | `best-design.html` | Best Design gallery |
-| `lab.html` | Lab, with 6 popups (`lab.html#claude-skills` etc.) |
+| `skills.html` | AI Skills (Claude skills, coming soon) |
 | `journey.html` | Journey (résumé) |
 
 ## Editing content
@@ -22,9 +22,8 @@ All pages are generated. Edit the data, then rebuild:
 python3 scripts/build.py
 ```
 
-- `scripts/build.py`: articles, projects, Lab rows, Best Design works, tools, and every page layout.
+- `scripts/build.py`: articles, projects, AI skills, Best Design works, tools, and every page layout.
 - `scripts/case_studies.py`: case study text and images (block guide at the top of the file).
-- `scripts/lab_popups.py`: Lab popup text.
 
 Articles take `(year, date, title, url, thumb, topic, claps, read minutes, views)`. Views come from medium.com/me/stats; when set, they replace the claps badge.
 

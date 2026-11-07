@@ -4,14 +4,57 @@
   "headers": [
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/projects/audit-engine",
+      "destination": "/projects/assistantly",
+      "permanent": true
+    },
+    {
+      "source": "/projects/omnisproof",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/projects/casenotes",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/projects/casepro",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/projects/litbox",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/lab",
+      "destination": "/skills",
+      "permanent": true
     }
   ]
 }
