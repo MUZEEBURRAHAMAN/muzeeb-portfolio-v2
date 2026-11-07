@@ -419,6 +419,21 @@ def block(slug, b):
         return '<div class="cs-links">' + ''.join(
             f'<a class="btn" href="{E(u)}"' + (' rel="noopener" target="_blank"' if u.startswith('http') else '')
             + f'>{E(l)} {"↗" if u.startswith("http") or u.endswith((".html", ".md")) else "↓"}</a>' for l, u in b[1]) + '</div>'
+    if k == 'browser':
+        # a full-page capture inside a browser frame that scrolls in place
+        _, f, url, cap = b; src = f'assets/img/cs/{slug}/{f}'; w, h = img_size(src)
+        return (f'<figure class="cs-browser"><div class="bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">{E(url)}</span>'
+                f'<span class="hint" aria-hidden="true">Scroll inside ↓</span></div>'
+                f'<div class="view" tabindex="0" role="region" aria-label="Scrollable full-page preview: {E(url)}">'
+                f'<img src="{src}" alt="{E(cap)}" width="{w}" height="{h}" loading="lazy" decoding="async"></div>'
+                f'<figcaption>{md(cap)}</figcaption></figure>')
+    if k == 'findings':
+        out = []
+        for n, sev, t, ev, fix in b[1]:
+            mark = f'<span class="cs-mark">{n}</span>' if isinstance(n, int) else '<span class="cs-mark none">–</span>'
+            out.append(f'<div class="cs-find">{mark}<div><h3>{pill({"Blocker": "bad", "Major": "mid"}.get(sev, "good"), sev)} {md(t)}</h3>'
+                       f'<p class="cs-p"><small>What I found</small>{md(ev)}</p><p class="cs-p"><small>Careway</small>{md(fix)}</p></div></div>')
+        return '<div class="cs-finds">' + ''.join(out) + '</div>'
     raise ValueError('unknown block ' + k)
 
 def case_page(i, c):

@@ -639,3 +639,23 @@ html:has(dialog.pop[open]) .dock,html:has(.lb:not([hidden])) .dock{opacity:0;poi
 }
 .sk-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .sk-links .btn svg{width:15px;height:15px}
+
+/* ---------- case study: scrollable full-page browser frame ---------- */
+.cs-browser{margin:0}
+.cs-browser .bar{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;background:var(--wash)}
+.cs-browser .dots{display:flex;gap:5px}.cs-browser .dots i{width:9px;height:9px;border-radius:50%;background:var(--line-2)}
+.cs-browser .url{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:12px var(--mono);color:var(--mute);background:var(--surface);border-radius:6px;padding:3px 10px}
+.cs-browser .hint{font:11px var(--mono);color:var(--mute);white-space:nowrap}
+.cs-browser .view{height:min(78vh,720px);overflow-y:auto;overscroll-behavior:contain;border:1px solid var(--line);border-radius:0 0 12px 12px;background:#fff}
+.cs-browser .view:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.cs-browser img{display:block;width:100%;height:auto}
+.cs-browser figcaption{margin-top:10px;color:var(--mute);font-size:13px}
+@media (max-width:540px){.cs-browser .hint{display:none}.cs-browser .view{height:70vh}}
+/* ---------- case study: numbered audit findings ---------- */
+.cs-finds{display:grid;border-top:1px solid var(--line)}
+.cs-find{display:grid;grid-template-columns:30px minmax(0,1fr);gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.cs-find h3{margin:0 0 6px;font-size:15px;font-weight:500;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cs-find p{margin:0}.cs-find p+p{margin-top:6px}
+.cs-find small{font:11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin-right:8px}
+.cs-mark{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#c23a3a;color:#fff;font:600 12px var(--sans)}
+.cs-mark.none{background:var(--wash);color:var(--mute)}
