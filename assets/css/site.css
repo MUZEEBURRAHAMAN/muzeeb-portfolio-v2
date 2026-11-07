@@ -574,3 +574,68 @@ html:has(dialog.pop[open]) .dock,html:has(.lb:not([hidden])) .dock{opacity:0;poi
 @media (max-width:560px){.skills{grid-template-columns:minmax(0,1fr)}}
 @supports (corner-shape: squircle){.skill{corner-shape:squircle;border-radius:22px}.sk-ic{corner-shape:squircle;border-radius:15px}}
 .cs-figs.phones.n2{grid-template-columns:repeat(2,minmax(0,210px));justify-content:center;gap:clamp(16px,5vw,40px)}
+
+/* ---------- AI skills: list rows ---------- */
+.sk-list{display:grid;border-top:1px solid var(--line)}
+.sk-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.sk-row .sk-ic{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+.sk-row .sk-ic svg{width:20px;height:20px}
+.sk-main{display:grid;gap:2px;min-width:0}
+.sk-main b{font-weight:600;font-size:15px}
+.sk-main small{color:var(--mute);font-size:13.5px;line-height:1.45}
+.sk-main:hover b{text-decoration:underline;text-underline-offset:3px}
+.sk-meta{display:flex;gap:6px;align-items:center}
+.sk-act{display:flex;gap:6px}
+.btn.sm{padding:5px 11px;font-size:12.5px;gap:6px}
+.btn.sm svg{width:14px;height:14px}
+.btn.copied{border-color:var(--ink)}
+@media (max-width:720px){.sk-row{grid-template-columns:auto minmax(0,1fr)}.sk-meta{display:none}.sk-act{grid-column:2}}
+/* ---------- AI skills: detail page ---------- */
+.sk-dl{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media (max-width:720px){.sk-dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sk-says{display:flex;flex-wrap:wrap;gap:8px}
+.sk-say{border:1px dashed var(--line-2);background:var(--surface);color:var(--ink);border-radius:10px;padding:8px 12px;font:13.5px var(--sans);cursor:copy;text-align:left}
+.sk-say:hover{border-style:solid;border-color:var(--ink)}
+.sk-code{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:12px 12px 12px 14px}
+.sk-code pre{margin:0;flex:1;min-width:0;overflow-x:auto;font:12.5px/1.6 var(--mono);white-space:pre-wrap;word-break:break-all}
+.sk-md-act{display:inline-flex;gap:6px;text-transform:none;letter-spacing:0}
+.sk-md{margin:0;max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px;font:12.5px/1.65 var(--mono);white-space:pre-wrap;word-wrap:break-word;color:var(--ink-2)}
+.sk-md:focus-visible,.sk-say:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.sk-demo-pre{margin:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px;font:12.5px/1.65 var(--mono);white-space:pre-wrap;word-wrap:break-word;overflow-x:auto;color:var(--ink-2)}
+.sk-demo-cap{margin:10px 0 0;color:var(--mute);font-size:13px}
+.sk-demo-tabs{margin-bottom:10px}
+.chip-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 13px;font:500 13px var(--sans);cursor:pointer}
+.chip-btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sk-demo-text{display:grid;gap:10px}
+.sk-demo-text p{margin:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px 16px;font-size:14.5px;line-height:1.65}
+.sk-tag{display:block;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.sk-demo-text mark{background:none;color:inherit;border-radius:4px;transition:background .2s}
+.hl-on .sk-demo-text mark{background:color-mix(in srgb,#d93f3f 18%,transparent);text-decoration:line-through;text-decoration-color:color-mix(in srgb,#d93f3f 70%,transparent)}
+/* ---------- AI skills: flow pipelines (same markup as the skill's template) ---------- */
+.flow-diagram{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:18px;display:grid;gap:16px}
+.flow-diagram+.flow-diagram{margin-top:12px}
+.flow-label{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.lozenge{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:6px;font:600 10.5px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;background:var(--ink);color:var(--bg)}
+.flow-title{font-weight:600;font-size:14.5px}
+.flow-pipeline{display:flex;align-items:flex-start}
+.flow-stage{flex:1 1 0;min-width:0;display:grid;place-items:center;text-align:center;min-height:58px;padding:10px;border-radius:10px;background:var(--bg);border:1px solid var(--line);font-size:13px;font-weight:500;line-height:1.35;color:var(--ink-2)}
+.flow-stage-wrap{flex:1 1 0;min-width:0;display:grid;gap:8px}
+.flow-branch{font-size:11.5px;color:var(--mute);text-align:center;padding:5px 7px;border:1px dashed var(--line-2);border-radius:8px}
+.flow-connector{flex:0 0 22px;position:relative;margin-top:28px;height:2px;background:var(--line-2)}
+.flow-connector::after{content:"";position:absolute;right:0;top:50%;width:6px;height:6px;border-top:2px solid var(--line-2);border-right:2px solid var(--line-2);transform:translateY(-50%) rotate(45deg)}
+.flow-diagram--current .flow-pipeline>:last-child,.flow-diagram--current .flow-pipeline>:last-child .flow-stage{border-style:dashed}
+.flow-diagram--proposed .lozenge{background:var(--accent);color:var(--surface)}
+.flow-diagram--proposed .flow-stage{color:var(--ink);border-color:var(--line-2)}
+.flow-diagram--proposed .flow-pipeline>.flow-stage:last-child{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.flow-return{position:relative;height:30px;margin:-4px 10% 8px;border:2px dashed var(--line-2);border-top:0;border-radius:0 0 14px 14px}
+.flow-return-label{position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);padding:0 8px;background:var(--surface);font:500 11.5px var(--mono);color:var(--mute);white-space:nowrap}
+@media (max-width:640px){
+  .flow-pipeline{flex-direction:column;align-items:stretch}
+  .flow-connector{flex-basis:18px;width:2px;height:18px;margin:0 auto}
+  .flow-connector::after{right:50%;top:auto;bottom:0;transform:translateX(50%) rotate(135deg)}
+  .flow-return{height:auto;margin:0;border:0}
+  .flow-return-label{position:static;transform:none;display:block;text-align:center;white-space:normal}
+  .flow-return-label::before{content:"↺ "}
+}
+.sk-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.sk-links .btn svg{width:15px;height:15px}

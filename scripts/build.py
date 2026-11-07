@@ -452,42 +452,117 @@ for i, c in enumerate(CASES):
     case_page(i, c)
 
 # ---------------- AI SKILLS ----------------
-# (icon in assets/icons, name, what it does, [what you get], status, optional (label, url))
-SKILLS = [
- ('sk-honest', 'Honest Review', 'A design-manager critique you can run on any screen. It separates facts from opinions and skips the flattery.',
-  ['Type hierarchy, density and layout', 'Engineering feasibility', 'What to fix first'], 'Coming soon', None),
- ('sk-ux', 'UX Assistant', 'The review engine behind Assistantly, packaged as a skill: usability, accessibility and missing states, each with a fix.',
-  ['229+ UX and accessibility checks', 'Findings tied to real elements', 'HTML and Markdown reports'], 'Coming soon', ('Read the Assistantly case study', 'projects/assistantly.html')),
- ('sk-portfolio', 'Portfolio Review', 'Reviews a design portfolio the way a hiring manager reads it, in the first minute and in depth.',
-  ['First-impression check', 'Case study structure and evidence', 'A ranked list of fixes'], 'Coming soon', None),
- ('sk-antislop-copy', 'Antislop · Content', 'Finds the patterns that make writing sound AI-generated and rewrites them in plain, direct language.',
-  ['Filler and empty phrases', 'Formulaic sentence shapes', 'Passive voice and vague claims'], 'Coming soon', None),
- ('sk-antislop-ui', 'Antislop · UI', 'Flags interface choices that look generic or templated, and suggests what to do instead.',
-  ['Overused fonts and gradients', 'Copy-paste layouts and card soup', 'Missing states and contrast issues'], 'Coming soon', None),
- ('sk-factcheck', 'Fact Checker', 'Upload a document, an article or any claim, and it checks what is factually correct, what is unsupported and what needs a source.',
-  ['Claim-by-claim verdicts', 'Sources for every verdict', 'A clear “couldn’t verify” when evidence is thin'], 'Coming soon', None),
- ('sk-flow', 'User Flow Creator', 'Turns a product brief into user flows and wireframes you can open, review and hand off.',
-  ['Flows for each role and edge case', 'Screen-by-screen wireframes', 'Notes on decisions and open questions'], 'Coming soon', ('See the kind of output', 'https://collectivebrain.de/en/skills/ux-flow-wireframer/')),
- ('sk-brand', 'Brand Kit & Pitch Deck', 'Upload your logo and theme, and it builds a complete brand kit and pitch deck that match them.',
-  ['Colour, type and logo usage', 'A full pitch deck in your theme', 'Consistent slides you can edit'], 'Coming soon', ('See the kind of output', 'https://collectivebrain.de/en/skills/brandkit/')),
-]
+# Skill sources live in ../claude-skills (published at github.com/MUZEEBURRAHAMAN/claude-skills).
+# The build copies each SKILL.md and a zipped bundle into assets/skills/<slug>/ so the site serves them too.
+import zipfile, shutil, html as _html
+SKILL_SRC = os.path.join(os.path.dirname(OUT), 'claude-skills')
+SKILL_REPO = 'https://github.com/MUZEEBURRAHAMAN/claude-skills'
+SKILL_RAW = 'https://raw.githubusercontent.com/MUZEEBURRAHAMAN/claude-skills/main'
+from skills_meta import SKILLS
+import json as _json
+_WS = os.path.join(os.path.dirname(OUT), 'claude-skills-workspace', 'iteration-1')
+_CASE = {}
+for _sk in SKILLS:
+    _ev = os.path.join(SKILL_SRC, _sk['slug'], 'evals')
+    if os.path.isdir(_ev):
+        for _c in sorted(os.listdir(_ev)):
+            def _score(cfg, c=_c):
+                g = os.path.join(_WS, c, cfg, 'grading.json')
+                if not os.path.exists(g): return None
+                x = _json.load(open(g))['summary']; return x['passed'], x['total']
+            w, wo = _score('with_skill'), _score('without_skill')
+            if w and wo and not _sk.get('tested'):
+                _sk['tested'] = dict(**{'with': f'{w[0]}/{w[1]}', 'without': f'{wo[0]}/{wo[1]}'}, checks=str(w[1]),
+                    note=f'One realistic task, run twice: once with the skill and once with plain Claude. A grader checked both against {w[1]} written checks. Test case: `{_c}`.')
 
-def skill_card(icon, name, desc, gets, status, link):
-    ln = ''
-    if link:
-        ext = link[1].startswith('http')
-        ln = f'<a class="more sk-link" href="{E(link[1])}"' + (' rel="noopener" target="_blank"' if ext else '') + f'>{E(link[0])} {"↗" if ext else "→"}</a>'
-    return (f'<article class="skill"><div class="sk-top"><span class="sk-ic">{svg(icon)}</span>'
-            f'<span class="badge topic {"sand" if status == "Coming soon" else "sage"}">{E(status)}</span></div>'
-            f'<h2 class="sk-name">{E(name)}</h2><p class="sk-desc">{E(desc)}</p>'
-            f'<ul class="sk-gets">' + ''.join(f'<li>{E(g)}</li>' for g in gets) + f'</ul>{ln}</article>')
+def bundle_skill(slug):
+    """Copy SKILL.md and zip the whole skill folder (without tests) into assets/skills/<slug>/."""
+    src, dst = os.path.join(SKILL_SRC, slug), os.path.join(OUT, 'assets', 'skills', slug)
+    os.makedirs(dst, exist_ok=True)
+    shutil.copy(os.path.join(src, 'SKILL.md'), os.path.join(dst, 'SKILL.md'))
+    with zipfile.ZipFile(os.path.join(dst, f'{slug}.zip'), 'w', zipfile.ZIP_DEFLATED) as z:
+        for root, dirs, files in os.walk(src):
+            dirs[:] = [d for d in dirs if d != 'evals']
+            for f in files:
+                if f == '.DS_Store': continue
+                full = os.path.join(root, f)
+                z.write(full, os.path.join(slug, os.path.relpath(full, src)))
+    return open(os.path.join(src, 'SKILL.md')).read()
 
-sk = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> AI Skills<h1 class="visually-hidden">AI Skills</h1></div>
-<p class="lede">Claude skills I’m building from the reviews and checks I repeat. Each one turns a process I trust into a tool anyone can run in Claude Code.</p></header>
-<div class="skills">{''.join(skill_card(*x) for x in SKILLS)}</div>
-<section class="sec sk-cta" aria-labelledby="h-early"><div class="eyebrow" id="h-early"><span class="n">✦</span> Early access</div>
-<p class="lede">Want to try a skill before it launches? Email me and I’ll send the early version.</p>
-<div class="cs-links"><button class="btn copy-btn" type="button" data-copy="{EMAIL}" data-done="Copied">{svg("copy")}<span class="lbl">Copy my email</span></button></div></section>'''
-page('skills.html','skills','AI Skills · Muzeeb Urrahaman','Claude skills by Muzeeb Urrahaman: honest design review, UX assistant, portfolio review, antislop, fact checker, user flows and brand kits.', sk)
+def skill_row(k):
+    return (f'<div class="sk-row"><span class="sk-ic">{svg(k["icon"])}</span>'
+            f'<a class="sk-main" href="skills/{k["slug"]}.html"><b>{E(k["name"])}</b><small>{E(k["tagline"])}</small></a>'
+            f'<span class="sk-meta">{tag(k["category"], k["tone"])}<span class="badge stat">{E(k["version"])}</span></span>'
+            f'<span class="sk-act"><a class="btn sm" href="skills/{k["slug"]}.html">View</a>'
+            f'<a class="btn sm" href="assets/skills/{k["slug"]}/{k["slug"]}.zip" download>{svg("download")}Download</a></span></div>')
+
+sk = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> AI Skills <a class="more" href="{SKILL_REPO}" rel="noopener">GitHub ↗</a><h1 class="visually-hidden">AI Skills</h1></div>
+<p class="lede">Claude skills I built from the reviews and checks I repeat. Each one is tested against a baseline, free to download, and installs in one command.</p></header>
+<div class="sk-list">{''.join(skill_row(k) for k in SKILLS)}</div>
+<section class="sec" aria-labelledby="h-how"><div class="eyebrow" id="h-how"><span class="n">?</span> How to install</div>
+<div class="cs-rows"><div class="cs-row"><span>01</span><div><h3>Claude Code</h3><p class="cs-p">Open a skill and copy its install command. It drops the skill into <code>~/.claude/skills/</code>.</p></div></div>
+<div class="cs-row"><span>02</span><div><h3>Claude.ai</h3><p class="cs-p">Download the .zip and upload it under Settings → Capabilities → Skills.</p></div></div>
+<div class="cs-row"><span>03</span><div><h3>Use it</h3><p class="cs-p">Ask in plain words. Each skill page lists phrases that switch it on.</p></div></div></div></section>'''
+page('skills.html','skills','AI Skills · Muzeeb Urrahaman','Free, tested Claude skills by Muzeeb Urrahaman: honest design review, UX audit, portfolio review, antislop for copy and UI, fact checking, user flows and brand kits.', sk)
+
+def flow_html(f):
+    def st(x):
+        if isinstance(x, tuple):
+            return f'<div class="flow-stage-wrap"><div class="flow-stage">{E(x[0])}</div><div class="flow-branch">{E(x[1])}</div></div>'
+        return f'<div class="flow-stage">{E(x)}</div>'
+    stages = '<div class="flow-connector" aria-hidden="true"></div>'.join(st(x) for x in f['stages'])
+    ret = f'<div class="flow-return"><span class="flow-return-label">{E(f["ret"])}</span></div>' if f.get('ret') else ''
+    return (f'<section class="flow-diagram flow-diagram--{f["kind"]}" aria-label="{E(f["label"])}"><div class="flow-label"><span class="lozenge">{E(f["label"])}</span>'
+            f'<span class="flow-title">{E(f["title"])}</span></div><div class="flow-pipeline">{stages}</div>{ret}</section>')
+
+def demo_html(k):
+    d = k.get('demo')
+    if not d: return ''
+    if d['type'] == 'flows':
+        body = ''.join(flow_html(f) for f in d['flows'])
+    elif d['type'] == 'highlight':
+        body = (f'<div class="sk-demo-tabs" role="group" aria-label="Demo view"><button type="button" class="chip-btn" aria-pressed="false" data-hl>Highlight what it catches</button></div>'
+                f'<div class="sk-demo-text">{d["html"]}</div>')
+    else:
+        body = f'<pre class="sk-demo-pre">{E(d["text"])}</pre>'
+    cap = f'<p class="sk-demo-cap">{md(d["caption"])}</p>' if d.get('caption') else ''
+    return f'<section class="sec" aria-labelledby="h-demo"><div class="eyebrow" id="h-demo"><span class="n">✦</span> {E(d["title"])}</div>{body}{cap}</section>'
+
+def skill_page(i, k):
+    slug = k['slug']; text = bundle_skill(slug)
+    install = f'mkdir -p ~/.claude/skills && curl -fsSL {SKILL_REPO}/raw/main/dist/{slug}.zip -o /tmp/{slug}.zip && unzip -oq /tmp/{slug}.zip -d ~/.claude/skills/'
+    meta = [('Level', k['level']), ('Saves', k['saves']), ('Version', k['version']), ('Updated', k['updated']), ('Available in', 'Claude Code · Claude.ai')]
+    tested = k.get('tested')
+    test_html = ''
+    if tested:
+        test_html = (f'<section class="sec" aria-labelledby="h-test"><div class="eyebrow" id="h-test"><span class="n">✓</span> Tested</div>'
+                     f'<div class="stats"><div><b>{E(tested["with"])}</b><small>Checks passed with the skill</small></div><div><b>{E(tested["without"])}</b><small>Same task without it</small></div><div><b>{E(tested["checks"])}</b><small>Checks in the test</small></div></div>'
+                     f'<p class="cs-p">{md(tested["note"])}</p></section>')
+    others = [SKILLS[(i + n) % len(SKILLS)] for n in (1, 2)]
+    body = f'''<header class="cs-head">
+<nav class="crumb" aria-label="Breadcrumb"><a href="skills.html">← AI Skills</a><span aria-hidden="true">/</span><span aria-current="page">{E(k["name"])}</span></nav>
+<div class="eyebrow"><span class="slash">//</span> Claude skill {tag(k["category"], k["tone"])}</div>
+<h1 class="cs-title">{E(k["name"])}</h1><p class="cs-lead">{md(k["description"])}</p>
+<div class="sk-links"><a class="btn" href="assets/skills/{slug}/{slug}.zip" download>{svg("download")}Download .zip</a><a class="btn" href="#skill-md">View SKILL.md</a><a class="btn" href="{SKILL_REPO}/tree/main/{slug}" rel="noopener" target="_blank">GitHub ↗</a></div>
+</header>
+<dl class="cs-meta sk-dl">{"".join(f'<div><dt>{E(a)}</dt><dd>{E(b)}</dd></div>' for a, b in meta)}</dl>
+<section class="sec" aria-labelledby="h-who"><div class="eyebrow" id="h-who"><span class="n">01</span> Who it is for</div><p class="cs-lead">{E(k["who"])}</p></section>
+<section class="sec" aria-labelledby="h-use"><div class="eyebrow" id="h-use"><span class="n">02</span> Use cases</div><ul class="cs-list">{"".join(f"<li>{md(u)}</li>" for u in k["uses"])}</ul></section>
+<section class="sec" aria-labelledby="h-say"><div class="eyebrow" id="h-say"><span class="n">03</span> Say this to activate it</div>
+<div class="sk-says">{"".join(f'<button type="button" class="sk-say" data-copy="{E(t)}" data-done="Copied">“{E(t)}”</button>' for t in k["triggers"])}</div></section>
+{demo_html(k)}
+<section class="sec" aria-labelledby="h-inst"><div class="eyebrow" id="h-inst"><span class="n">04</span> Install</div>
+<div class="sk-code"><pre><code>{E(install)}</code></pre><button type="button" class="btn sm" data-copy="{E(install)}" data-done="Copied">{svg("copy")}<span class="lbl">Copy</span></button></div>
+<p class="cs-p">The command downloads the skill and unpacks it into <code>~/.claude/skills/</code>. No terminal? Download the .zip and upload it in Claude.ai under Settings → Capabilities → Skills.</p></section>
+{test_html}
+<section class="sec" id="skill-md" aria-labelledby="h-md"><div class="eyebrow" id="h-md"><span class="n">05</span> SKILL.md
+<span class="more sk-md-act"><button type="button" class="btn sm" data-copy-from="md-{slug}" data-done="Copied">{svg("copy")}<span class="lbl">Copy</span></button><a class="btn sm" href="assets/skills/{slug}/SKILL.md" download="SKILL.md">{svg("download")}Download</a></span></div>
+<pre class="sk-md" id="md-{slug}" tabindex="0">{E(text)}</pre></section>
+<section class="sec"><div class="eyebrow">More skills <a class="more" href="skills.html">All skills →</a></div><div class="sk-list">{"".join(skill_row(o) for o in others)}</div></section>'''
+    page(f'skills/{slug}.html', 'skills', f'{k["name"]} · Claude Skill · Muzeeb Urrahaman', k['tagline'], body, base='../')
+
+
+for i, k in enumerate(SKILLS):
+    skill_page(i, k)
 
 print('built', sorted(f for f in os.listdir(OUT) if f.endswith('.html')), sorted(os.listdir(os.path.join(OUT, 'projects'))))

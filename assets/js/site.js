@@ -106,13 +106,14 @@
 
   /* ---------- copy email ---------- */
   function initCopy() {
-    document.querySelectorAll('[data-copy]').forEach(el => el.addEventListener('click', e => {
+    document.querySelectorAll('[data-copy],[data-copy-from]').forEach(el => el.addEventListener('click', e => {
       e.preventDefault();
-      const text = el.dataset.copy, lbl = el.querySelector('.lbl');
+      const src = el.dataset.copyFrom && document.getElementById(el.dataset.copyFrom);
+      const text = src ? src.textContent : el.dataset.copy, lbl = el.querySelector('.lbl');
       // buttons with a label swap it to "Copied" in place; plain links fall back to a toast
       const done = () => {
         Sound.play('toggle');
-        if (!lbl) return toast('Email copied');
+        if (!lbl) return toast(el.dataset.copyFrom || el.dataset.done ? 'Copied' : 'Email copied');
         clearTimeout(el._t);
         if (!el.dataset.idle) el.dataset.idle = lbl.textContent;
         lbl.textContent = el.dataset.done; el.classList.add('copied');
@@ -125,6 +126,11 @@
       try { document.execCommand('copy'); done(); } catch (e) { toast(text); } t.remove();
     }
   }
+  /* ---------- skill demo: mark what the skill catches ---------- */
+  document.querySelectorAll('[data-hl]').forEach(b => b.addEventListener('click', () => {
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', on); b.closest('section').classList.toggle('hl-on', on);
+  }));
   let toastTimer;
   function toast(msg) {
     document.querySelectorAll('.toast').forEach(t => t.remove());
