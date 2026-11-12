@@ -20,69 +20,58 @@ pill is one of: good, bad, mid. **text** renders bold. Images live in assets/img
 CASES = [
 # ------------------------------------------------------------------ GOFULLY
 dict(
- slug='gofully', name='GoFully', tags=['Chrome extension', 'Brand + product'], read=9,
+ slug='gofully', name='GoFully', tags=['Chrome extension', 'Brand + product'], read=7,
  cover='assets/img/cover/gofully.webp',
  title='GoFully: redesigning a screenshot extension around one promise, nothing leaves your device.',
- lede='GoFully already did a lot: full-page capture, text reading, markup, redaction and PDF export, all offline. I redesigned the brand, the extension and the website so the tool is **calm to pick up and private by default**.',
- meta=[('Role', 'Product Designer, end-to-end redesign'), ('Product', 'Chrome extension · 5 browsers'), ('Scope', 'Brand, design system, extension UI, website'), ('Status', 'Designed · new site in development')],
- stats=[('41 pages', 'Brand guide', 'From positioning and voice to the 16 px app icon'), ('70+', 'Extension screens', 'Every state, in light and dark'), ('1 action', 'Per screen', 'One primary action in navy; everything else quiet')],
- tldr=[('The problem', 'The old extension and website listed every feature at once, so a capable offline screenshot tool felt busy and its main promise got lost.'),
-       ('What I did', 'Redesigned the brand, extension and website end to end: a 41-page brand guide, 70+ screens in light and dark, and one primary action per screen.'),
-       ('Where it stands', 'Designed, with the new website in development. No post-launch metrics yet, so this shows the design work, not results.')],
+ lede='GoFully could capture, read, mark up, redact and export a whole page, all offline, but it looked like every other screenshot tool. I redesigned the brand, the extension and the website so that promise is the first thing people see.',
+ meta=[('Role', 'Product designer · brand, UX, UI, website'), ('Product', 'Screenshot extension · 5 browsers'), ('Scope', 'Brand guide, design system, 70+ screens, website'), ('Status', 'New website live')],
+ stats=[('41 pages', 'Brand guide', 'From positioning to the 16 px icon'), ('70+', 'Extension screens', 'Every state, light and dark'), ('1', 'Primary action', 'Per screen, in navy')],
+ tldr=[('The problem', 'A capable offline screenshot tool listed every feature at once, so its one real difference, privacy, got lost.'),
+       ('The solution', 'One promise across every surface: capture the whole page and keep it on your device. A new symbol, a calm design system and a site that shows the product.'),
+       ('My role', 'Brand strategy and identity, design system, every extension and editor screen, and the website design.')],
+ links=[('Visit the GoFully website', 'https://gofully-extension.vercel.app')],
  sections=[
-  ('Overview', 'GoFully worked well and looked like dozens of other screenshot tools.', [
-    ('p', 'GoFully scrolls a page, waits for lazy images, handles sticky headers and stitches one clean image. It reads text in six languages, marks up and redacts, beautifies captures and exports PNG, JPG, WebP or PDF. There’s no account and no server: everything runs on the device.'),
-    ('callout', 'The opening insight', 'On the old website, “100% on-device” was a small badge above a headline about features. The one thing that set GoFully apart was the quietest thing on the page.'),
+  ('How screenshots work today', 'Sharing one page takes a chain of apps.', [
+    ('pipeline', 'current', 'Today', 'Five tools → one leak', ['Capture tool', 'Image editor', 'Blur by hand', 'PDF converter', 'Upload to share'], 'redo when a detail was missed'),
+    ('pipeline', 'proposed', 'With GoFully', 'One click → ready to share, on your device', ['One click or shortcut', 'Whole page stitched', 'Redact and mark up', 'Export PNG, PDF or text', 'Nothing uploaded']),
   ]),
-  ('The problem', 'The store page, website and popup each listed every feature at once.', [
-    ('rows', [('A headline made of features', '“Full Page Screenshot Tool. One Extension. Every Job.” followed by WebAssembly OCR, 4K export and PDF in one sentence.'),
-              ('A generic identity', 'A glossy camera icon, next to other screenshot extensions with camera icons.'),
-              ('Busy visuals that hid the UI', 'Gradients, tilted devices and callouts; each surface in its own style.')], None),
+  ('The problem', 'The best thing about GoFully was the quietest thing on the page.', [
+    ('cards', [('A headline of features', '“Full Page Screenshot Tool. One Extension. Every Job.” then OCR, 4K and PDF in one line.'),
+               ('A generic camera icon', 'It sat next to dozens of other screenshot extensions with cameras.'),
+               ('Privacy as a small badge', '“100% on-device” was a tiny label above the headline.')]),
     ('cmp', 'before-site-hero.webp', 'after-site-hero.webp', 'Before · old site', 'After · new site'),
     ('fig', 'before-store-entire.webp', 'Before: four store screenshots, four different layouts.'),
   ]),
-  ('Direction', 'I built the direction on one promise: capture the whole page and keep it on your device.', [
-    ('p', 'The audience is everyday sharers: developers, QA testers, writers, researchers and privacy teams. The problem in the brand guide’s three words: three tools, one leak.'),
-    ('cards', [('Private', 'Everything runs on the device. No account, no upload, no tracking.'), ('Precise', 'Pixel-exact captures, checked seams, crops that keep the marks.'), ('Fast', 'One click or one shortcut from page to finished file.')]),
-    ('fig', 'brand-positioning.webp', 'Positioning and moodboard from the 41-page brand guide.'),
+  ('My role', 'Brand to website, end to end.', [
+    ('chips', ['Positioning', 'Brand identity', '41-page brand guide', 'Design system v2', 'Extension UX and UI', 'Editor', 'Error and edge states', 'Website design', 'Store screenshots']),
   ]),
-  ('Brand', 'From a glossy camera to a viewfinder drawn as a G.', [
-    ('p', 'The new symbol still says “screenshot”, and it can only be GoFully. Chrome shows it at 16 px in the toolbar, so below 32 px the wordmark drops and the symbol stands alone.'),
-    ('fig', 'r0-mark-a.webp', 'Logo anatomy: viewfinder frame, lens ring, shutter dot and tail, each with a job.'),
-    ('table', ['Role', 'Pair', 'Contrast'], [
-      ['Body text', 'Ink on White · #152333 / #FFFFFF', '15.9:1 Pass'], ['Primary button', 'White on Navy · #FFFFFF / #014073', '10.6:1 Pass'],
-      ['Text on Sky fills', 'Navy on Sky · #014073 / #6AB0FF', '4.7:1 Pass'], ['Never for text', 'Sky on White · #6AB0FF / #FFFFFF', '2.3:1 Fail']]),
-    ('p', 'Voice: a calm expert. “Screenshot saved. 4,200 px captured.” Never “Your amazing screenshot has been successfully saved!”'),
+  ('Brand', 'Private, precise, fast.', [
+    ('fig', 'brand-positioning.webp', 'Positioning and moodboard from the brand guide.'),
+    ('feature', 'Symbol', 'A viewfinder drawn as a G', 'It still reads as “screenshot”, and it can only be GoFully. Below 32 px the wordmark drops and the symbol stands alone.', 'r0-mark-a.webp'),
+    ('feature', 'Design system', 'Soft corners, a 4 px grid and two quiet shadows', 'Radius by role, navy shadows instead of black, one icon weight. Every component in four states.', 'ui-components.webp'),
   ]),
-  ('Design system', 'Soft corners, a 4 px grid and two quiet shadows.', [
-    ('cards', [('Radius by role', '6 px inputs, 10 px buttons, 16 px cards, 24 px dialogs.'), ('Two navy shadows', 'Raised for cards, Overlay for menus and dialogs. Never pure black.'), ('One icon weight', '24 px grid, 1.75 px stroke, round caps and joins.')]),
-    ('fig', 'ui-components.webp', 'Core components, each in default, hover, focus and disabled.'),
+  ('The extension', 'One primary action per screen, and a way out of every error.', [
+    ('feature', 'Popup', 'Every capture mode, with its shortcut', 'When a capture fails, the popup says what happened and what to do next.', ['popup-default.webp', 'popup-failed.webp']),
+    ('feature', 'Full page', 'The whole page, in one image', 'It scrolls, waits for lazy images and stops sticky headers repeating.', 'site-fullpage.webp'),
+    ('feature', 'Redact', 'Hide what shouldn’t be seen, before you share', 'Emails, card numbers and API keys are covered automatically.', ['site-redact.webp', 'ed-redact.webp']),
+    ('feature', 'Text', 'Copy text out of any image', 'Six languages, read on the device.', 'site-ocr.webp'),
+    ('feature', 'Editor', 'Everything after the capture, in one quiet window', 'Crop, arrows, text, blur and Beautify, in light and dark.', ['ed-default.webp', 'ed-dark.webp']),
+    ('feature', 'Result card', 'Copy, save, edit or pin', 'After a capture, a small card appears on top of any site.', 'ov-result-card.webp'),
   ]),
-  ('Extension', 'Each screen gets one primary action and a way out of errors.', [
-    ('p', 'I followed a capture through every state it can reach, including the ones that go wrong: a page Chrome won’t allow, a capture that stopped halfway, a search with no results. Each explains what happened and offers the next step.'),
-    ('figs', [('popup-default.webp', 'The popup lists each capture mode with its shortcut.'), ('popup-failed.webp', 'A failed capture says what to do next.')]),
-    ('fig', 'ov-result-card.webp', 'After a capture, the result card offers copy, save, edit and pin, on top of any site.'),
-  ]),
-  ('Editor', 'Everything after the capture, in one quiet window.', [
-    ('p', 'Crop, arrows, text, blur, auto-redact, Beautify and export. Auto-redact covers emails and card numbers before anything is shared.'),
-    ('cmp', 'ed-default.webp', 'ed-dark.webp', 'Light', 'Dark'),
-    ('fig', 'ed-redact.webp', 'Auto-redact results, before export.'),
-  ]),
-  ('Website', 'I replaced the feature list with one sentence.', [
-    ('lead', 'Old: “Full Page Screenshot Tool. One Extension. Every Job.” New: **“Screenshot the whole page. Share it ready to go.”**'),
-    ('p', 'The privacy promise moved from a badge into the first paragraph. I tried three hero layouts against a realistic long article, then storyboarded every feature demo.'),
+  ('The website', 'I replaced the feature list with one sentence.', [
+    ('lead', 'Old: “Full Page Screenshot Tool. One Extension. Every Job.” New: **“The screenshot studio that stays on your device.”**'),
     ('fig', 'landing-hero-options.webp', 'Three hero directions, each tested against the same long article.'),
+    ('feature', 'Live demos', 'Each feature plays on a real page', 'Pick a demo or let them run.', 'site-demo.webp'),
+    ('feature', 'Comparison', 'Four tools, or one', 'What people usually pay for, set against one free extension.', 'site-vs.webp'),
+    ('browser', 'site-full.webp', 'gofully-extension.vercel.app', 'The full GoFully website. Scroll inside the frame.'),
   ]),
-  ('Where it stands', 'What’s done and what comes next.', [
-    ('tldr', [('good', 'Designed', 'The brand and 41-page guide, Design System v2, 70+ extension screens in light and dark, and the new website.'),
-              ('mid', 'Building', 'The new site runs in development; the live site and store listing still show the old design.'),
-              ('bad', 'Not yet', 'Post-launch metrics.')]),
-    ('panels', [('mid', 'Next', 'v1.2 pushes privacy and precision', ['Redact page: cover emails, cards and API keys before capture.', 'Measure: sizes, padding and colours on hover.', 'Delayed capture for menus and tooltips.', 'QR codes and barcodes, read on device.'])]),
-    ('lead', 'I kept every feature. The icon, popup, editor and website now share one look and one message.'),
+  ('Looking back', 'What GoFully taught me.', [
+    ('rows', [('Lead with the difference', 'Privacy moved from a badge to the headline, because it was the one thing competitors couldn’t say.'),
+              ('Design the failures too', 'Every error state got a next step, so people don’t get stuck.'),
+              ('One look everywhere', 'Icon, popup, editor and website now share one system and one message.')], None),
+    ('honest', 'No post-launch metrics yet.', 'The new website is live. This shows the design work, not results.'),
   ]),
  ],
- faq=[('Why redesign if the features worked?', 'The product was strong; the way it presented itself hid that. Privacy, its real difference, was the quietest message.'),
-      ('Is the redesign live?', 'Not yet. The new website is in development and the extension’s current release is v1.1.3.')],
 ),
 
 # ------------------------------------------------------------------ JOBLY
