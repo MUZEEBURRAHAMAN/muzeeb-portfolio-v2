@@ -33,6 +33,7 @@ PROJECTS = [  # (name, domain, desc, cover, url); same order as CASES in case_st
  ('Jobly','chrome extension · web','Fresh jobs with real posting dates, plus apply assist, resume tailoring and cover letters. Founded, designed and built solo.','jobly','projects/jobly.html'),
  ('Assistantly','ai design qa','Clicks through every state of a web app and reports each design problem with its exact code fix, for about $0.30 a screen.','assistantly','projects/assistantly.html'),
  ('Careway Landing Page','healthcare · competitor audit','I audited a competitor’s oncology software page, found 13 problems, and designed a landing page that answers each one.','careway','projects/careway.html'),
+ ('Landing Pages with AI','process · ai-assisted','How I design and build landing pages with AI without them looking generated, shown across four pages.','ai-landing','projects/ai-landing.html'),
  ('Petsy','e-commerce · 3d','A full 18-page pet clothing store with a 3D fitting room, so a dog or cat tries the coat on before you buy.','petsy','projects/petsy.html'),
  ('EVE','mental wellness · redesign','A wellness platform redesigned for employees and their companies: audit, flows, a calm system and 100+ screens.','eve','projects/eve.html'),
  ('PharmFlow','health app · brand','One pharmacy brand across a phone app, a watch app and a website, with 200+ screens.','pharmflow','projects/pharmflow.html'),

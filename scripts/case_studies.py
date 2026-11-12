@@ -698,6 +698,73 @@ dict(
   ]),
  ],
 ),
+# ------------------------------------------------------------------ AI LANDING
+dict(
+ slug='ai-landing', name='Landing Pages with AI', tags=['Process', 'AI-assisted build', 'Landing pages'], read=5,
+ cover='assets/img/cover/ai-landing.webp',
+ title='How I design landing pages with AI, without them looking like AI made them.',
+ lede='AI can produce a landing page in a minute, and it will look like every other one. Across four landing pages I’ve settled on a process where I make the decisions and AI does the typing.',
+ meta=[('Role', 'Designer and builder'), ('Sites', 'GoFully, Jobly, Careway, Petsy'), ('Tools', 'Figma, Claude Code, Base44'), ('Output', '4 landing pages')],
+ stats=[('4', 'Landing pages', 'Each designed and built by me'), ('1', 'Section per prompt', 'Never a whole page at once'), ('375 px', 'First check', 'Every section tested on a phone')],
+ tldr=[('The problem', 'Prompt an AI for “a landing page” and you get the average of the internet: a gradient, three cards and a vague headline.'),
+       ('The solution', 'Do the thinking first. Research, one sentence, a wireframe. Then prompt one finished section at a time and review it like any other design.'),
+       ('My role', 'Research, positioning, wireframes, prompts, review and the final build on all four pages.')],
+ links=[('GoFully', 'https://gofully-extension.vercel.app'), ('Jobly', 'https://jobly-88t.pages.dev'), ('Petsy', 'https://petsy-style-edit.base44.app')],
+ sections=[
+  ('Two ways to use AI', 'The tool is the same. The order is different.', [
+    ('pipeline', 'current', 'The default', 'Prompt → page → generic', ['“Make me a landing page”', 'AI picks the layout', 'AI writes the headline', 'Tweak colours', 'Looks like everyone else’s'], 'regenerate and hope'),
+    ('pipeline', 'proposed', 'My process', 'Decide → wireframe → prompt → review', ['Research the audience', 'Write one sentence', 'Wireframe the page', 'Prompt one section', 'Review, test, ship']),
+  ]),
+  ('Step 1 · Research', 'Know what the page must answer before it exists.', [
+    ('figs', [('cw-competitor.webp', 'Careway: I audited a competitor’s page first and listed what it failed to answer.'), ('cw-research.webp', 'The research board that set the direction.')]),
+    ('p', 'For Careway that audit found 13 problems. Each one became a section the new page had to get right.'),
+  ]),
+  ('Step 2 · One sentence', 'If I can’t write the headline, the page isn’t ready to design.', [
+    ('table', ['Site', 'The sentence'],
+     [['GoFully', 'The screenshot studio that stays on your device.'],
+      ['Jobly', 'Find jobs posted this week, not last year.'],
+      ['Careway', 'Every patient on track. Every follow-up done.'],
+      ['Petsy', 'Dressed for autumn walks.']]),
+    ('cmp', 'gf-before.webp', 'gf-after.webp', 'Before · a list of features', 'After · one promise'),
+  ]),
+  ('Step 3 · Wireframe', 'Structure is my decision, not the model’s.', [
+    ('carousel', [('pt-wireframe.webp', 'Petsy', 'Home and product pages wireframed in Figma before any prompt.'),
+                  ('cw-wireframe.webp', 'Careway', 'The hero in grey, so the argument is judged before the styling.'),
+                  ('gf-options.webp', 'GoFully', 'Three hero directions, each tested against the same long article.')]),
+    ('fig', 'jb-wireframe.webp', 'Jobly: the full page as a wireframe, section by section.'),
+  ]),
+  ('Step 4 · Prompt one section', 'Small prompts, each describing something already designed.', [
+    ('fig', 'pt-builder.webp', 'Petsy in Base44: one prompt per finished section, each tested before the next.'),
+    ('cards', [('Give it the decision', 'The prompt carries the layout, copy and tokens. The AI doesn’t choose them.'),
+               ('One section at a time', 'A small change is easy to judge and easy to throw away.'),
+               ('Real content only', 'Real product screens and real copy go in from the first prompt. No placeholders.')]),
+  ]),
+  ('Step 5 · Review like a designer', 'AI output is a draft. I check it the way I’d check anyone’s work.', [
+    ('rows', [('Does it look generated?', 'I strip default gradients, identical cards and filler copy until the page is specific to the product.'),
+              ('Does it work on a phone?', 'Every section is checked at 375 px for overflow, tap targets and reading order.'),
+              ('Is it true?', 'Every number and claim on the page is traced back to a source.')], None),
+    ('gallery', [('cw-m-a.webp', 'Careway, hero A on a phone.'), ('cw-m-b.webp', 'Careway, hero B on a phone.'), ('pt-mobile.webp', 'Petsy on a phone.')], 3),
+    ('p', 'I packaged these checks as reusable Claude skills, so the same review runs on every project.'),
+    ('links', [('See the skills', 'skills.html')]),
+  ]),
+  ('The results', 'Four pages, four different looks, one process.', [
+    ('carousel', [('gf-after.webp', 'GoFully', 'Privacy is the headline, and live demos replace the feature list.'),
+                  ('jb-hero.webp', 'Jobly', 'The promise is the posting date, with the product right under it.'),
+                  ('cw-hero-b.webp', 'Careway · hero B', 'The product-led hero, one of two built for an A/B test.'),
+                  ('cw-hero-a.webp', 'Careway · hero A', 'The film-led hero for the same test.'),
+                  ('pt-hero.webp', 'Petsy', 'A full-screen film and two paths in.')]),
+    ('browser', 'gf-full.webp', 'gofully-extension.vercel.app', 'GoFully, the full page.'),
+    ('browser', 'jb-full.webp', 'jobly-88t.pages.dev', 'Jobly, the full page.'),
+    ('browser', 'cw-full.webp', 'Careway · landing page', 'Careway, the full page.'),
+  ]),
+  ('Looking back', 'What I’d tell another designer.', [
+    ('rows', [('AI speeds up building, not thinking', 'The hours I save on code go into research and copy, which is where pages are won.'),
+              ('Generic in, generic out', 'The quality of the page tracks the quality of the brief I write.'),
+              ('Keep a checklist', 'The same review every time is what stops AI defaults from creeping back in.')], None),
+    ('honest', 'About results.', 'I don’t have conversion data for these pages yet. This shows the process, not an uplift.'),
+  ]),
+ ],
+),
 # ------------------------------------------------------------------ MATH AI
 dict(
  slug='mathai', name='Math AI', tags=['Mobile app', 'App Store screenshots'], read=3, compact=True,
