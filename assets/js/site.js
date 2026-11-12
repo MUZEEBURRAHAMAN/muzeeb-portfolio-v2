@@ -270,7 +270,7 @@
 
     let lb = null, last = null;
     const close = () => { if (!lb || lb.hidden) return; lb.hidden = true; document.body.style.overflow = ''; last?.focus(); };
-    document.querySelectorAll('.cs-fig .zoom').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.cs-fig .zoom, .cs-car .zoom').forEach(btn => btn.addEventListener('click', () => {
       if (!lb) {
         lb = document.createElement('div'); lb.className = 'lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true');
         lb.innerHTML = '<button class="x" aria-label="Close">×</button><figure><figcaption><small></small></figcaption></figure>';
@@ -327,3 +327,14 @@
     dots(document.querySelector('.dock .me'), { interactive: false, fadeRows: 0 });
   });
 })();
+
+/* carousels */
+(function(){document.querySelectorAll('[data-car]').forEach(function(c){
+  var t=c.querySelector('.track'),n=t.children.length,p=c.querySelector('.prev'),x=c.querySelector('.next'),ct=c.querySelector('.count');
+  function i(){return Math.round(t.scrollLeft/(t.scrollWidth/n))}
+  function sync(){var k=i();ct.textContent=(k+1)+' / '+n;p.disabled=k===0;x.disabled=k===n-1}
+  function go(d){var k=Math.max(0,Math.min(n-1,i()+d));t.scrollTo({left:k*(t.clientWidth+12),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+  p.addEventListener('click',function(){go(-1)});x.addEventListener('click',function(){go(1)});
+  t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});
+  t.addEventListener('scroll',function(){requestAnimationFrame(sync)},{passive:true});sync();
+})})();

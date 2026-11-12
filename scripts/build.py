@@ -449,6 +449,21 @@ def block(slug, b):
                 f'<div class="view" tabindex="0" role="region" aria-label="Scrollable full-page preview: {E(url)}">'
                 f'<img src="{src}" alt="{E(cap)}" width="{w}" height="{h}" loading="lazy" decoding="async"></div>'
                 f'<figcaption>{md(cap)}</figcaption></figure>')
+    if k == 'carousel':
+        # swipeable slides: one large image, a short title and one line each
+        slides = []
+        for n, (f, t, x) in enumerate(b[1], 1):
+            src = f'assets/img/cs/{slug}/{f}'; w, h = img_size(src)
+            slides.append(f'<figure class="slide" aria-label="{n} of {len(b[1])}"><button type="button" class="zoom" data-full="{src}" aria-label="Open full size: {E(t)}">'
+                          f'<img src="{src}" alt="{E(t)}" width="{w}" height="{h}" loading="lazy" decoding="async"></button>'
+                          f'<figcaption><b>{md(t)}</b><span>{md(x)}</span></figcaption></figure>')
+        return (f'<div class="cs-car" data-car><div class="track" tabindex="0" role="region" aria-label="Image carousel, {len(b[1])} slides">{"".join(slides)}</div>'
+                f'<div class="ctl"><button type="button" class="prev" aria-label="Previous slide">←</button><span class="count" aria-live="polite">1 / {len(b[1])}</span>'
+                f'<button type="button" class="next" aria-label="Next slide">→</button></div></div>')
+    if k == 'video':
+        _, f, poster, cap = b; ps = f'assets/img/cs/{slug}/{poster}'; w, h = img_size(ps)
+        return (f'<figure class="cs-video"><video controls playsinline preload="none" poster="{ps}" width="{w}" height="{h}"><source src="assets/video/{f}" type="video/mp4"></video>'
+                f'<figcaption>{md(cap)}</figcaption></figure>')
     if k == 'findings':
         out = []
         for n, sev, t, ev, fix in b[1]:
@@ -464,6 +479,7 @@ def case_page(i, c):
     toc = ''.join(f'<a href="#s{n}"><span>{n:02d}</span>{E(t)}</a>' for n, (t, _, _) in enumerate(secs, 1))
     tldr_html = ('<section class="sec" aria-label="Summary"><div class="eyebrow">TL;DR</div><div class="cs-tldr">'
                  + ''.join(f'<div><small>{E(k)}</small><p>{md(v)}</p></div>' for k, v in c['tldr']) + '</div></section>') if c.get('tldr') else ''
+    HERO = f'''<figure class="cs-fig cs-hero"><button type="button" class="zoom" data-full="{c["cover"]}" aria-label="Open cover image full size"><img src="{c["cover"]}" alt="{E(c["name"])} cover" width="{img_size(c["cover"])[0]}" height="{img_size(c["cover"])[1]}" decoding="async" fetchpriority="high"></button></figure>'''
     body = [f'''<header class="cs-head">
   <nav class="crumb" aria-label="Breadcrumb"><a href="projects.html">← Projects</a><span aria-hidden="true">/</span><span aria-current="page">{E(c["name"])}</span></nav>
   <div class="eyebrow"><span class="slash">//</span> Case study {"".join(tag(t) for t in c["tags"])}<span class="more">{c["read"]} min read</span></div>
@@ -471,8 +487,9 @@ def case_page(i, c):
   <p class="cs-lead">{md(c["lede"])}</p>
 </header>
 <dl class="cs-meta">{"".join(f'<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>' for k, v in c["meta"])}</dl>
-<figure class="cs-fig cs-hero"><button type="button" class="zoom" data-full="{c["cover"]}" aria-label="Open cover image full size"><img src="{c["cover"]}" alt="{E(c["name"])} cover" width="{img_size(c["cover"])[0]}" height="{img_size(c["cover"])[1]}" decoding="async" fetchpriority="high"></button></figure>
+{'' if c.get('video') else HERO}
 {block(slug, ('stats', c['stats'])) if c.get('stats') else ''}
+{block(slug, ('video',) + tuple(c['video'])) if c.get('video') else ''}
 {tldr_html}
 {block(slug, ('links', c['links'])) if c.get('links') else ''}
 {'' if c.get('compact') else f'<nav class="sec" aria-label="Contents"><div class="eyebrow">Contents</div><div class="cs-toc">{toc}</div></nav>'}''']

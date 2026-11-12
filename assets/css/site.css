@@ -681,3 +681,24 @@ html:has(dialog.pop[open]) .dock,html:has(.lb:not([hidden])) .dock{opacity:0;poi
 @media (max-width:640px){.cs-gallery.c2,.cs-gallery.c3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .cs-sec .flow-diagram+.flow-diagram{margin-top:12px}
 .cs-browser,.cs-browser .bar,.cs-browser .view{min-width:0;max-width:100%}
+
+/* carousel: scroll-snap track with arrows and a counter */
+.cs-car{min-width:0;max-width:100%}
+.cs-car .track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;border-radius:12px}
+.cs-car .track::-webkit-scrollbar{display:none}
+.cs-car .track:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.cs-car .slide{flex:0 0 100%;min-width:0;margin:0;scroll-snap-align:center;display:grid;gap:10px;align-content:start}
+.cs-car .slide .zoom{display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--wash);cursor:zoom-in}
+.cs-car .slide img{display:block;width:100%;height:auto}
+.cs-car figcaption{display:grid;gap:2px;font-size:14px}
+.cs-car figcaption b{font-weight:600}
+.cs-car figcaption span{color:var(--mute)}
+.cs-car .ctl{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:10px}
+.cs-car .ctl button{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);font-size:15px;cursor:pointer}
+.cs-car .ctl button:hover{background:var(--wash)}
+.cs-car .ctl button:disabled{opacity:.35;cursor:default}
+.cs-car .count{font:12px var(--mono);color:var(--mute);min-width:5ch;text-align:center}
+.cs-video{margin:0}
+.cs-video video{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#000}
+.cs-video figcaption{margin-top:10px;color:var(--mute);font-size:13px}
+.cs-car .track{-webkit-mask-image:none!important;mask-image:none!important}

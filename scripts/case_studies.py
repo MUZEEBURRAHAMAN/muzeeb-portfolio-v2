@@ -337,57 +337,66 @@ dict(
 # ------------------------------------------------------------------ AVATARLY
 dict(
  slug='avatarly', name='Avatarly', tags=['Figma plugin', 'Design + code'], read=3, compact=True,
- cover='assets/img/cover/avatarly.webp',
- title='Avatarly: fill every avatar in a Figma mockup in one click, without breaking the layout.',
- lede='Designers fill user lists, chats and tables with placeholder faces over and over. Avatarly fills the shapes you already drew, from 12 collections, straight from the Figma menu.',
+ cover='assets/img/cs/avatarly/store-01.webp',
+ title='Avatarly: I got tired of pasting the same six faces into every mockup.',
+ lede='Every user list, chat and table I design needs faces. Finding them, cropping them and pasting them one by one was eating real time. So I built the plugin I wanted: select the shapes, pick a style, done.',
  meta=[('Role', 'Solo designer and developer'), ('Product', 'Figma plugin'), ('Library', '12 collections · 1,198 images'), ('Built with', 'Figma Plugin API, JavaScript')],
- tldr=[('The problem', 'Avatar plugins insert new images, which breaks auto layout, and most pull faces from third-party services that change or disappear.'),
-       ('The idea', 'Fill the shapes already on the canvas, keep the layout intact, and serve every image from my own open library.'),
-       ('My role', 'Product idea, plugin UI and brand, the avatar library, and the code.')],
  links=[('Source on GitHub', 'https://github.com/MUZEEBURRAHAMAN/avatarly-figma-plugin')],
  sections=[
-  ('What makes it different', 'Three things other avatar plugins don’t do.', [
-    ('cards', [('Fill, don’t insert', 'Select frames, tables or a whole screen; every shape gets a unique avatar and the layout stays put.'),
-               ('No window needed', '14 Quick Fill commands run straight from the Figma menu, plus an instant re-shuffle.'),
-               ('Components, not just images', 'One click builds an avatar component set with default, hover, active, selected and disabled states.')]),
+  ('Why I built it', 'Placeholder faces were costing me minutes on every screen.', [
+    ('pipeline', 'current', 'Before', 'One face at a time', ['Search for a photo', 'Download and crop', 'Paste into the shape', 'Repeat 20 times', 'Same faces in every file'], 'again on the next screen'),
+    ('pipeline', 'proposed', 'With Avatarly', 'One click, every shape', ['Select a frame or table', 'Pick a style', 'Every shape filled', 'Shuffle if you want', 'Layout untouched']),
+    ('cards', [('Other plugins insert, I fill', 'New image layers break auto layout. Avatarly fills the shapes you already drew.'),
+               ('Other plugins depend on outside services', 'Faces vanish when a service changes. Every image here ships with the plugin.'),
+               ('Real products are not all photos', 'Mockups need initials, logos, bots and status rings too.')]),
   ]),
-  ('First run', 'Three slides explain the whole plugin.', [
-    ('gallery', [('onboard-1.webp', 'Welcome: what Avatarly does.'), ('onboard-2.webp', 'How it works: select, pick a style, fill.'), ('onboard-3.webp', 'Twelve built-in collections.')], 3),
+  ('Store screenshots', 'Seven frames I designed to explain the plugin before anyone installs it.', [
+    ('carousel', [('store-01.webp', '12 styles, one plugin', 'The opening frame shows range first: office photos, 3D, cartoon, memoji, pixel and more.'),
+                  ('store-04.webp', 'One click. Every shape filled.', 'The core promise as a before and after, so it reads without any copy.'),
+                  ('store-05.webp', 'Filter by vibe', 'Narrow by gender, profession or tone so faces match the product.'),
+                  ('store-03.webp', 'Browse before you fill', 'A gallery for when one specific avatar matters.'),
+                  ('store-02.webp', 'Ship-ready components', 'One click builds a component set with default, hover, active, selected and disabled states.'),
+                  ('store-07.webp', 'Real-world detail', 'Status dots and story rings, added without leaving Figma.'),
+                  ('store-06.webp', 'Beyond faces', 'Company logos, abstract marks, bots and pixel avatars for any placeholder.')]),
   ]),
-  ('The plugin', 'Quick Add, Gallery and Components.', [
-    ('gallery', [('quick-add.webp', 'Quick Add: filter by vibe, pick a style, fill the selection.'), ('gallery.webp', 'Gallery: browse each collection and place one avatar.'), ('components.webp', 'Components: generate a full avatar component set.')], 3),
+  ('The plugin', 'Three tabs, each with one job.', [
+    ('gallery', [('quick-add.webp', 'Quick Add: pick a style and fill the selection.'), ('gallery.webp', 'Gallery: browse and place one avatar.'), ('components.webp', 'Components: generate a full component set.')], 3),
+    ('p', 'For speed, 14 Quick Fill commands run straight from the Figma menu, with no window at all.'),
   ]),
-  ('How it works', 'Select, pick a style, fill.', [
-    ('pipeline', 'proposed', 'Quick Fill', 'Selection → style → every shape filled', ['Select shapes or a frame', 'Pick a collection', 'Avatars fill each shape', 'Shuffle without repeats', 'Layout untouched']),
+  ('First run', 'Three slides teach the whole thing.', [
+    ('gallery', [('onboard-1.webp', 'What it does.'), ('onboard-2.webp', 'Select, pick a style, fill.'), ('onboard-3.webp', 'Twelve built-in collections.')], 3),
   ]),
  ],
 ),
 # ------------------------------------------------------------------ BLOBBY
 dict(
  slug='blobby', name='Blobby', tags=['Figma plugin', 'Design + code'], read=3, compact=True,
- cover='assets/img/cover/blobby.webp',
- title='Blobby: a blob generator for Figma where every blob stays editable.',
- lede='Most blob plugins drop a flat vector and forget it. Blobby stores each blob’s settings on the layer, so you can select it weeks later and keep editing.',
+ cover='assets/img/cs/blobby/shot-7.webp',
+ title='Blobby: every blob plugin gave me a dead vector. I wanted one I could keep editing.',
+ lede='I use blobs for hero backgrounds and illustration. Every plugin I tried inserted a flat path and forgot it, so one small change meant starting over. Blobby keeps the recipe on the layer.',
  meta=[('Role', 'Solo designer and developer'), ('Product', 'Figma plugin · v0.4'), ('Built with', 'TypeScript, esbuild, Playwright'), ('Status', '59 of 59 tests passing')],
- tldr=[('The problem', 'Blob plugins create dead vectors. To try three variations, you start from zero three times.'),
-       ('The idea', 'Keep the recipe on the blob. Re-select it and the plugin reopens with its exact settings.'),
-       ('My role', 'Product idea, UI, brand, the shape algorithm, tests and the Community listing.')],
  sections=[
-  ('Why another blob plugin', 'Other tools stop at “insert”. Blobby starts there.', [
-    ('fig', 'store-vs.webp', 'Blobby against four popular blob plugins: more shape styles, re-editing and code export.'),
+  ('Why I built it', 'The shape was never the hard part. Changing it later was.', [
+    ('pipeline', 'current', 'Before', 'Generate, insert, start over', ['Generate a blob', 'Insert a flat vector', 'Client wants it rounder', 'Settings are gone', 'Generate again'], 'for every variation'),
+    ('pipeline', 'proposed', 'With Blobby', 'Generate once, edit forever', ['Generate a blob', 'Recipe saved on the layer', 'Select it weeks later', 'Plugin reopens its settings', 'Update in place']),
+    ('cards', [('Blobs that stay editable', 'Complexity, gradient, stroke and shadow stay adjustable on the canvas.'),
+               ('Sets that belong together', 'A variation keeps the style and changes only the shape.'),
+               ('Made for hand-off', 'Copy any blob as SVG, CSS clip-path or a React component.')]),
+  ]),
+  ('Store screenshots', 'Six frames I designed for the Figma Community listing.', [
+    ('carousel', [('shot-7.webp', 'Beautiful blobs. One click away.', 'The opening frame: the mascot, the promise and the real plugin panel.'),
+                  ('shot-2.webp', 'More shapes. More ways to create.', 'Seven shape families side by side, so the range is obvious at a glance.'),
+                  ('shot-3.webp', 'Make it yours.', 'One blob taken from original to complex, gradient and stroke.'),
+                  ('shot-4.webp', 'One shape. Endless possibilities.', 'Variations from a single idea, the feature other plugins lack.'),
+                  ('shot-5.webp', 'Not just another blob generator.', 'An honest comparison with four popular blob plugins.'),
+                  ('shot-6.webp', 'From blob to design in seconds.', 'A before and after that shows where a blob ends up.')]),
   ]),
   ('The plugin', 'Pick a shape, shuffle, insert.', [
-    ('gallery', [('ui-home.webp', 'Home: preview, shuffle, insert or generate a set.'), ('ui-liquid.webp', 'Liquid styles: wave, droplet, melt, goo, splash.'), ('ui-geometric.webp', 'Geometric styles: soft geo, polygon, ring, donut.')], 3),
+    ('gallery', [('ui-home.webp', 'Home: preview, shuffle, insert or generate a set.'), ('ui-liquid.webp', 'Liquid styles.'), ('ui-geometric.webp', 'Geometric styles.')], 3),
   ]),
-  ('Features', 'One recipe, many uses.', [
-    ('feature', 'Shapes', 'Seven families of shapes', 'Organic, soft, liquid, geometric, expressive, natural and abstract.', 'store-shapes.webp'),
-    ('feature', 'Re-edit', 'Change it later, not from scratch', 'Complexity, gradient, stroke and shadow stay adjustable on the canvas.', 'store-edit.webp'),
-    ('feature', 'Variations', 'One shape, endless siblings', 'Duplicate as a variation keeps the style and changes the seed.', 'store-variations.webp'),
-    ('feature', 'Hand-off', 'From blob to design in seconds', 'Copy any blob as SVG, CSS clip-path or a React component.', 'store-before-after.webp'),
-  ]),
-  ('Under the hood', 'An algorithm that never clips.', [
-    ('pipeline', 'proposed', 'Shape', 'Seeded points → smooth curve → exact fit', ['Points on a circle', 'Seeded noise', 'Smooth curve', 'Exact bounding box', 'Fills its frame']),
-    ('p', 'Settings live on the layer through Figma’s plugin data. 100% offline: no account and no network.'),
+  ('Under the hood', 'A shape that never clips its frame.', [
+    ('pipeline', 'proposed', 'Shape', 'Seeded points, smooth curve, exact fit', ['Points on a circle', 'Seeded noise', 'Smooth curve', 'Exact bounding box', 'Fills its frame']),
+    ('p', 'It runs fully offline: no account and no network.'),
   ]),
  ],
 ),
