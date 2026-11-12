@@ -144,102 +144,56 @@ dict(
 
 # ------------------------------------------------------------------ ASSISTANTLY
 dict(
- slug='assistantly', name='Assistantly', tags=['AI tooling', 'Design QA'], read=12,
+ slug='assistantly', name='Assistantly', tags=['AI tooling', 'Design QA'], read=7,
  cover='assets/img/cover/assistantly.webp',
  title='Design QA took me a day per release. So I built Assistantly, which takes minutes.',
  lede='Assistantly opens a web app the way a person would, clicks through its menus and pop-ups, and lists each design problem it finds with **the exact code fix**. It costs about $0.30 a screen.',
- meta=[('Role', 'Solo product designer & builder'), ('Duration', 'Jun – Jul 2026 · Omnis AI'), ('Owned', 'Problem, design, architecture, ~27k lines of TypeScript'), ('Skills', 'Design QA, accessibility, AI pipelines, full-stack TypeScript')],
- stats=[('$0.30', 'Per screen', 'In about 3 minutes, vs 2–3 hours per product by hand'), ('90%+', 'Proof', 'Of findings tied to a real element on the page'), ('229', 'Rules', 'Fixed checks before any AI judgement')],
- tldr=[('The problem', 'As the only designer across five products, I checked every release by hand. Design bugs hid behind dropdowns, errors and empty states nobody had time to open.'),
-       ('What I did', 'Designed and built an engine that signs in, clicks through every state and checks it against 229 rules. A finding that can’t point to a real element is thrown out.'),
-       ('Where it stands', 'A working prototype: about $0.30 and 3 minutes a screen, 90%+ of findings tied to an element, 187 tests. Parked after a restructuring; not run at scale.')],
+ meta=[('Role', 'Solo designer and builder'), ('Duration', 'Jun – Jul 2026 · Omnis AI'), ('Owned', 'Problem, design, architecture, ~27k lines of TypeScript'), ('Status', 'Working prototype · parked')],
+ stats=[('$0.30', 'Per screen', 'About 3 minutes, vs hours by hand'), ('90%+', 'Proof', 'Findings tied to a real element'), ('229', 'Rules', 'Fixed checks before any AI')],
+ tldr=[('The problem', 'As the only designer across five products, I checked every release by hand. Bugs hid behind dropdowns, errors and empty states nobody had time to open.'),
+       ('The solution', 'An engine that signs in, clicks through every state, checks it against 229 rules and reports each problem with its element and a fix. Anything it can’t prove is dropped.'),
+       ('My role', 'Problem framing, product and report design, architecture and the full TypeScript build.')],
  links=[('Assistantly on GitHub', 'https://github.com/MUZEEBURRAHAMAN/AI-UX-Audit-Assistant')],
  sections=[
-  ('Overview', 'I built the QA teammate I didn’t have.', [
-    ('p', 'I was the only designer across five legal-tech products at Omnis AI. Before each release I checked every screen by hand, and it took hours. So I built a tool that does the checking, and I keep the final say.'),
-    ('rows', [('Give it a link', 'And a test login for the staging app.'), ('It clicks through', 'Screens, menus, dialogs and pop-ups, the way a person would.'),
-              ('It checks each state', 'Against 229 fixed rules, then an AI pass for layout.'), ('You get a report', 'Every problem tied to an element, with a fix ready to paste.')], None),
+  ('How design QA works', 'Most teams check a release by hand, one screenshot at a time.', [
+    ('pipeline', 'current', 'By hand', 'Screenshots → red boxes → tickets', ['Open each screen', 'Screenshot it', 'Mark it up in Figma', 'Write tickets', 'Engineer asks “which element?”'], 'check everything again after each fix'),
+    ('pipeline', 'proposed', 'With Assistantly', 'One command → proof → a fix to paste', ['Give it a link', 'It clicks every state', '229 rules, then AI', 'Unproven findings dropped', 'Report with code fixes']),
   ]),
   ('The problem', 'Most design bugs show up only after a click.', [
-    ('p', 'A screen can pass review when it first loads. The problems appear after someone opens a dropdown, submits a form with an error, or lands on an empty page. Nobody had time to click through all of those states before each release, so those bugs reached real users.'),
     ('fig', 'audit-dropdown-states.webp', 'At first load the form passes. Open the Matter dropdown and three problems appear: the list is cut off, the options are too faint, and it covers the Schedule button.'),
-    ('callout', 'The goal', 'Check every state of every screen, fast enough to run before each release, and accurate enough that engineers would trust it.'),
-  ]),
-  ('Solution', 'Three parts: a clicker, a checker and a reporter.', [
-    ('table', ['Part', 'What it does', 'What you get'], [
-      ['Crawler', 'Logs in and clicks through screens, menus, dialogs and tabs', 'A record of each state it reached'],
-      ['Checker', 'Runs 229 fixed rules (contrast, tokens, accessibility), then an AI pass for layout', 'Problems, each tied to a real element'],
-      ['Reporter', 'Sorts problems into a view for each role', 'A report with the exact code fix per problem']]),
-    ('p', 'Built for product designers, frontend engineers, QA, content designers and the managers who sign off on releases.'),
-  ]),
-  ('Background', 'One designer, five products, no QA team.', [
-    ('cards', [('Owned five products', 'Each one shipped on its own schedule.'), ('Checked each release by hand', 'Screenshots, red boxes in Figma, then tickets.'), ('Repeated it after each fix', 'A fix meant checking the whole screen again.')]),
-    ('p', 'A typical manual check meant screenshots, red boxes in Figma, a list of design tokens and a stack of tickets. When engineers fixed something, I checked everything again. Design QA became the thing holding releases back.'),
     ('fig', 'audit-02.webp', 'Before: my manual review in Figma, one note per problem.'),
   ]),
-  ('Design process', 'Version one invented a button. Version two checks the real page.', [
-    ('p', 'Each version tested one question: can a tool find design problems engineers trust enough to fix?'),
-    ('iters', [('bad', 'V1 · Rejected', 'Reading screenshots with AI', 'A vision model listed problems from screenshots. On a dashboard I knew well it reported low contrast on “the secondary button beside the search field.” That button didn’t exist; the AI had guessed from what dashboards usually look like.', None),
-               ('good', 'Final', 'Checking the real page, with proof', 'The tool works inside a live browser, runs 229 fixed rules first and uses AI only for layout questions. Any problem that can’t point to a real element is thrown out.', None)]),
-    ('figs', [('audit-v1-vision-report.webp', 'V1 flagged a button that isn’t there.'), ('audit-08.webp', 'Final: each flagged element maps to a numbered finding with its selector and fix.')]),
-    ('rows', [('A problem is spotted', 'By one of the 229 rules, or by the AI layout pass.'), ('Proof check', 'Does it point to a real element on the page?'),
-              ('Yes: it’s reported', 'With the selector, the measured values and the fix.'), ('No: it’s dropped', 'Before anyone has to read it.')], None),
-    ('callout', 'Rejections are remembered', 'If a designer rejects a finding, Assistantly won’t flag it again.'),
-    ('fig', 'audit-03.webp', 'Reading a live page: styles, positions and the element tree, straight from the browser.'),
+  ('My role', 'One designer, five products, no QA team.', [
+    ('chips', ['Problem framing', 'Product design', 'Report and dashboard UI', 'Rule set (229 checks)', 'Architecture', 'TypeScript engine', 'Playwright crawler', 'Testing (187 tests)']),
   ]),
-  ('Outcome', 'What changed between the manual way and Assistantly.', [
-    ('stats', [('$0.30', 'Cost and time', 'Per screen, in about 3 minutes'), ('89', 'One run', 'Problems across 22 states of CaseNotes in ~11 min, ~$1.20'), ('90%+', 'Proof', 'Of findings tied to a real element')]),
-    ('table', ['Before · by hand', 'After · Assistantly'], [
-      ['Hours of designer time per product', 'About 3 minutes per screen'], ['Some states checked, when there was time', 'All reachable controls on the audited screens'],
-      ['A Figma screenshot with a red box', 'The exact element and a copy-paste fix'], ['Check everything again after a fix', 'One command re-checks and shows what changed']]),
-    ('fig', 'audit-05.webp', 'The report, with the screen annotated and each problem tied to its element.'),
-    ('panels', [('bad', 'Before', 'By hand, every release', ['Open each screen', 'Screenshot it and mark it up in Figma', 'Click states by hand, when there was time', 'Answer “which element?” one by one', 'Start over after each fix']),
-                ('good', 'After', 'One command, proof attached', ['Run one command', 'It opens dialogs, drawers and dropdowns', 'Each problem anchored to its selector', 'Engineers paste the fix'])]),
-    ('table', ['Severity', 'Blocker', 'Major', 'Minor', 'Nit', 'Praise'], [['AutoDoc · 87 findings', '4', '26', '42', '12', '3']]),
-    ('honest', 'Scope note.', 'I measured these on my own test runs against Omnis staging apps. Nobody outside the team has checked them, and I haven’t run them on live traffic.'),
+  ('The key decision', 'Version one invented a button. Version two checks the real page.', [
+    ('iters', [('bad', 'V1 · Rejected', 'Reading screenshots with AI', 'It reported low contrast on a button that didn’t exist. The AI guessed from what dashboards usually look like.', None),
+               ('good', 'Final', 'Checking the live page, with proof', 'Fixed rules run first; AI only answers layout questions. A finding that can’t point to a real element is thrown out.', None)]),
+    ('figs', [('audit-v1-vision-report.webp', 'V1 flagged a button that isn’t there.'), ('audit-08.webp', 'Final: each flagged element maps to a numbered finding.')]),
   ]),
-  ('Design decisions', 'Proof first, clicks before judging, fixes ready to paste.', [
-    ('rows', [('Proof before opinion', 'Fixed rules handle what can be measured: contrast, accessibility attributes and design tokens. AI handles judgement calls, only when it can point to the element.'),
-              ('Click before judging', 'Assistantly opens each dialog, dropdown, drawer and tab before it reviews a screen.'),
-              ('Every problem comes with its fix', 'Each card shows severity, the rule, a plain title, the principle behind it, a copy-paste CSS fix and a confidence score.'),
-              ('Each role sees its own list', 'One run, six readers, each filtered to the work they can act on.')], None),
-    ('figs', [('audit-04.webp', 'Going past the first screen to check dialogs, drawers and open dropdowns.'), ('audit-pr-handoff.webp', 'What the engineer receives: the rule, the element, measured colours and a fix.')]),
-    ('table', ['Reader', 'What they see'], [
-      ['Product designer', 'Problems by severity and token mismatches. Rejecting a false alarm stops it coming back.'], ['Frontend developer', 'Blockers with the exact element, its styles and the fix.'],
-      ['QA', 'A log of every dialog, drawer and dropdown the tool opened.'], ['Content designer', 'A separate list of confusing labels and copy.'],
-      ['Engineering manager', 'A dashboard across all products.'], ['Leadership', 'A record of problems fixed over time.']]),
-    ('fig', 'audit-fleet-dashboard.webp', 'One run across four products: findings per product, open blockers with an owner, fixes per week and a release gate.'),
-    ('figs', [('audit-06.webp', 'The content designer’s review track, separate from code rules.'), ('audit-07.webp', 'The screen index, with element counts and rule coverage per staging screen.')]),
+  ('How it works', 'A clicker, a checker and a reporter.', [
+    ('feature', 'Run', 'One command does the whole audit', 'It logs in, opens each state, drops what it can’t prove, and saves HTML and Markdown reports.', 'audit-terminal-run.webp'),
+    ('feature', 'Explore', 'It opens every dialog, drawer and dropdown', 'Screens are judged after they’re clicked, not just at first load.', 'audit-04.webp'),
+    ('feature', 'Check', 'It reads the real page', 'Styles, positions and the element tree come straight from the browser.', 'audit-03.webp'),
+    ('feature', 'Report', 'Every problem tied to its element', 'Severity, rule, plain title, a copy-paste fix and a confidence score.', 'audit-05.webp'),
+    ('feature', 'Hand-off', 'What the engineer receives', 'The rule, the element, the measured colours and the fix.', 'audit-pr-handoff.webp'),
+    ('feature', 'Roles', 'Each reader sees their own list', 'Content designers get copy issues; QA gets the log of every state opened.', ['audit-06.webp', 'audit-07.webp']),
+    ('feature', 'Dashboard', 'One run across four products', 'Findings per product, open blockers with an owner, and a release gate.', 'audit-fleet-dashboard.webp'),
   ]),
-  ('Under the hood', 'Two codebases, one TypeScript stack.', [
-    ('p', 'The **engine** captures and checks pages. The **service** adds the multi-product dashboard and automation.'),
-    ('fig', 'audit-terminal-run.webp', 'One command logs in, opens each state, drops findings it can’t tie to an element, and saves HTML and Markdown reports.'),
-    ('table', ['Layer', 'Technology'], [
-      ['Runtime', 'Node + TypeScript, Model Context Protocol (MCP) SDK'], ['Capture', 'Playwright: sessions, full-page screenshots, DOM inventory, state crawler'],
-      ['Accessibility', '@axe-core/playwright, run live per page'], ['AI vision', 'OpenAI-compatible SDK with Gemini Flash and OpenRouter fallbacks'],
-      ['Image', 'Sharp for annotations, tesseract.js for OCR snapping, pixelmatch for diffs'],
-      ['Service', 'Next.js 16, React 19, Tailwind 4, Prisma 7 + Postgres, BullMQ + Redis, Docker']]),
-    ('links', [('Open a sample report (HTML)', 'assets/files/audit-report.html'), ('Open a sample report (Markdown)', 'assets/files/audit-report.md')]),
-  ]),
-  ('Agent skill', 'Run Assistantly’s review in your own agent.', [
-    ('p', 'I packaged the heuristics, WCAG 2.2 rules, state-exploration prompts and report templates into a drop-in skill for Claude Code, Cursor, Windsurf and custom agent loops.'),
-    ('list', ['229+ fixed UX and accessibility checks', 'Prompts and rules for exploring page states', 'Self-contained HTML and Markdown report templates', 'Copy-paste fixes for developers']),
-    ('links', [('Download the skill (.skill)', 'assets/files/assistantly.skill'), ('Download the bundle (.zip)', 'assets/files/assistantly-skill.zip')]),
+  ('Outcome', 'What changed.', [
+    ('stats', [('3 min', 'Per screen', 'About $0.30 each'), ('89', 'One run', 'Problems across 22 states in ~11 min'), ('90%+', 'Proof', 'Findings tied to a real element')]),
+    ('panels', [('bad', 'Before', 'By hand, every release', ['Hours per product', 'Some states, when there was time', 'A red box in Figma', 'Start over after each fix']),
+                ('good', 'After', 'One command', ['Minutes per screen', 'Every reachable state', 'The exact element and a fix', 'Re-check shows what changed'])]),
+    ('honest', 'Scope note.', 'Measured on my own runs against Omnis staging apps, not on live traffic.'),
+    ('links', [('Open a sample report (HTML)', 'assets/files/audit-report.html'), ('Download the agent skill (.zip)', 'assets/files/assistantly-skill.zip')]),
   ]),
   ('Looking back', 'What building it taught me.', [
     ('rows', [('Trust comes before speed', 'A tool that reports 50 problems with 15 made up costs more time than checking by hand.'),
-              ('Real checks need clicks', 'Looking only at first loads misses overflowing dropdowns, error messages and empty pages.'),
+              ('Real checks need clicks', 'First loads miss overflowing dropdowns, errors and empty pages.'),
               ('Engineers fix what they can paste', 'A selector and a code fix get merged. A vague comment gets skipped.')], None),
-    ('honest', 'Where it stands.', 'A working prototype with 187 automated tests and about 27,000 lines of TypeScript. After a company restructuring changed the staging setup, I parked it. Testing at larger scale is still open.'),
-    ('panels', [('mid', 'Next', 'If I pick it back up', ['Remember a baseline per product so runs flag only new problems.', 'Run on every staging deploy through GitHub Actions and flag blockers on pull requests.', 'Re-check after a fix is merged.', 'Send verified notes back into Figma.'])]),
+    ('honest', 'Where it stands.', 'A working prototype with 187 tests. I parked it after a restructuring changed the staging setup.'),
   ]),
  ],
- faq=[('Who approved giving a designer staging credentials?', 'No new access was needed. It reused the staging access I already had for reviewing those apps by hand, and never touched production.'),
-      ('Are you a designer or an engineer?', 'Product design is my foundation: research, UX architecture, interaction design and design systems. I also write production TypeScript to ship working prototypes and tooling end to end.'),
-      ('What did you build versus engineering?', 'I conceived, designed and built the whole engine myself: the MCP architecture, Playwright crawlers, axe integration and the Next.js dashboard.'),
-      ('How do you prevent hallucinations?', 'Fixed checks cover objective rules like contrast maths and ARIA attributes. AI findings are rejected unless they map to a real element on the page.'),
-      ('How is it different from axe-core or Lighthouse?', 'Those check one static URL. Assistantly signs in, crawls interactive states, pairs axe-core with layout checks and exports ready-to-paste fixes.'),
-      ('Can it run in CI?', 'Not yet. Running on every staging deploy and flagging blockers on pull requests is the next step.')],
 ),
 
 # ------------------------------------------------------------------ CAREWAY
