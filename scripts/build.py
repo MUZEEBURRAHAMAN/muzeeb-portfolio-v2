@@ -33,8 +33,8 @@ PROJECTS = [  # (name, domain, desc, cover, url); same order as CASES in case_st
  ('Jobly','chrome extension · web','Fresh jobs with real posting dates, plus apply assist, resume tailoring and cover letters. Founded, designed and built solo.','jobly','projects/jobly.html'),
  ('Assistantly','ai design qa','Clicks through every state of a web app and reports each design problem with its exact code fix, for about $0.30 a screen.','assistantly','projects/assistantly.html'),
  ('Careway Landing Page','healthcare · competitor audit','I audited a competitor’s oncology software page, found 13 problems, and designed a landing page that answers each one.','careway','projects/careway.html'),
- ('Petsy','e-commerce · 3d','A pet clothing store with a 3D fitting room, so a dog or cat tries the coat on before you buy.','petsy','projects/petsy.html'),
- ('Avatarly','figma plugin','Fills every avatar in a mockup from 12 collections, straight from the Figma menu, without breaking the layout.','avatarly','projects/avatarly.html'),
+ ('Petsy','e-commerce · 3d','A full 18-page pet clothing store with a 3D fitting room, so a dog or cat tries the coat on before you buy.','petsy','projects/petsy.html'),
+ ('Avatarly','figma plugin','A Figma plugin that fills every avatar in a mockup in one click, from 12 collections, without breaking the layout.','avatarly','projects/avatarly.html'),
  ('Blobby','figma plugin','A blob generator where every blob stays editable: re-select it weeks later and keep tweaking.','blobby','projects/blobby.html'),
 ]
 
@@ -188,7 +188,7 @@ def page(fname, key, title, desc, body, base=''):
 </html>
 '''
     if base:  # pages in a subfolder: point local links and assets one level up
-        doc = re.sub(r'(href|src|data-full)="(?!https?:|#|mailto:|data:|/)', lambda m: m.group(0) + base, doc)
+        doc = re.sub(r'(href|src|data-full|poster)="(?!https?:|#|mailto:|data:|/)', lambda m: m.group(0) + base, doc)
     path = os.path.join(OUT, fname); os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, 'w').write(doc)
 
