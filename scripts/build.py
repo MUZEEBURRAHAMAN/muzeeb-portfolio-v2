@@ -34,8 +34,17 @@ PROJECTS = [  # (name, domain, desc, cover, url); same order as CASES in case_st
  ('Assistantly','ai design qa','Clicks through every state of a web app and reports each design problem with its exact code fix, for about $0.30 a screen.','assistantly','projects/assistantly.html'),
  ('Careway Landing Page','healthcare · competitor audit','I audited a competitor’s oncology software page, found 13 problems, and designed a landing page that answers each one.','careway','projects/careway.html'),
  ('Petsy','e-commerce · 3d','A full 18-page pet clothing store with a 3D fitting room, so a dog or cat tries the coat on before you buy.','petsy','projects/petsy.html'),
+ ('EVE','mental wellness · redesign','A wellness platform redesigned for employees and their companies: audit, flows, a calm system and 100+ screens.','eve','projects/eve.html'),
+ ('PharmFlow','health app · brand','One pharmacy brand across a phone app, a watch app and a website, with 200+ screens.','pharmflow','projects/pharmflow.html'),
+ ('OmnisProof E-Sign','legal tech · saas','An e-signature product where sending and signing each take one screen.','esign','projects/esign.html'),
+ ('GoFully Brand Guidelines','brand identity','The 42-page guide behind GoFully: positioning, logo rules, type, colour and product UI.','gofully-brand','projects/gofully-brand.html'),
  ('Ghost Tears','game ui · design system','A multiplayer word game redesigned in three themes: 18 screens, a friendlier mascot and one token system.','ghost-tears','projects/ghost-tears.html'),
  ('Math AI','mobile app','A homework solver that shows the steps, with App Store screenshot sets for phone and tablet.','mathai','projects/mathai.html'),
+ ('Oodle','mobile app · social','A friend-finding app in light and dark, with onboarding short enough to finish.','oodle','projects/oodle.html'),
+ ('Bundled AI','mobile app · ai','An AI image app where a prompt becomes a picture in three taps.','bundled','projects/bundled.html'),
+ ('Rosify','mobile app · ai chat','Logo and seven-step onboarding for an AI companion app.','rosify','projects/rosify.html'),
+ ('Landing Page Redesigns','concepts','Nine real landing pages with the first screen redesigned, original alongside.','landing-concept','projects/landing-concept.html'),
+ ('Dashboard Designs','data ui','Three dashboards built to be read in five seconds.','dashboards','projects/dashboards.html'),
  ('Avatarly','figma plugin','A Figma plugin that fills every avatar in a mockup in one click, from 12 collections, without breaking the layout.','avatarly','projects/avatarly.html'),
  ('Blobby','figma plugin','A blob generator where every blob stays editable: re-select it weeks later and keep tweaking.','blobby','projects/blobby.html'),
 ]
@@ -298,7 +307,7 @@ for y in sorted(years, reverse=True):
 page('writing.html','writing','Writing · Muzeeb Urrahaman','Articles by Muzeeb Urrahaman on usability, research and product design, published on Medium.',wr)
 
 # ---------------- PROJECTS ----------------
-pr = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Projects<h1 class="visually-hidden">Projects</h1></div><p class="lede">Four products I designed end to end: two browser tools, an AI design-QA engine and a healthcare landing page. Each one opens the full case study.</p></header>
+pr = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> Projects<h1 class="visually-hidden">Projects</h1></div><p class="lede">Products, apps, brands and plugins I designed, several of them built end to end. Each one opens the full case study.</p></header>
 <div class="plist">{''.join(prow(n, w, d, f'assets/img/cover/{c}.webp', u) for n, w, d, c, u in PROJECTS)}</div>'''
 page('projects.html','projects','Projects · Muzeeb Urrahaman','Four product design case studies: GoFully, Jobly, Assistantly and the Careway landing page.',pr)
 
@@ -339,6 +348,8 @@ page('journey.html','journey','Journey · Muzeeb Urrahaman','Experience, skills 
 
 # ---------------- CASE STUDIES ----------------
 from case_studies import CASES
+_ORDER = {u.split('/')[-1][:-5]: n for n, (_, _, _, _, u) in enumerate(PROJECTS)}
+CASES.sort(key=lambda c: _ORDER.get(c['slug'], 99))  # case pages follow the project list order
 
 def md(t):
     return re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', E(t))

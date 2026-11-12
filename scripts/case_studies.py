@@ -430,6 +430,274 @@ dict(
   ]),
  ],
 ),
+# ------------------------------------------------------------------ EVE
+dict(
+ slug='eve', name='EVE', tags=['Mental wellness', 'Redesign', 'Web + mobile'], read=5,
+ cover='assets/img/cover/eve.webp',
+ title='EVE: redesigning a mental wellness platform for employees and the companies that support them.',
+ lede='EVE gives people a private AI companion to talk to, and gives their employer an anonymous picture of how teams are doing. I audited the old product and redesigned both sides of it.',
+ meta=[('Role', 'Product designer · research to UI'), ('Product', 'Web app · mobile · landing page'), ('Scope', 'User panel, company panel, design system'), ('Deliverables', '100+ screens')],
+ stats=[('100+', 'Screens', 'Across web and mobile'), ('2', 'Panels', 'One for people, one for the company'), ('1', 'Design system', 'Tokens, components, email templates')],
+ tldr=[('The problem', 'The old product had the features but no clear path through them, and talking about mental health needs a calm screen.'),
+       ('The solution', 'An audit first, then new flows, a quiet lavender system, and a chat screen with one obvious starting point.'),
+       ('My role', 'Audit, competitor and persona work, user flows, wireframes, design system, and final UI for both panels.')],
+ sections=[
+  ('Start with the old product', 'I marked what was wrong before drawing anything new.', [
+    ('carousel', [('f-03.webp', 'Old design review', 'Every screen annotated with what to fix, so the redesign had a list to answer.'),
+                  ('f-02.webp', 'Rough work', 'The full old product laid out side by side to see the gaps between screens.'),
+                  ('f-04-2.webp', 'Persona and competitors', 'Who the product is for, and what similar tools do well or badly.'),
+                  ('f-04-1.webp', 'User flows', 'Each journey mapped end to end before any layout.'),
+                  ('f-04.webp', 'Wireframes for each problem area', 'Chat, voice, profile, calendar and onboarding reworked in grey first.')]),
+  ]),
+  ('The system', 'Calm by construction.', [
+    ('figs', [('f-05.webp', 'Variables for colour, type, spacing and radius.'), ('f-06.webp', 'Components built from them.')]),
+  ]),
+  ('For people', 'A private place to talk.', [
+    ('carousel', [('f-11.webp', 'Chat with EVE', 'One greeting, one input and a row of starter prompts. Nothing else competes.'),
+                  ('f-10.webp', 'Mind map', 'Work, family, friends and relationships shown as a map instead of a form.'),
+                  ('f-12.webp', 'Mobile · talk and transcribe', 'Voice first on a phone, with the transcript one tab away.'),
+                  ('f-13.webp', 'Mobile · onboarding, map and calendar', 'The same features, rearranged for one hand.'),
+                  ('f-09.webp', 'Sign in', 'The same screen on web and phone.'),
+                  ('f-16.webp', 'Settings', 'Login activity is visible, because trust matters more here than in most apps.')]),
+  ]),
+  ('For the company', 'Signals, not surveillance.', [
+    ('feature', 'Dashboard', 'How teams are doing, in aggregate', 'Survey completion, engagement by department and a table to drill into.', 'f-14.webp'),
+    ('feature', 'Ask AI', 'Questions in plain language', 'A manager asks about survey trends and gets a chart with the answer.', 'f-15.webp'),
+  ]),
+  ('Around the product', 'The landing page and emails share the system.', [
+    ('figs', [('f-07.webp', 'Landing page.'), ('f-08.webp', 'Email templates.')]),
+    ('fig', 'f-18.webp', 'All 100+ screens on one canvas.'),
+  ]),
+  ('Looking back', 'What EVE taught me.', [
+    ('rows', [('Audit before redesign', 'A marked-up old product is a better brief than a blank page.'),
+              ('Two audiences, one system', 'People and employers need different screens, but the same components kept both sides consistent.'),
+              ('Quiet is a feature', 'In a wellness product, every extra element on the chat screen is a reason not to type.')], None),
+    ('honest', 'Design work.', 'This shows the redesign. I don’t have usage numbers to share.'),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ PHARMFLOW
+dict(
+ slug='pharmflow', name='PharmFlow', tags=['Health app', 'Brand + product'], read=4,
+ cover='assets/img/cover/pharmflow.webp',
+ title='PharmFlow: one pharmacy brand across a phone app, a watch app and a website.',
+ lede='PharmFlow lets people order medicine, compare prices and remember their doses. I designed the brand and every surface it lives on.',
+ meta=[('Role', 'Product and brand designer'), ('Product', 'iOS app · watch app · website'), ('Scope', 'Brand, wireframes, design system, UI'), ('Deliverables', '200+ app screens')],
+ stats=[('200+', 'App screens', 'From onboarding to checkout'), ('3', 'Surfaces', 'Phone, watch and web'), ('1', 'Brand', 'Logo, colour and guidelines')],
+ tldr=[('The problem', 'Managing medicine means three jobs: buying it, choosing the right one and taking it on time. Most apps do one.'),
+       ('The solution', 'One app for ordering, comparing and reminders, with the reminder also on the wrist.'),
+       ('My role', 'Branding, wireframes, design guidelines, app and watch UI, website and store screenshots.')],
+ sections=[
+  ('Overview', 'Everything in the project, on one board.', [
+    ('fig', 'f-1.webp', 'App screens, watch design and website.'),
+  ]),
+  ('Brand', 'A plus sign that reads as health and as flow.', [
+    ('carousel', [('f-3.webp', 'Logo and app icon', 'The mark works in one colour, reversed, and at icon size.'),
+                  ('f-4.webp', 'Applications', 'Watch face, pattern, business card and signage.'),
+                  ('f-5.webp', 'Brand in use', 'Community and delivery banners in the same blue.'),
+                  ('f-9.webp', 'Splash screens', 'Three splash options tested with the mark.')]),
+  ]),
+  ('From wireframe to system', 'Structure first, then rules.', [
+    ('figs', [('f-2.webp', 'Wireframes for the app and website.'), ('f-7.webp', 'Design guidelines: colour, type, buttons, forms and cards.')]),
+  ]),
+  ('The app', 'Four moments that matter.', [
+    ('carousel', [('f-10.webp', 'Onboarding · goals', 'The app asks what you want it for, then shapes the home screen around the answer.'),
+                  ('f-11.webp', 'Onboarding · health', 'Allergies and conditions are captured once, so warnings can be automatic.'),
+                  ('f-12.webp', 'Categories and products', 'Medicines grouped the way a pharmacy shelf is, with price and rating on every card.'),
+                  ('f-13.webp', 'Dose reminders', 'Set a schedule in one form; the reminder itself is a single full-screen prompt.'),
+                  ('f-6.webp', 'Store screenshots', 'The listing leads with the three jobs: manage, compare, schedule.')]),
+  ]),
+  ('Watch and web', 'The same product at two other sizes.', [
+    ('figs', [('f-8.webp', 'The watch app flow.'), ('f-14.webp', 'The website on desktop and mobile.')]),
+  ]),
+  ('Looking back', 'What PharmFlow taught me.', [
+    ('rows', [('Brand first pays off', 'With the mark and colour fixed early, 200 screens stayed consistent without policing.'),
+              ('Put the reminder where the person is', 'A dose reminder belongs on the wrist more than in an app.')], None),
+    ('honest', 'Design work.', 'This shows the design. I don’t have launch numbers to share.'),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ ESIGN
+dict(
+ slug='esign', name='OmnisProof E-Sign', tags=['Legal tech', 'B2B SaaS'], read=3, compact=True,
+ cover='assets/img/cover/esign.webp',
+ title='OmnisProof: an e-signature product where sending and signing each take one screen.',
+ lede='OmnisProof lets law firms send documents for signature and track them. I designed the document lists, the signing flow, the modals and the edge-case screens.',
+ meta=[('Role', 'Product designer'), ('Product', 'Web app · responsive'), ('Company', 'Omnis AI'), ('Scope', 'Lists, signing, modals, AI assistant')],
+ sections=[
+  ('The job', 'A signature is a small task that tools make long.', [
+    ('pipeline', 'proposed', 'With OmnisProof', 'Upload → send → sign → track', ['Upload a document', 'Add recipients', 'They sign on any device', 'Status updates itself', 'History kept']),
+  ]),
+  ('The screens', 'Lists you can scan, and one decision per modal.', [
+    ('carousel', [('f-e4.webp', 'Document list', 'Name, sender, recipients and date in one row, with filters for completed, pending and draft.'),
+                  ('f-e6.webp', 'Envelope list', 'Status is a coloured label, so a paralegal can find what is stuck at a glance.'),
+                  ('f-e5.webp', 'Signing on a phone', 'Draw, type or upload a signature, with the document still visible behind.'),
+                  ('f-e9.webp', 'Sign anywhere', 'The signature pad is the whole modal. Nothing else to read.'),
+                  ('f-e7.webp', 'Upload, history and review', 'Three supporting flows: adding a file, seeing what happened, and reviewing before sending.'),
+                  ('f-e3.webp', 'Upload and delete', 'Destructive actions say exactly what will be lost.'),
+                  ('f-e11.webp', 'New template', 'Start from an upload or let AI draft one.'),
+                  ('f-e10.webp', 'AI assistant', 'A chat panel that asks follow-up questions before drafting a contract.'),
+                  ('f-e8.webp', 'API tokens', 'Three numbered steps for developers.'),
+                  ('f-e2.webp', 'Not found', 'Even the 404 gives one way back.')]),
+  ]),
+  ('Design choices', 'Why it looks plain on purpose.', [
+    ('cards', [('Dense, not crowded', 'Legal staff work in lists all day, so rows are compact and columns are predictable.'),
+               ('One primary action', 'Each modal has a single blue button. Cancel is always quieter.'),
+               ('Edge cases designed', 'Empty, error, 404 and maintenance screens were part of the scope, not an afterthought.')]),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ OODLE
+dict(
+ slug='oodle', name='Oodle', tags=['Mobile app', 'Social'], read=3, compact=True,
+ cover='assets/img/cover/oodle.webp',
+ title='Oodle: a friend-finding app with onboarding short enough to finish.',
+ lede='Oodle helps people find friends who share their interests. I designed the app in light and dark, from the first screen to chat and premium, plus its store screenshots.',
+ meta=[('Role', 'Product designer · UI'), ('Product', 'Mobile app'), ('Scope', 'Onboarding, profile, chat, premium'), ('Themes', 'Light and dark')],
+ sections=[
+  ('The idea', 'People quit social apps during sign-up.', [
+    ('pipeline', 'proposed', 'Onboarding', 'Phone number → three questions → photos → in', ['Sign in with a phone number', 'Answer one question per screen', 'Pick interests', 'Add photos', 'Start meeting people']),
+  ]),
+  ('The screens', 'One question per screen, one yellow button.', [
+    ('carousel', [('f-02.webp', 'The whole app', 'Store screenshots on top, the full onboarding flow below.'),
+                  ('f-01.webp', 'Splash', 'Light and dark from the first frame.'),
+                  ('f-03.webp', 'Sign in', 'Apple, Google or a phone number, then a one-time code.'),
+                  ('f-04.webp', 'Three questions', 'Each on its own screen with a progress bar, so it never feels like a form.'),
+                  ('f-05.webp', 'Interests and photos', 'Interests are tappable chips; photos fill a simple grid.'),
+                  ('f-06.webp', 'Asking permission', 'Contacts and notifications are requested with a reason and an easy “No, thanks”.'),
+                  ('f-10.webp', 'Chat and account', 'Conversations, a single thread and settings.'),
+                  ('f-09.webp', 'Premium', 'A plain free-versus-premium table in both themes.'),
+                  ('f-07.webp', 'Dark theme · sign in', 'The same flow, with yellow still the only accent.'),
+                  ('f-08.webp', 'Dark theme · photos', 'Photo upload in dark.')]),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ BUNDLED
+dict(
+ slug='bundled', name='Bundled AI', tags=['Mobile app', 'AI image tool'], read=2, compact=True,
+ cover='assets/img/cover/bundled.webp',
+ title='Bundled AI: turning a text prompt into an image in three taps.',
+ lede='Bundled is an AI image app. I designed its brand basics and more than 30 screens, keeping the path from prompt to finished image as short as possible.',
+ meta=[('Role', 'Product designer · UI'), ('Product', 'Mobile app'), ('Scope', 'Design system and 30+ screens'), ('Theme', 'Dark, with a light splash')],
+ sections=[
+  ('The flow', 'Prompt, style, create.', [
+    ('pipeline', 'proposed', 'Creating an image', 'Prompt → size and style → image', ['Type a prompt', 'Pick a size', 'Pick a style', 'Watch it generate', 'Save or regenerate']),
+  ]),
+  ('The screens', 'Dark, so the artwork is the brightest thing on screen.', [
+    ('carousel', [('f-1.webp', 'Overview', 'The icon and the complete app.'),
+                  ('f-5.webp', 'Prompt to image', 'Size and style open as sheets, so the prompt never leaves the screen.'),
+                  ('f-7.webp', 'Generating and result', 'A progress ring, then the image full-bleed with regenerate, share and download.'),
+                  ('f-4.webp', 'Onboarding', 'Three screens that show results instead of describing them.'),
+                  ('f-8.webp', 'Advanced settings and history', 'Model, negative prompt and aspect ratio for people who want control.'),
+                  ('f-6.webp', 'Premium', 'A feature table and three plans.'),
+                  ('f-3.webp', 'Splash', 'Dark and light.'),
+                  ('f-2.webp', 'Design system', 'Type, colour, shadows and the icon.')]),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ ROSIFY
+dict(
+ slug='rosify', name='Rosify', tags=['Mobile app', 'AI chat'], read=2, compact=True,
+ cover='assets/img/cover/rosify.webp',
+ title='Rosify: onboarding for an AI companion app, one choice at a time.',
+ lede='Rosify is an AI chat app where people create a virtual companion. I designed the logo, the onboarding and the premium screens.',
+ meta=[('Role', 'Product designer · UI and logo'), ('Product', 'Mobile app'), ('Scope', 'Logo, onboarding, payment'), ('Steps', '7-step onboarding')],
+ sections=[
+  ('The screens', 'Seven short steps, each answered with a tap.', [
+    ('carousel', [('f-01.webp', 'Overview', 'Logo options and the full onboarding flow.'),
+                  ('f-02.webp', 'Splash and sign in', 'Continue as a guest first; an account can wait.'),
+                  ('f-03.webp', 'Name, birth year, gender', 'One field per screen with a visible step count.'),
+                  ('f-04.webp', 'What are you looking for?', 'Picture cards instead of a list, so choosing feels like browsing.'),
+                  ('f-05.webp', 'Interests and premium', 'Interest chips, then a clear free-versus-pro comparison.')]),
+  ]),
+  ('Design choices', 'Why it works.', [
+    ('cards', [('Guest first', 'People can try the app before giving an email.'),
+               ('Pictures over labels', 'Preference questions use image cards, which are faster to answer than text.'),
+               ('Progress always visible', 'A step counter on every screen shows how little is left.')]),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ LANDING CONCEPTS
+dict(
+ slug='landing-concept', name='Landing Page Redesigns', tags=['Landing pages', 'Unsolicited concepts'], read=3, compact=True,
+ cover='assets/img/cover/landing-concept.webp',
+ title='Nine landing pages, redesigned: what I’d change above the fold and why.',
+ lede='A practice series. I took nine real landing pages and redesigned the first screen of each, with the original beside it. These are my own concepts, not client work.',
+ meta=[('Role', 'Designer · self-initiated'), ('Format', 'Before and after'), ('Count', '9 pages'), ('Focus', 'Hero, headline, call to action')],
+ sections=[
+  ('The method', 'Three questions for every hero.', [
+    ('cards', [('Can I tell what it is?', 'The headline should name the product or the outcome within five words.'),
+               ('Can I see it?', 'A real product shot beats an abstract illustration.'),
+               ('Do I know what to do?', 'One primary button, with proof next to it.')]),
+  ]),
+  ('Before and after', 'The original is top left in each frame.', [
+    ('carousel', [('f-01.webp', 'WeForest', 'A clearer promise in the headline and a photo strip that shows the work.'),
+                  ('f-02.webp', 'Mail Tester', 'The headline names the benefit, and the product appears in the hero.'),
+                  ('f-03.webp', 'Rivet', 'A two-line headline replaces a vague one, with the tool visible below.'),
+                  ('f-04.webp', 'Clicks', 'Larger type, one button and a product preview.'),
+                  ('f-05.webp', 'Relaw.ai', 'An outcome headline with a customer quote beside it.'),
+                  ('f-06.webp', 'Health tech', 'The audience is named in the headline, with the app shown underneath.'),
+                  ('f-07.webp', 'Flashmock', 'A warmer palette and faces next to the promise.'),
+                  ('f-08.webp', 'Affil.ai sign in', 'A split layout: the form on one side, proof on the other.'),
+                  ('f-09.webp', 'Shopify App Store', 'One headline over a wall of app icons instead of a dense grid.')]),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ GOFULLY BRAND
+dict(
+ slug='gofully-brand', name='GoFully Brand Guidelines', tags=['Brand identity', 'Guidelines'], read=3, compact=True,
+ cover='assets/img/cover/gofully-brand.webp',
+ title='GoFully brand guidelines: 42 pages from positioning to the app icon.',
+ lede='The brand guide behind the GoFully redesign. It sets the promise, the logo and its rules, type, colour with contrast checks, and how the product UI should look.',
+ meta=[('Role', 'Brand and product designer'), ('Format', '42-page guide'), ('Covers', 'Brand, logo, type, colour, product UI, assets'), ('Version', '1.1.3')],
+ links=[('Read the GoFully product case study', 'projects/gofully.html')],
+ sections=[
+  ('The guide', 'Six chapters, in the order a team needs them.', [
+    ('carousel', [('f-01.webp', 'Cover', 'Navy, the viewfinder ring, and nothing else.'),
+                  ('f-05.webp', 'Positioning', 'One line: capture the whole page, keep every pixel private.'),
+                  ('f-06.webp', 'Brand values', 'Private, precise, fast and friendly.'),
+                  ('f-08.webp', 'Tone of voice', 'Clear, calm, private by default, with do and don’t examples.'),
+                  ('f-12.webp', 'Logo anatomy', 'Viewfinder frame, lens ring, shutter dot and tail.'),
+                  ('f-14.webp', 'Logo scaling', 'How the lockup behaves from large to small.'),
+                  ('f-17.webp', 'Logo misuse', 'Six things not to do.'),
+                  ('f-19.webp', 'Typography', 'Archivo for headlines, Inter Display for reading.'),
+                  ('f-24.webp', 'Primary colour', 'Sky Blue, Soft White and Deep Navy.'),
+                  ('f-27.webp', 'Colour roles and contrast', 'Every text and background pair with its contrast ratio, pass or fail.'),
+                  ('f-35.webp', 'Components', 'Buttons and inputs in each state.'),
+                  ('f-36.webp', 'Product screens', 'The popup in light and dark.'),
+                  ('f-39.webp', 'Visual assets', 'Store and marketing graphics in the system.'),
+                  ('f-41.webp', 'App icon', 'The symbol at home-screen size.')]),
+  ]),
+  ('Why it matters', 'A guide is only useful if it removes decisions.', [
+    ('cards', [('Rules with reasons', 'Each rule says why, so people follow it when I’m not in the room.'),
+               ('Contrast is checked', 'Colour pairs are listed with ratios, so accessible choices are the default.'),
+               ('Product included', 'The guide covers UI, not just the logo, because the extension is the brand.')]),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ DASHBOARDS
+dict(
+ slug='dashboards', name='Dashboard Designs', tags=['Dashboards', 'Data UI'], read=2, compact=True,
+ cover='assets/img/cover/dashboards.webp',
+ title='Three dashboards: making a screen full of numbers readable in five seconds.',
+ lede='Three dashboard designs for finance, analytics and sales. Each one answers the same question: what should the eye land on first?',
+ meta=[('Role', 'Product designer · UI'), ('Format', 'Web dashboards'), ('Count', '3 designs'), ('Focus', 'Hierarchy and charts')],
+ sections=[
+  ('The designs', 'One main chart, a few key numbers, everything else smaller.', [
+    ('carousel', [('f-dashboard-79-1.webp', 'Finance · accounts', 'Four totals across the top, one sales chart, and cards kept to the corner.'),
+                  ('f-dashboard-78-2.webp', 'Analytics', 'Black bars on white for the main report, with traffic detail below.'),
+                  ('f-image-26855.webp', 'Sales overview', 'Today’s numbers first, then trend, map and recent customers.'),
+                  ('f-1.webp', 'Finance · detail', 'How the layout holds at two sizes.'),
+                  ('f-2.webp', 'Analytics · detail', 'The same components at closer range.'),
+                  ('f-3.webp', 'Sales · detail', 'Table and chart side by side.')]),
+  ]),
+  ('Rules I follow', 'What keeps a dashboard calm.', [
+    ('cards', [('One accent colour', 'Colour marks the data, not the decoration.'),
+               ('Numbers before charts', 'The key totals sit above the chart that explains them.'),
+               ('Tables stay tables', 'Lists of people or products are left as plain rows, which are fastest to scan.')]),
+  ]),
+ ],
+),
 # ------------------------------------------------------------------ MATH AI
 dict(
  slug='mathai', name='Math AI', tags=['Mobile app', 'App Store screenshots'], read=3, compact=True,
