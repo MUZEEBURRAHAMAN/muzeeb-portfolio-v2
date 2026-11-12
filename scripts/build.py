@@ -34,6 +34,8 @@ PROJECTS = [  # (name, domain, desc, cover, url); same order as CASES in case_st
  ('Assistantly','ai design qa','Clicks through every state of a web app and reports each design problem with its exact code fix, for about $0.30 a screen.','assistantly','projects/assistantly.html'),
  ('Careway Landing Page','healthcare · competitor audit','I audited a competitor’s oncology software page, found 13 problems, and designed a landing page that answers each one.','careway','projects/careway.html'),
  ('Petsy','e-commerce · 3d','A full 18-page pet clothing store with a 3D fitting room, so a dog or cat tries the coat on before you buy.','petsy','projects/petsy.html'),
+ ('Ghost Tears','game ui · design system','A multiplayer word game redesigned in three themes: 18 screens, a friendlier mascot and one token system.','ghost-tears','projects/ghost-tears.html'),
+ ('Math AI','mobile app','A homework solver that shows the steps, with App Store screenshot sets for phone and tablet.','mathai','projects/mathai.html'),
  ('Avatarly','figma plugin','A Figma plugin that fills every avatar in a mockup in one click, from 12 collections, without breaking the layout.','avatarly','projects/avatarly.html'),
  ('Blobby','figma plugin','A blob generator where every blob stays editable: re-select it weeks later and keep tweaking.','blobby','projects/blobby.html'),
 ]

@@ -374,6 +374,99 @@ dict(
   ]),
  ],
 ),
+# ------------------------------------------------------------------ GHOST TEARS
+dict(
+ slug='ghost-tears', name='Ghost Tears', tags=['Game UI', 'Design system'], read=5,
+ cover='assets/img/cover/ghost-tears.webp',
+ title='Ghost Tears: a word game for friends, redesigned in three themes on one system.',
+ lede='Ghost Tears is a turn-based word game for 3 to 6 friends: add a letter, but don’t finish the word. The client asked for a friendlier look, so I redesigned every screen, the mascot and the system underneath.',
+ meta=[('Role', 'Product designer · UX, UI, brand'), ('Product', 'Multiplayer word game · web'), ('Scope', '18 screens, desktop and mobile'), ('Status', 'Redesign v3 · client project')],
+ stats=[('18', 'Screens', 'Each on desktop and mobile'), ('3', 'Themes', 'Minimal, Blue and Dark'), ('32', 'Colour tokens', 'Per theme, same names')],
+ tldr=[('The problem', 'A party game has to be learned in seconds and read at a glance, and the earlier design felt colder than the game is.'),
+       ('The solution', 'A friendlier ghost, rounder type, and a game screen where whose turn it is and what to do are never in doubt.'),
+       ('My role', 'UX flows, UI for every state, the mascot and logo, and the token system that drives all three themes.')],
+ sections=[
+  ('The game', 'Five rules, so the UI has to teach fast.', [
+    ('pipeline', 'proposed', 'A round', 'Add a letter → dodge the word → last one standing', ['Add one letter', 'Don’t complete a word', 'Finish one, take a strike', 'Challenge a bluff', 'Last player wins']),
+  ]),
+  ('The brief', 'Client feedback: make it friendlier.', [
+    ('cards', [('A ghost with feelings', 'A line-art mascot with five expressions, used for wins, losses and waiting.'),
+               ('Three themes', 'Minimal black and white, Blue, and Dark, switched without redrawing a screen.'),
+               ('Softer type', 'Fredoka for the logo, tiles and buttons; Nunito for reading.')]),
+    ('fig', 'brand.webp', 'The mascot’s five expressions and the new logo.'),
+  ]),
+  ('The flow', 'From the first screen to the winner.', [
+    ('carousel', [('d-splash.webp', 'Splash', 'One line explains the game, and two buttons start or join one. No sign-up.'),
+                  ('d-how-1.webp', 'How to play', 'Three short cards teach the rules with real tiles instead of paragraphs.'),
+                  ('d-create.webp', 'Create a game', 'Sensible defaults are preselected, so a host can start in one tap.'),
+                  ('d-created.webp', 'Game ready', 'The invite link is the only thing on screen, with one copy button.'),
+                  ('d-lobby.webp', 'Lobby', 'Empty seats show how many friends are still needed.'),
+                  ('d-turn.webp', 'Your turn', 'The word, the timer and the keyboard sit in one column. Players and history stay at the sides.'),
+                  ('d-word.webp', 'Word completed', 'The finishing letter is marked, so the strike feels fair.'),
+                  ('d-challenge.webp', 'Challenge', 'A countdown and plain copy say who challenged whom and what happens next.'),
+                  ('d-result.webp', 'Challenge result', 'The real word is shown, and the strike lands on the right player.'),
+                  ('d-out.webp', 'You’re out', 'Eliminated players keep watching instead of hitting a dead end.'),
+                  ('d-over.webp', 'Match over', 'Final standings, then Play again as the main action.')]),
+  ]),
+  ('Three themes', 'Same layout, same components, different tokens.', [
+    ('carousel', [('blue-splash.webp', 'Blue · splash', 'The same screen with the Blue token set.'),
+                  ('blue-turn.webp', 'Blue · your turn', 'Only colour changes; spacing and type stay put.'),
+                  ('dark-splash.webp', 'Dark · splash', 'Dark keeps the tiles as the brightest thing on screen.'),
+                  ('dark-turn.webp', 'Dark · your turn', 'The active letter is still the highest-contrast element.')]),
+  ]),
+  ('On a phone', 'Most rounds are played on one.', [
+    ('gallery', [('m-splash.webp', 'Splash.'), ('m-lobby.webp', 'Lobby.'), ('m-turn.webp', 'Your turn, keyboard in thumb reach.'),
+                 ('m-word.webp', 'Word completed, as a bottom sheet.'), ('blue-m-turn.webp', 'Blue.'), ('dark-m-turn.webp', 'Dark.')], 3),
+  ]),
+  ('Design system', 'What makes three themes cheap to maintain.', [
+    ('gallery', [('ds-type.webp', 'Type: Fredoka plays, Nunito reads.'), ('ds-colour.webp', 'Colour: one set of token names, three themes.'),
+                 ('ds-spacing.webp', 'Spacing, radius and elevation.'), ('ds-components.webp', 'Components in every state.')], 2),
+  ]),
+  ('Looking back', 'What Ghost Tears taught me.', [
+    ('rows', [('Design the turn first', 'Everything else in a turn-based game hangs off one screen. I settled that before the rest.'),
+              ('Name tokens by job', 'Because tokens are named for their role, a new theme is a new set of values, not new screens.'),
+              ('A mascot carries tone', 'Five small expressions did more for “friendlier” than any colour change.')], None),
+    ('honest', 'Design only.', 'This shows the redesign. I don’t have launch or usage numbers to share.'),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ MATH AI
+dict(
+ slug='mathai', name='Math AI', tags=['Mobile app', 'App Store screenshots'], read=3, compact=True,
+ cover='assets/img/cover/mathai.webp',
+ title='Math AI: a homework solver that shows the steps, and the store screenshots that sell it.',
+ lede='Math AI lets a student point the camera at a problem and get a worked solution. I designed the app screens and the App Store screenshot sets for phone and tablet.',
+ meta=[('Role', 'Product designer · UI and store screenshots'), ('Product', 'Mobile app · phone and tablet'), ('Scope', 'App screens, onboarding, two screenshot sets'), ('Type', 'UI design')],
+ sections=[
+  ('The idea', 'An answer isn’t the same as understanding.', [
+    ('pipeline', 'current', 'Stuck on homework', 'Search → copy → still stuck', ['Hit a hard problem', 'Type it into a search', 'Find a bare answer', 'Copy it down', 'Next problem, same wall'], 'again tomorrow'),
+    ('pipeline', 'proposed', 'With Math AI', 'Scan → steps → understand', ['Point the camera', 'Crop to one problem', 'Read it step by step', 'Check the graph', 'Save it for revision']),
+  ]),
+  ('Store screenshots', 'Two sets, one message per frame.', [
+    ('carousel', [('f-start.webp', 'Phone and tablet, side by side', 'One layout system covers both sizes, so the listing looks the same on every device.'),
+                  ('f-01.webp', 'Lead with the scan', 'The first three frames show the product’s whole promise: scan, steps, hard questions.'),
+                  ('f-02.webp', 'Then the depth', 'Step-by-step solutions, graphs for equations, and history.'),
+                  ('f-03.webp', 'Then the extras', 'The basic and scientific calculator close the set.'),
+                  ('f-01-tab.webp', 'Tablet · scan and learn', 'The same headline hierarchy, redrawn for a wider frame.'),
+                  ('f-02-tab.webp', 'Tablet · dark frames', 'Light and dark panels alternate so each frame reads as a new point.'),
+                  ('f-03-tab.webp', 'Tablet · calculator and graphs', 'Device angles change only where the feature is tactile.')]),
+  ]),
+  ('The app', 'Every screen a student meets.', [
+    ('carousel', [('f-7.webp', 'Splash and onboarding', 'Three screens: what it does, how it helps, and what premium adds.'),
+                  ('f-04.webp', 'Scan and result', 'Camera permission is asked in context, and the result reads like a worked page.'),
+                  ('f-05.webp', 'How to use, and pricing', 'A short guide for first-timers and a plain comparison for premium.'),
+                  ('f-367466078.webp', 'Calculator', 'Scientific and basic modes share one layout, with a single red key for clear.'),
+                  ('f-367466075.webp', 'History and bookmarks', 'Past problems grouped by day, with bookmarks one tab away.'),
+                  ('f-367466076.webp', 'Empty states', 'An illustration and one line, instead of a blank list.'),
+                  ('f-367466077.webp', 'Terms and privacy', 'Long legal text set for reading, not hidden.')]),
+  ]),
+  ('Design choices', 'Why it looks the way it does.', [
+    ('cards', [('One accent colour', 'Red marks the action and the answer. Everything else stays neutral.'),
+               ('Steps over answers', 'The solution is laid out line by line, like a teacher’s working.'),
+               ('Ask permission late', 'The camera prompt appears when the student taps scan, not at launch.')]),
+  ]),
+ ],
+),
 # ------------------------------------------------------------------ AVATARLY
 dict(
  slug='avatarly', name='Avatarly', tags=['Figma plugin', 'Design + code'], read=3, compact=True,
