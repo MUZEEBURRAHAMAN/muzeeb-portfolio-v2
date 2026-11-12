@@ -659,3 +659,25 @@ html:has(dialog.pop[open]) .dock,html:has(.lb:not([hidden])) .dock{opacity:0;poi
 .cs-find small{font:11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin-right:8px}
 .cs-mark{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#c23a3a;color:#fff;font:600 12px var(--sans)}
 .cs-mark.none{background:var(--wash);color:var(--mute)}
+
+/* ---------- case study: feature blocks (label, title, 1–2 lines, big UI) ---------- */
+.cs-feature{display:grid;gap:14px;padding:22px 0;border-top:1px solid var(--line)}
+.cs-feature:first-of-type{border-top:0;padding-top:4px}
+.cs-feature-txt{display:grid;gap:4px;max-width:60ch}
+.cs-feature-txt small{font:11px var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--mute)}
+.cs-feature-txt h3{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em}
+.cs-feature-txt p{margin:0}
+.cs-feature-img{display:grid;gap:12px}
+.cs-feature-img.n2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cs-feature-img .cs-fig{margin:0}
+.cs-feature-img figcaption{display:none}
+@media (max-width:640px){.cs-feature-img.n2{grid-template-columns:minmax(0,1fr)}}
+.cs-chips{display:flex;flex-wrap:wrap;gap:8px}
+.cs-chips span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--ink-2)}
+.cs-gallery{display:grid;gap:12px}
+.cs-gallery.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cs-gallery.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cs-gallery .cs-fig{margin:0}
+@media (max-width:640px){.cs-gallery.c2,.cs-gallery.c3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cs-sec .flow-diagram+.flow-diagram{margin-top:12px}
+.cs-browser,.cs-browser .bar,.cs-browser .view{min-width:0;max-width:100%}

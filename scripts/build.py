@@ -419,6 +419,25 @@ def block(slug, b):
         return '<div class="cs-links">' + ''.join(
             f'<a class="btn" href="{E(u)}"' + (' rel="noopener" target="_blank"' if u.startswith('http') else '')
             + f'>{E(l)} {"↗" if u.startswith("http") or u.endswith((".html", ".md")) else "↓"}</a>' for l, u in b[1]) + '</div>'
+    if k == 'feature':
+        # one feature: a label, a short title, one or two lines, then the UI large
+        _, label, t, text, files = b
+        files = files if isinstance(files, list) else [files]
+        imgs = ''.join(cs_img(slug, f, f'{t}: {label}') if isinstance(f, str) else cs_img(slug, f[0], f[1]) for f in files)
+        return (f'<div class="cs-feature"><div class="cs-feature-txt"><small>{E(label)}</small><h3>{md(t)}</h3><p class="cs-p">{md(text)}</p></div>'
+                f'<div class="cs-feature-img n{len(files)}">{imgs}</div></div>')
+    if k == 'chips':
+        return '<div class="cs-chips">' + ''.join(f'<span>{E(x)}</span>' for x in b[1]) + '</div>'
+    if k == 'pipeline':
+        # same markup as the user-flow skill: label lozenge, outcome title, stages, optional loop
+        _, kind, label, t, stages, ret = (list(b) + [None])[:6]
+        st = '<div class="flow-connector" aria-hidden="true"></div>'.join(f'<div class="flow-stage">{md(x)}</div>' for x in stages)
+        r = f'<div class="flow-return"><span class="flow-return-label">{E(ret)}</span></div>' if ret else ''
+        return (f'<section class="flow-diagram flow-diagram--{kind}" aria-label="{E(label)}"><div class="flow-label"><span class="lozenge">{E(label)}</span>'
+                f'<span class="flow-title">{md(t)}</span></div><div class="flow-pipeline">{st}</div>{r}</section>')
+    if k == 'gallery':
+        _, items = b[:2]; cols = b[2] if len(b) > 2 else 3
+        return f'<div class="cs-gallery c{cols}">' + ''.join(cs_img(slug, f, c) for f, c in items) + '</div>'
     if k == 'browser':
         # a full-page capture inside a browser frame that scrolls in place
         _, f, url, cap = b; src = f'assets/img/cs/{slug}/{f}'; w, h = img_size(src)

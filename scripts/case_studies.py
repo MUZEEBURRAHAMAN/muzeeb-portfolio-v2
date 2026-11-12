@@ -87,81 +87,70 @@ dict(
 
 # ------------------------------------------------------------------ JOBLY
 dict(
- slug='jobly', name='Jobly', tags=['Chrome extension', '0 → 1', 'Design + code'], read=10,
+ slug='jobly', name='Jobly', tags=['Chrome extension', '0 → 1', 'Solo founder'], read=7,
  cover='assets/img/cover/jobly.webp',
- title='Jobly: fresh jobs from company career pages, with the real posting date on every card.',
- lede='Job boards bury new openings under listings that closed months ago. I designed and built Jobly, a free Chrome extension, website and resume studio that reads the hiring systems of **2,000+ employers** and shows only jobs posted in the last 60 days.',
- meta=[('Role', 'Product designer & builder, solo'), ('Timeline', 'Sep – Nov 2026'), ('Platforms', 'Chrome extension, website, Jobly Studio'), ('Stack', 'React, Astro, Python, Cloudflare Pages')],
- stats=[('2,000+', 'Employers', 'Read from their own public job boards'), ('60 days', 'Freshness rule', 'Anything older is dropped'), ('0', 'Accounts', 'No server, no login, no tracking')],
- tldr=[('The problem', 'Job seekers lose hours to listings that closed months ago. Big boards mix fresh roles with stale ones, hide the posting date and route applications through their own forms.'),
-       ('What I did', 'Designed and built Jobly end to end: an extension that shows fresh jobs with their real date, a product website, and Jobly Studio for tailored resumes. Everything runs in the browser.'),
-       ('Where it stands', 'The website and Studio are live, with job data refreshed every 4 hours. Version 1.1 of the extension is packaged for the Chrome Web Store. No usage numbers yet.')],
+ title='Jobly: fresh jobs with their real posting date, and help applying, in the browser toolbar.',
+ lede='Job boards are full of listings that closed months ago, and every application asks for the same details again. I founded, designed and built Jobly on my own: a free Chrome extension, website and resume studio that fixes both.',
+ meta=[('Role', 'Solo founder · design, code, launch'), ('Timeline', 'Sep – Nov 2026'), ('Platforms', 'Chrome extension, website, Studio'), ('Status', 'Website and Studio live · v1.4 extension')],
+ stats=[('2,000+', 'Employers', 'Read from their own hiring systems'), ('60 days', 'Freshness rule', 'Anything older is dropped'), ('0', 'Accounts or servers', 'Everything stays in the browser')],
+ tldr=[('The problem', 'Big job boards mix fresh roles with stale ones and hide the posting date. Applying means retyping the same profile into every form.'),
+       ('The solution', 'An extension that shows only jobs from the last 60 days, with their real date, then helps you apply: profile import, apply assist, resume tailoring and cover letters.'),
+       ('My role', 'Everything: research, product strategy, brand, UX and UI, the data pipeline, the extension, the website, the store listing and a pre-launch audit.')],
  links=[('Visit the Jobly website', 'https://jobly-88t.pages.dev'), ('Open Jobly Studio', 'https://jobly-studio.pages.dev'), ('Source on GitHub', 'https://github.com/MUZEEBURRAHAMAN/Jobly')],
  sections=[
-  ('Overview', 'One promise: every job shows when it was posted.', [
-    ('p', 'Jobly reads the public job feeds employers embed on their careers pages (Greenhouse, Ashby, Lever, Workday and nine more) plus three remote boards. A scheduled job publishes the result as static files, and the extension, website and Studio filter it in your browser.'),
-    ('rows', [('Find jobs', 'Product design, frontend, product, AI/ML and fullstack roles, plus more families, with filters for location, level, salary and date posted.'),
-              ('Track applications', 'A board for Saved, Applied, Interviewing, Offer and Closed, with notes, reminders and interview prep.'),
-              ('Apply faster', 'Resume profiles, cover letters and autofill that you review. Jobly never presses Submit.')], None),
-    ('fig', 'store-1.webp', 'Fresh jobs, discovered automatically: listings come straight from employers’ hiring systems.'),
+  ('How job hunting works', 'Where a job comes from, and where it goes stale.', [
+    ('p', 'Companies post jobs in their own hiring system (Greenhouse, Lever, Workday and others). Job boards copy those posts, often without the date, and keep them up long after the role is filled.'),
+    ('pipeline', 'current', 'Today', 'Copied listings → stale jobs → retyped forms', ['Company posts a job', 'Boards copy it', 'Date gets lost', 'You apply to a filled role', 'Retype your profile again'], 'repeat for every application'),
+    ('pipeline', 'proposed', 'With Jobly', 'Source of truth → fresh jobs → faster applications', ['Company posts a job', 'Jobly reads the source', 'Real date, 60-day limit', 'Matched in your browser', 'Apply assist fills the form']),
   ]),
-  ('The problem', 'Job search turns into a pile of stale tabs.', [
-    ('rows', [('Old listings stay up', 'Ghost jobs sit on boards for months, so you apply to roles nobody is hiring for.'),
-              ('Dates are hidden or vague', '“30+ days ago” tells you nothing, and a repost looks brand new.'),
-              ('Applications take a detour', 'Boards keep you inside their own forms and messaging instead of the employer’s page.'),
-              ('Your search becomes their data', 'Accounts, tracking and promoted listings come with the free tools.')], None),
-    ('callout', 'The goal', 'Show only fresh roles, with a date you can trust, and send people straight to the employer.'),
+  ('The problem', 'Three things waste a job seeker’s week.', [
+    ('cards', [('Ghost jobs', 'Listings stay up after the role is filled, and many boards don’t show when a job was posted.'),
+               ('The same form, again', 'Every application asks for name, links, experience and notice period, one field at a time.'),
+               ('One resume for every job', 'Tailoring a resume to each posting takes too long, so most people don’t.')]),
   ]),
-  ('Principles', 'Five rules I set before designing a screen.', [
-    ('rows', [('A date is a fact', 'Jobly reads the date from the employer’s own listing. If a source has none, the card shows none and the date filter leaves it out.'),
-              ('Nothing older than 60 days', 'Old listings never appear, so ghost jobs stay out.'),
-              ('Apply on the employer’s site', 'Every Apply button opens the company’s own application page.'),
-              ('No account', 'Preferences, saved jobs and alerts live on your device. There is nothing to sign up for.'),
-              ('No made-up proof', 'Jobly had no users yet, so the site shows product facts instead of invented reviews or quotes.')], None),
+  ('Why an extension', 'I put Jobly where applying already happens.', [
+    ('iters', [('bad', 'Option', 'Another job website', 'One more tab to remember, and it can’t help on the employer’s application page.', None),
+               ('bad', 'Option', 'A mobile app', 'People browse jobs on phones but apply on laptops, where the forms and resumes are.', None),
+               ('good', 'Chosen', 'A Chrome extension', 'One click from any tab, and it can fill an application form when asked. Data stays on the device.', None)]),
   ]),
-  ('Architecture', 'No server, by design.', [
-    ('flow', ['2,000+ employer job feeds', 'GitHub Actions, every 4 hours', 'Static files on Cloudflare Pages', 'Extension · Website · Studio']),
-    ('p', 'Every client downloads the same public files and filters, matches and sorts them in the browser. A query reads only the categories and age buckets it needs: tech roles from the last week come to about **0.7 MB** compressed, even at 200,000 jobs.'),
-    ('table', ['Source', 'How Jobly reads it'], [
-      ['Greenhouse, Ashby, Lever', 'Public job-board APIs, with real publish dates'],
-      ['SmartRecruiters, Workable, Recruitee and 5 more', 'Public feeds employers embed on careers pages'],
-      ['Workday, Amazon Jobs', 'Public careers search'],
-      ['We Work Remotely, Himalayas, Arbeitnow', 'RSS and public APIs, labelled “via” the board']]),
+  ('My role', 'One person, every part of the product.', [
+    ('chips', ['Research', 'Product strategy', 'Brand', 'UX and UI', 'Design system', 'Extension (React, Manifest V3)', 'Data pipeline (Python)', 'Website (Astro)', 'Store listing', 'QA and security audit']),
   ]),
-  ('The extension', 'Filters people already know, and alerts that don’t spam.', [
-    ('figs', [('store-2.webp', 'Filters for location, experience, salary, remote and date posted.'), ('store-4.webp', 'Pick your roles once; the feed personalizes without an account.')]),
-    ('rows', [('Grouped alerts', 'Jobly checks every 60 to 90 minutes and sends one grouped notification, not a flood.'),
-              ('Saved jobs that stay', 'A saved job keeps a copy on your device, so it stays on your list after the company takes it down.'),
-              ('A tracker that fills itself', 'After you open a job, Jobly asks “Did you apply?” and moves it on the board.')], None),
-    ('cmp', 'dashboard-jobs-light.webp', 'dashboard-jobs-dark.webp', 'Light', 'Dark'),
+  ('Product overview', 'Find jobs, apply faster, keep your data.', [
+    ('feature', 'Popup', 'New jobs, one click from any tab', 'The toolbar popup shows fresh matches. The full dashboard opens from there.', ['v14-popup.webp', 'v14-jobs.webp']),
+    ('cards', [('Find', 'Fresh jobs from 2,000+ employers, with filters, dealbreakers and alerts.'), ('Apply', 'Profile import, apply assist, tailored resumes and cover letters.'), ('Private', 'No account and no server. Jobly reads a page only when you ask.')]),
   ]),
-  ('The website', 'A product site that only says what’s true.', [
-    ('p', 'I studied the page set of the GoFully site and the interactions of wrangle.ai, then planned 27 pages: how dates work, a live list of companies, guides, and honest comparison pages with sources and a “checked on” date.'),
-    ('fig', 'store-3.webp', 'The headline I chose: “Find jobs posted this week, not last year.”'),
-    ('fig', 'landing-wireframe.webp', 'The landing page wireframe, section by section, before visual design.'),
+  ('Find jobs', 'Every card shows when the job was really posted.', [
+    ('feature', 'Jobs', 'A feed that only shows recent jobs', 'Roles you pick, from the last 60 days, with the real date and a “Matches you” tag.', 'v14-jobs.webp'),
+    ('feature', 'Companies', 'Follow companies, not searches', 'Turn on alerts for a company and hear about every new job it posts.', 'v14-companies.webp'),
+    ('feature', 'Saved', 'Saved and applied in one list', 'After you open a job, Jobly asks “Did you apply?” and keeps your applications in one place.', 'v14-saved.webp'),
   ]),
-  ('Jobly Studio', 'A resume tool that can’t make things up.', [
-    ('p', 'Studio writes a tailored resume and cover letter for each job from one profile, and tracks every application. It runs fully in the browser and works offline.'),
-    ('callout', 'The fact check', 'Every line the AI writes must cite facts from your profile. Code removes a bullet that cites nothing, and flags any number that isn’t in the facts it cites.'),
-    ('table', ['AI option', 'Cost', 'Where your profile goes'], [
-      ['Claude, by hand (default)', 'Your Claude plan', 'You paste a prompt into claude.ai and paste the answer back'],
-      ['Anthropic API', 'Your API key', 'Straight from the browser to Anthropic'],
-      ['OpenAI-compatible', 'Your key, or free locally', 'OpenAI, OpenRouter, or Ollama on your own computer']]),
+  ('Apply faster', 'Set up once, then let Jobly do the typing.', [
+    ('feature', 'Profile setup', 'Import a LinkedIn PDF and check six short steps', 'The PDF is read in the browser, never uploaded. A completeness score shows what’s missing.', 'v14-profile-setup.webp'),
+    ('feature', 'Apply assist', 'A panel that fills the application with you', 'Each answer shows where it came from. Questions only you can answer are marked. You press Submit yourself.', 'v14-apply-assist.webp'),
+    ('feature', 'Tailor for a job', 'See which requirements your resume covers', 'Paste a job description to get a coverage score and the line that proves each requirement. Accept changes one by one.', 'v14-tailor.webp'),
+    ('feature', 'Resume and cover letter', 'Documents built from the same profile', 'Four resume templates as PDF or Word, and cover letters that answer what the posting asks for.', ['v14-resume.webp', 'v14-cover-letter.webp']),
+  ]),
+  ('Under the hood', 'No server, by design.', [
+    ('pipeline', 'proposed', 'Data', 'Public job feeds → static files → filtered in your browser', ['2,000+ employer feeds', 'Read every 4 hours', 'Static files on Cloudflare', 'Extension, website, Studio']),
+    ('p', 'Every client downloads the same public files and filters them locally. With no server, there is nothing to attack and nothing to keep running.'),
+  ]),
+  ('The website', 'A product site that explains the extension.', [
+    ('browser', 'web-full.webp', 'jobly-88t.pages.dev', 'The full Jobly website. Scroll inside the frame.'),
   ]),
   ('Quality', 'I audited Jobly before launch, and it failed.', [
-    ('p', 'On 16 October I ran a QA and security audit with Playwright, axe-core and dependency checks against a local copy. The verdict: not ready for the Chrome Web Store.'),
-    ('stats', [('46', 'Findings', '6 of them blockers'), ('1 day', 'To fix', 'Re-verified in a real browser'), ('0', 'axe issues', 'In both light and dark themes')]),
-    ('p', 'The fixes went further than patches. I moved every preference, saved job and alert onto the device, then removed the server entirely in favour of static files. With no server, there is nothing to attack and nothing to keep running.'),
+    ('stats', [('46', 'Findings', '6 of them blockers'), ('1 day', 'To fix', 'Re-checked in a real browser'), ('0', 'axe issues', 'In light and dark themes')]),
+    ('p', 'A Playwright, axe-core and dependency audit said “not ready”. The fix went past patches: I moved all user data onto the device and removed the server.'),
   ]),
   ('Looking back', 'What Jobly taught me.', [
-    ('rows', [('Freshness is a data problem first', 'No layout can fix a stale listing. The 60-day rule and real dates had to live in the data pipeline.'),
-              ('Privacy you can see is a feature', '“No account” is something people notice on the first screen, not a line in a policy.'),
+    ('rows', [('Freshness is a data problem first', 'No layout can fix a stale listing. The 60-day rule had to live in the pipeline.'),
+              ('Help, don’t take over', 'Apply assist fills fields, but the person approves every answer and presses Submit.'),
               ('Audit before you publish', 'Testing my own product like an attacker found problems no design review would.')], None),
+    ('honest', 'No usage numbers yet.', 'The website and Studio are live. Version 1.4 of the extension is packaged for the Chrome Web Store.'),
   ]),
  ],
- faq=[('How is Jobly different from LinkedIn or Indeed?', 'Jobly reads postings from company career pages, shows the real posting date and hides anything older than two months. It has no promoted jobs, no account and no messaging. LinkedIn and Indeed list far more jobs and offer things Jobly doesn’t, like Easy Apply.'),
-      ('How much does it cost?', 'Nothing. Jobly is free.'),
-      ('Why build it without a server?', 'Static files cost nothing to host, can’t leak user data and keep working when traffic spikes.')],
+ faq=[('Why build it alone?', 'Jobly started as the tool I wanted for my own search. Owning design and code meant every decision, from the data pipeline to the button copy, served the same promise.'),
+      ('Does apply assist submit applications?', 'No. It fills fields after you approve them. You always press Submit yourself.')],
 ),
 
 # ------------------------------------------------------------------ ASSISTANTLY
