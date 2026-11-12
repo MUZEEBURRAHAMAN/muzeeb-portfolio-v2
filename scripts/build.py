@@ -478,6 +478,36 @@ def block(slug, b):
         _, f, poster, cap = b; ps = f'assets/img/cs/{slug}/{poster}'; w, h = img_size(ps)
         return (f'<figure class="cs-video"><video controls playsinline preload="none" poster="{ps}" width="{w}" height="{h}"><source src="assets/video/{f}" type="video/mp4"></video>'
                 f'<figcaption>{md(cap)}</figcaption></figure>')
+    if k == 'clip':
+        # a short silent loop of the real product on a soft stage; plays when on screen
+        _, f, cap = b[:3]; src = f'assets/video/clips/{f}'; ps = src[:-4] + '.webp'
+        if not os.path.exists(os.path.join(OUT, ps)): print('  missing clip', f); return ''
+        w, h = img_size(ps)
+        t1, t2, t3 = TINT.get(slug, ('#e8e4ff', '#ffe3d1', '#f1efea'))
+        return (f'<figure class="cs-clip"><div class="stage" style="--t1:{t1};--t2:{t2};--t3:{t3}">'
+                f'<video muted loop playsinline preload="none" poster="{ps}" width="{w}" height="{h}" data-clip aria-label="{E(cap)}"><source src="{src}" type="video/mp4"></video>'
+                f'<button type="button" class="clip-btn" aria-label="Pause clip" hidden><span class="i-pause" aria-hidden="true"></span></button></div>'
+                + (f'<figcaption>{md(cap)}</figcaption>' if cap else '') + '</figure>')
+    if k == 'story':
+        # a numbered "before" journey: what a real person goes through today
+        _, label, steps = b
+        return (f'<div class="cs-story"><small>{E(label)}</small><ol>' + ''.join(f'<li><span>{n:02d}</span><p>{md(x)}</p></li>' for n, x in enumerate(steps, 1)) + '</ol></div>')
+    if k == 'problem':
+        _, n, t, text, impact = b
+        return (f'<div class="cs-problem"><h3><span>{n:02d}.</span> {md(t)}</h3><p class="cs-p">{md(text)}</p>'
+                f'<p class="cs-impact"><small>Impact</small>{md(impact)}</p></div>')
+    if k == 'goals':
+        _, biz, usr = b
+        col = lambda lbl, items: f'<div><small>{E(lbl)}</small><ul>' + ''.join(f'<li><b>{E(t)}</b> {md(x)}</li>' for t, x in items) + '</ul></div>'
+        return '<div class="cs-goals">' + col('For the business', biz) + col('For users', usr) + '</div>'
+    if k == 'solution':
+        # numbered solution: intro, the clip, what changed, why it matters
+        _, n, t, intro, media, changed, why = b
+        media = media if isinstance(media, list) else [media]
+        m = ''.join(block(slug, ('clip', x, '')) if x.endswith('.mp4') else cs_img(slug, x, t) for x in media)
+        return (f'<div class="cs-solution"><h3><span>{n:02d}.</span> {md(t)}</h3><p class="cs-p">{md(intro)}</p>{m}'
+                f'<div class="cs-sol-grid"><div><small>What changed</small><ul>' + ''.join(f'<li>{md(x)}</li>' for x in changed) + '</ul></div>'
+                f'<div><small>Why it matters</small><p class="cs-p">{md(why)}</p></div></div></div>')
     if k == 'findings':
         out = []
         for n, sev, t, ev, fix in b[1]:
@@ -487,8 +517,11 @@ def block(slug, b):
         return '<div class="cs-finds">' + ''.join(out) + '</div>'
     raise ValueError('unknown block ' + k)
 
+TINT = {}
+
 def case_page(i, c):
     slug = c['slug']
+    if c.get('tint'): TINT[slug] = c['tint']
     secs = list(c['sections']) + ([('Questions I expect', None, None)] if c.get('faq') else [])
     toc = ''.join(f'<a href="#s{n}"><span>{n:02d}</span>{E(t)}</a>' for n, (t, _, _) in enumerate(secs, 1))
     tldr_html = ('<section class="sec" aria-label="Summary"><div class="eyebrow">TL;DR</div><div class="cs-tldr">'
@@ -501,7 +534,7 @@ def case_page(i, c):
   <p class="cs-lead">{md(c["lede"])}</p>
 </header>
 <dl class="cs-meta">{"".join(f'<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>' for k, v in c["meta"])}</dl>
-{'' if c.get('video') else HERO}
+{block(slug, ('clip', c['hero_clip'], '')) if c.get('hero_clip') else ('' if c.get('video') else HERO)}
 {block(slug, ('stats', c['stats'])) if c.get('stats') else ''}
 {block(slug, ('video',) + tuple(c['video'])) if c.get('video') else ''}
 {tldr_html}

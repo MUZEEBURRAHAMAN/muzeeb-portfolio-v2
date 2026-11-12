@@ -21,130 +21,156 @@ CASES = [
 # ------------------------------------------------------------------ GOFULLY
 dict(
  slug='gofully', name='GoFully', tags=['Chrome extension', 'Brand + product'], read=7,
- cover='assets/img/cover/gofully.webp',
+ cover='assets/img/cover/gofully.webp', hero_clip='gofully-fullpage.mp4', tint=('#cfe3ff', '#dcd6ff', '#eef3fa'),
  title='GoFully: redesigning a screenshot extension around one promise, nothing leaves your device.',
  lede='GoFully could capture, read, mark up, redact and export a whole page, all offline, but it looked like every other screenshot tool. I redesigned the brand, the extension and the website so that promise is the first thing people see.',
  meta=[('Role', 'Product designer · brand, UX, UI, website'), ('Product', 'Screenshot extension · 5 browsers'), ('Scope', 'Brand guide, design system, 70+ screens, website'), ('Status', 'New website live')],
  stats=[('41 pages', 'Brand guide', 'From positioning to the 16 px icon'), ('70+', 'Extension screens', 'Every state, light and dark'), ('1', 'Primary action', 'Per screen, in navy')],
- tldr=[('The problem', 'A capable offline screenshot tool listed every feature at once, so its one real difference, privacy, got lost.'),
-       ('The solution', 'One promise across every surface: capture the whole page and keep it on your device. A new symbol, a calm design system and a site that shows the product.'),
-       ('My role', 'Brand strategy and identity, design system, every extension and editor screen, and the website design.')],
- links=[('Visit the GoFully website', 'https://gofully-extension.vercel.app')],
+ links=[('Visit the GoFully website', 'https://gofully-extension.vercel.app'), ('Read the brand guidelines', 'projects/gofully-brand.html')],
  sections=[
-  ('How screenshots work today', 'Sharing one page takes a chain of apps.', [
-    ('pipeline', 'current', 'Today', 'Five tools → one leak', ['Capture tool', 'Image editor', 'Blur by hand', 'PDF converter', 'Upload to share'], 'redo when a detail was missed'),
-    ('pipeline', 'proposed', 'With GoFully', 'One click → ready to share, on your device', ['One click or shortcut', 'Whole page stitched', 'Redact and mark up', 'Export PNG, PDF or text', 'Nothing uploaded']),
+  ('Introduction', 'A capable tool with nothing to make it memorable.', [
+    ('p', 'GoFully scrolls a page, waits for lazy images, handles sticky headers and stitches one clean image. It reads text, marks up, redacts and exports PNG, JPG, WebP or PDF, with no account and no server.'),
+    ('p', 'I led the redesign end to end: positioning, brand, the design system, every extension and editor screen, and the website.'),
+    ('chips', ['Positioning', 'Brand identity', '41-page brand guide', 'Design system v2', 'Extension UX and UI', 'Editor', 'Error states', 'Website', 'Store screenshots']),
   ]),
-  ('The problem', 'The best thing about GoFully was the quietest thing on the page.', [
-    ('cards', [('A headline of features', '“Full Page Screenshot Tool. One Extension. Every Job.” then OCR, 4K and PDF in one line.'),
-               ('A generic camera icon', 'It sat next to dozens of other screenshot extensions with cameras.'),
-               ('Privacy as a small badge', '“100% on-device” was a tiny label above the headline.')]),
+  ('The problem', 'The one thing that set GoFully apart was the quietest thing on the page.', [
+    ('quote', '“100% on-device” sat in a small badge above a headline made of features. Privacy, the real difference, was easy to miss.'),
+    ('story', 'A QA tester sharing a bug, before GoFully', [
+      'They need the whole page in the ticket, but their screenshot tool only grabs what’s on screen.',
+      'They take three screenshots and stitch them in an image editor.',
+      'A customer’s email is visible, so they open another app to blur it by hand.',
+      'The ticket system wants a PDF, so they convert it in a third tool.',
+      'They upload it to a sharing service to get a link.',
+      'Twenty minutes and three tools later, a second email they missed is still in the corner.']),
+    ('problem', 1, 'The promise was buried', 'The store page, website and popup each listed every feature at once.', 'GoFully read like dozens of other screenshot tools, so there was no reason to pick it.'),
+    ('problem', 2, 'A generic identity', 'A glossy camera icon sat next to other extensions with camera icons.', 'Nothing about the brand said “private” or “precise”, the two things it actually was.'),
+    ('problem', 3, 'Every surface in its own style', 'Popup, editor, store screenshots and website didn’t share type, colour or layout.', 'The product felt stitched together, which undermines trust in a privacy tool.'),
     ('cmp', 'before-site-hero.webp', 'after-site-hero.webp', 'Before · old site', 'After · new site'),
-    ('fig', 'before-store-entire.webp', 'Before: four store screenshots, four different layouts.'),
   ]),
-  ('My role', 'Brand to website, end to end.', [
-    ('chips', ['Positioning', 'Brand identity', '41-page brand guide', 'Design system v2', 'Extension UX and UI', 'Editor', 'Error and edge states', 'Website design', 'Store screenshots']),
+  ('What I wanted to achieve', 'Goals for the product, and for the person using it.', [
+    ('goals', [('Stand out on the store.', 'Lead with privacy, the one claim competitors can’t make.'),
+               ('One system.', 'One set of tokens and components across popup, editor and website.'),
+               ('Keep every feature.', 'Change how it feels, not what it can do.')],
+              [('The whole page, one click.', 'No stitching, no second tool.'),
+               ('Safe to share.', 'Sensitive details covered before anything leaves the device.'),
+               ('Calm to use.', 'One primary action per screen, and a way out of every error.')]),
   ]),
-  ('Brand', 'Private, precise, fast.', [
-    ('fig', 'brand-positioning.webp', 'Positioning and moodboard from the brand guide.'),
-    ('feature', 'Symbol', 'A viewfinder drawn as a G', 'It still reads as “screenshot”, and it can only be GoFully. Below 32 px the wordmark drops and the symbol stands alone.', 'r0-mark-a.webp'),
-    ('feature', 'Design system', 'Soft corners, a 4 px grid and two quiet shadows', 'Radius by role, navy shadows instead of black, one icon weight. Every component in four states.', 'ui-components.webp'),
+  ('Direction', 'Private, precise, fast.', [
+    ('fig', 'brand-positioning.webp', 'Positioning and moodboard from the 41-page brand guide.'),
+    ('figs', [('r0-mark-a.webp', 'A viewfinder drawn as a G: it still reads as “screenshot”, and it can only be GoFully.'), ('ui-components.webp', 'Soft corners, a 4 px grid and two navy shadows.')]),
+  ]),
+  ('The solution', 'Four moments, each recorded from the live product demos.', [
+    ('solution', 1, 'The whole page, in one image', 'Click once. GoFully scrolls, waits for lazy images and stops sticky headers from repeating.', 'gofully-fullpage.mp4',
+     ['Capture modes are listed with their shortcuts in the popup.', 'Progress is shown while it scrolls, so a long page never looks stuck.', 'The result opens ready to copy, save or edit.'],
+     'The QA tester’s three screenshots and an image editor become one click.'),
+    ('solution', 2, 'Hide what shouldn’t be seen, before you share', 'Auto-redact finds emails, card numbers, phone numbers and API keys, and covers them on the device.', 'gofully-redact.mp4',
+     ['Detection runs locally; the page never leaves the computer.', 'It says how many items it found, so nothing is hidden silently.', 'Blur, pixelate or black out, before or after capture.'],
+     'The leak in the story, the email in the corner, is caught before the link is shared.'),
+    ('solution', 3, 'Copy text out of any image', 'Drag over a chart, a scanned page or a paused video to copy its text.', 'gofully-text.mp4',
+     ['Six languages, read on the device with no cloud OCR.', 'Copy as plain text or JSON.'],
+     'One less tool to open, and no upload to a third-party service.'),
+    ('solution', 4, 'Measure anything on the page', 'Hover to see sizes, padding and colours; click two elements for the gap between them.', 'gofully-measure.mp4',
+     ['Built for designers and QA checking a build against a spec.', 'Values copy straight into a ticket.'],
+     'It turns GoFully from a screenshot tool into a review tool, without a new app.'),
   ]),
   ('The extension', 'One primary action per screen, and a way out of every error.', [
-    ('feature', 'Popup', 'Every capture mode, with its shortcut', 'When a capture fails, the popup says what happened and what to do next.', ['popup-default.webp', 'popup-failed.webp']),
-    ('feature', 'Full page', 'The whole page, in one image', 'It scrolls, waits for lazy images and stops sticky headers repeating.', 'site-fullpage.webp'),
-    ('feature', 'Redact', 'Hide what shouldn’t be seen, before you share', 'Emails, card numbers and API keys are covered automatically.', ['site-redact.webp', 'ed-redact.webp']),
-    ('feature', 'Text', 'Copy text out of any image', 'Six languages, read on the device.', 'site-ocr.webp'),
-    ('feature', 'Editor', 'Everything after the capture, in one quiet window', 'Crop, arrows, text, blur and Beautify, in light and dark.', ['ed-default.webp', 'ed-dark.webp']),
-    ('feature', 'Result card', 'Copy, save, edit or pin', 'After a capture, a small card appears on top of any site.', 'ov-result-card.webp'),
+    ('figs', [('popup-default.webp', 'The popup lists each capture mode with its shortcut.'), ('popup-failed.webp', 'A failed capture says what happened and what to do next.')]),
+    ('cmp', 'ed-default.webp', 'ed-dark.webp', 'Editor · light', 'Editor · dark'),
   ]),
   ('The website', 'I replaced the feature list with one sentence.', [
     ('lead', 'Old: “Full Page Screenshot Tool. One Extension. Every Job.” New: **“The screenshot studio that stays on your device.”**'),
     ('fig', 'landing-hero-options.webp', 'Three hero directions, each tested against the same long article.'),
-    ('feature', 'Live demos', 'Each feature plays on a real page', 'Pick a demo or let them run.', 'site-demo.webp'),
-    ('feature', 'Comparison', 'Four tools, or one', 'What people usually pay for, set against one free extension.', 'site-vs.webp'),
     ('browser', 'site-full.webp', 'gofully-extension.vercel.app', 'The full GoFully website. Scroll inside the frame.'),
   ]),
-  ('Looking back', 'What GoFully taught me.', [
-    ('rows', [('Lead with the difference', 'Privacy moved from a badge to the headline, because it was the one thing competitors couldn’t say.'),
-              ('Design the failures too', 'Every error state got a next step, so people don’t get stuck.'),
-              ('One look everywhere', 'Icon, popup, editor and website now share one system and one message.')], None),
-    ('honest', 'No post-launch metrics yet.', 'The new website is live. This shows the design work, not results.'),
+  ('What I’d do next', 'The new site is live; the store listing still shows the old design.', [
+    ('rows', [('Ship the store listing', 'Replace the old screenshots with the new set so the first impression matches the product.'),
+              ('Measure install rate', 'Compare store conversion before and after the new listing.'),
+              ('Test the redact flow', 'Watch five people share a sensitive page and see whether auto-redact catches what they expect.'),
+              ('Keep the system honest', 'Audit new features against the token set so the product doesn’t drift again.')], None),
+    ('honest', 'No post-launch metrics yet.', 'This shows the design work, not results.'),
   ]),
  ],
 ),
-
 # ------------------------------------------------------------------ JOBLY
 dict(
  slug='jobly', name='Jobly', tags=['Chrome extension', '0 → 1', 'Solo founder'], read=7,
- cover='assets/img/cover/jobly.webp',
+ cover='assets/img/cover/jobly.webp', hero_clip='jobly-search.mp4', tint=('#ffd9c7', '#ffe9b8', '#f6f1ea'),
  title='Jobly: fresh jobs with their real posting date, and help applying, in the browser toolbar.',
- lede='Job boards are full of listings that closed months ago, and every application asks for the same details again. I founded, designed and built Jobly on my own: a free Chrome extension, website and resume studio that fixes both.',
+ lede='Job boards are full of listings that closed months ago, and every application asks for the same details again. I founded, designed and built Jobly on my own to fix both.',
  meta=[('Role', 'Solo founder · design, code, launch'), ('Timeline', 'Sep – Nov 2026'), ('Platforms', 'Chrome extension, website, Studio'), ('Status', 'Website and Studio live · v1.4 extension')],
  stats=[('2,000+', 'Employers', 'Read from their own hiring systems'), ('60 days', 'Freshness rule', 'Anything older is dropped'), ('0', 'Accounts or servers', 'Everything stays in the browser')],
- tldr=[('The problem', 'Big job boards mix fresh roles with stale ones and hide the posting date. Applying means retyping the same profile into every form.'),
-       ('The solution', 'An extension that shows only jobs from the last 60 days, with their real date, then helps you apply: profile import, apply assist, resume tailoring and cover letters.'),
-       ('My role', 'Everything: research, product strategy, brand, UX and UI, the data pipeline, the extension, the website, the store listing and a pre-launch audit.')],
  links=[('Visit the Jobly website', 'https://jobly-88t.pages.dev'), ('Open Jobly Studio', 'https://jobly-studio.pages.dev'), ('Source on GitHub', 'https://github.com/MUZEEBURRAHAMAN/Jobly')],
  sections=[
-  ('How job hunting works', 'Where a job comes from, and where it goes stale.', [
-    ('p', 'Companies post jobs in their own hiring system (Greenhouse, Lever, Workday and others). Job boards copy those posts, often without the date, and keep them up long after the role is filled.'),
-    ('pipeline', 'current', 'Today', 'Copied listings → stale jobs → retyped forms', ['Company posts a job', 'Boards copy it', 'Date gets lost', 'You apply to a filled role', 'Retype your profile again'], 'repeat for every application'),
-    ('pipeline', 'proposed', 'With Jobly', 'Source of truth → fresh jobs → faster applications', ['Company posts a job', 'Jobly reads the source', 'Real date, 60-day limit', 'Matched in your browser', 'Apply assist fills the form']),
+  ('Introduction', 'A job search tool that lives where applying happens.', [
+    ('p', 'Jobly is a free Chrome extension, website and resume studio. It reads job posts straight from employers’ own hiring systems, shows only the ones from the last 60 days with their real date, and then helps you apply.'),
+    ('p', 'I did every part: research, brand, UX and UI, the data pipeline, the extension, the website, the store listing and a pre-launch audit.'),
+    ('chips', ['Research', 'Product strategy', 'Brand', 'UX and UI', 'Design system', 'Extension (React, Manifest V3)', 'Data pipeline (Python)', 'Website (Astro)', 'QA and security audit']),
   ]),
-  ('The problem', 'Three things waste a job seeker’s week.', [
-    ('cards', [('Ghost jobs', 'Listings stay up after the role is filled, and many boards don’t show when a job was posted.'),
-               ('The same form, again', 'Every application asks for name, links, experience and notice period, one field at a time.'),
-               ('One resume for every job', 'Tailoring a resume to each posting takes too long, so most people don’t.')]),
+  ('The problem', 'Job hunting wastes time in two places: finding real jobs, and applying to them.', [
+    ('quote', '“Is this job even still open?” is the first question a job seeker asks, and most boards can’t answer it.'),
+    ('story', 'A job seeker’s evening, before Jobly', [
+      'They open three job boards and search “product designer” on each.',
+      'Half the results are reposts of the same role, and most don’t say when they were posted.',
+      'They find a good one and click through to the company’s page.',
+      'The role was filled two months ago. The board never took it down.',
+      'On the next one, the form asks for name, links and experience, field by field, again.',
+      'Two hours later they’ve sent one application, with the same resume they send everywhere.']),
+    ('problem', 1, 'Ghost jobs', 'Boards copy listings from employers and keep them up long after the role is filled, often without the date.', 'People spend most of their search time on jobs that no longer exist, and lose trust in every listing.'),
+    ('problem', 2, 'The same form, again', 'Every application asks for the same profile details, one field at a time.', 'Each application costs 15 to 30 minutes of retyping, so people apply to fewer roles.'),
+    ('problem', 3, 'One resume for every job', 'Tailoring a resume to a posting takes too long, so most people send the same one.', 'Applications miss the exact words the employer screens for.'),
   ]),
-  ('Why an extension', 'I put Jobly where applying already happens.', [
+  ('What I wanted to achieve', 'Goals for the product, and for the person using it.', [
+    ('goals', [('Trust.', 'Every listing must be real, recent and dated, or the product has no reason to exist.'),
+               ('No running cost.', 'No server and no accounts, so a solo founder can keep it free.'),
+               ('Store-ready.', 'Pass a full accessibility and security audit before launch.')],
+              [('Only fresh jobs.', 'See roles from the last 60 days, with the real posting date.'),
+               ('Apply faster.', 'Enter a profile once and reuse it on every form.'),
+               ('Stay private.', 'No sign-up, and data that never leaves the browser.')]),
+  ]),
+  ('Key decisions', 'Two choices shaped everything else.', [
     ('iters', [('bad', 'Option', 'Another job website', 'One more tab to remember, and it can’t help on the employer’s application page.', None),
-               ('bad', 'Option', 'A mobile app', 'People browse jobs on phones but apply on laptops, where the forms and resumes are.', None),
-               ('good', 'Chosen', 'A Chrome extension', 'One click from any tab, and it can fill an application form when asked. Data stays on the device.', None)]),
+               ('bad', 'Option', 'A mobile app', 'People browse on phones but apply on laptops, where the forms and resumes are.', None),
+               ('good', 'Chosen', 'A Chrome extension', 'One click from any tab, and it can fill an application when asked.', None)]),
+    ('pipeline', 'proposed', 'Data', 'Read the source, not the boards', ['2,000+ employer feeds', 'Read every 4 hours', 'Drop anything over 60 days', 'Static files on Cloudflare', 'Filtered in your browser']),
+    ('p', 'Freshness had to be solved in the data, not the layout. With no server, there’s nothing to attack and nothing to keep running.'),
   ]),
-  ('My role', 'One person, every part of the product.', [
-    ('chips', ['Research', 'Product strategy', 'Brand', 'UX and UI', 'Design system', 'Extension (React, Manifest V3)', 'Data pipeline (Python)', 'Website (Astro)', 'Store listing', 'QA and security audit']),
+  ('The solution', 'Five moments in the real extension.', [
+    ('solution', 1, 'Set up in three steps', 'The first run asks only what Jobly needs to filter: the roles you want, and whether to send alerts.', 'jobly-onboarding.mp4',
+     ['Roles are preselected cards you untick, so nobody starts from an empty form.', 'Step three explains privacy in plain words before anything is stored.', 'A “Skip for now” path goes straight to jobs.'],
+     'People see useful results within a minute, and nothing is asked that isn’t used.'),
+    ('solution', 2, 'A feed that only shows recent jobs', 'Search and role chips filter thousands of live jobs instantly, because the filtering happens in the browser.', 'jobly-search.mp4',
+     ['Every card shows how long ago the job was really posted.', 'A “Matches you” tag explains why a job is in your feed.', 'Role chips show live counts before you tap them.'],
+     'The first question, “is this still open?”, is answered on the card itself.'),
+    ('solution', 3, 'Save now, track later', 'Saving is one tap from the card, and saved jobs sit in one list with the ones you’ve applied to.', 'jobly-save.mp4',
+     ['Save changes state in place, with no dialog.', 'After you open a job, Jobly asks “Did you apply?”', 'Saved and applied live in one place.'],
+     'People stop keeping a separate spreadsheet of where they applied.'),
+    ('solution', 4, 'Follow companies, not searches', 'Many people know where they want to work. They can follow a company and hear about every new role it posts.', 'jobly-companies.mp4',
+     ['A company directory built from the same live feeds.', 'Alerts per company instead of per keyword.'],
+     'It matches how people actually job hunt: by employer first.'),
+    ('solution', 5, 'Tailor a resume to the job', 'Paste a job description and see which requirements your resume already covers.', 'v14-tailor.webp',
+     ['A coverage score, with the line that proves each requirement.', 'Suggested changes are accepted one by one, never applied silently.'],
+     'Tailoring becomes a ten-minute review instead of an hour of rewriting.'),
+    ('feature', 'Apply assist', 'And on the employer’s form, it fills the fields with you', 'Each answer shows where it came from, questions only you can answer are marked, and you press Submit yourself.', 'v14-apply-assist.webp'),
   ]),
-  ('Product overview', 'Find jobs, apply faster, keep your data.', [
-    ('feature', 'Popup', 'New jobs, one click from any tab', 'The toolbar popup shows fresh matches. The full dashboard opens from there.', ['v14-popup.webp', 'v14-jobs.webp']),
-    ('cards', [('Find', 'Fresh jobs from 2,000+ employers, with filters, dealbreakers and alerts.'), ('Apply', 'Profile import, apply assist, tailored resumes and cover letters.'), ('Private', 'No account and no server. Jobly reads a page only when you ask.')]),
-  ]),
-  ('Find jobs', 'Every card shows when the job was really posted.', [
-    ('feature', 'Jobs', 'A feed that only shows recent jobs', 'Roles you pick, from the last 60 days, with the real date and a “Matches you” tag.', 'v14-jobs.webp'),
-    ('feature', 'Companies', 'Follow companies, not searches', 'Turn on alerts for a company and hear about every new job it posts.', 'v14-companies.webp'),
-    ('feature', 'Saved', 'Saved and applied in one list', 'After you open a job, Jobly asks “Did you apply?” and keeps your applications in one place.', 'v14-saved.webp'),
-  ]),
-  ('Apply faster', 'Set up once, then let Jobly do the typing.', [
-    ('feature', 'Profile setup', 'Import a LinkedIn PDF and check six short steps', 'The PDF is read in the browser, never uploaded. A completeness score shows what’s missing.', 'v14-profile-setup.webp'),
-    ('feature', 'Apply assist', 'A panel that fills the application with you', 'Each answer shows where it came from. Questions only you can answer are marked. You press Submit yourself.', 'v14-apply-assist.webp'),
-    ('feature', 'Tailor for a job', 'See which requirements your resume covers', 'Paste a job description to get a coverage score and the line that proves each requirement. Accept changes one by one.', 'v14-tailor.webp'),
-    ('feature', 'Resume and cover letter', 'Documents built from the same profile', 'Four resume templates as PDF or Word, and cover letters that answer what the posting asks for.', ['v14-resume.webp', 'v14-cover-letter.webp']),
-  ]),
-  ('Under the hood', 'No server, by design.', [
-    ('pipeline', 'proposed', 'Data', 'Public job feeds → static files → filtered in your browser', ['2,000+ employer feeds', 'Read every 4 hours', 'Static files on Cloudflare', 'Extension, website, Studio']),
-    ('p', 'Every client downloads the same public files and filters them locally. With no server, there is nothing to attack and nothing to keep running.'),
-  ]),
-  ('The website', 'A product site that explains the extension.', [
-    ('browser', 'web-full.webp', 'jobly-88t.pages.dev', 'The full Jobly website. Scroll inside the frame.'),
+  ('In the toolbar', 'The popup is the fastest way in.', [
+    ('clip', 'jobly-popup2.mp4', 'The toolbar popup: fresh matches without opening a new tab.'),
   ]),
   ('Quality', 'I audited Jobly before launch, and it failed.', [
     ('stats', [('46', 'Findings', '6 of them blockers'), ('1 day', 'To fix', 'Re-checked in a real browser'), ('0', 'axe issues', 'In light and dark themes')]),
     ('p', 'A Playwright, axe-core and dependency audit said “not ready”. The fix went past patches: I moved all user data onto the device and removed the server.'),
   ]),
-  ('Looking back', 'What Jobly taught me.', [
-    ('rows', [('Freshness is a data problem first', 'No layout can fix a stale listing. The 60-day rule had to live in the pipeline.'),
-              ('Help, don’t take over', 'Apply assist fills fields, but the person approves every answer and presses Submit.'),
-              ('Audit before you publish', 'Testing my own product like an attacker found problems no design review would.')], None),
-    ('honest', 'No usage numbers yet.', 'The website and Studio are live. Version 1.4 of the extension is packaged for the Chrome Web Store.'),
+  ('What I’d do next', 'Jobly isn’t on the Chrome Web Store yet. After launch I’d focus on four things.', [
+    ('rows', [('Measure the core loop', 'Track how many saved jobs turn into applications, which tells me if the feed is trusted.'),
+              ('Talk to job seekers', 'Run short interviews with early users about where apply assist still gets in the way.'),
+              ('Watch the data', 'Monitor feeds that break or go quiet, since freshness is the whole promise.'),
+              ('Keep improving', 'Use what I learn to decide between more employers and deeper apply help.')], None),
+    ('honest', 'No usage numbers yet.', 'The website and Studio are live. Version 1.4 of the extension is packaged for the store.'),
   ]),
  ],
- faq=[('Why build it alone?', 'Jobly started as the tool I wanted for my own search. Owning design and code meant every decision, from the data pipeline to the button copy, served the same promise.'),
-      ('Does apply assist submit applications?', 'No. It fills fields after you approve them. You always press Submit yourself.')],
 ),
-
 # ------------------------------------------------------------------ ASSISTANTLY
 dict(
- slug='assistantly', name='Assistantly', tags=['AI tooling', 'Design QA'], read=7,
+ slug='assistantly', name='Assistantly', tags=['AI tooling', 'Design QA'], read=7, tint=('#ffd8d2', '#e4e0ff', '#f5f3f1'),
  cover='assets/img/cover/assistantly.webp',
  title='Design QA took me a day per release. So I built Assistantly, which takes minutes.',
  lede='Assistantly opens a web app the way a person would, clicks through its menus and pop-ups, and lists each design problem it finds with **the exact code fix**. It costs about $0.30 a screen.',
@@ -176,6 +202,7 @@ dict(
     ('feature', 'Explore', 'It opens every dialog, drawer and dropdown', 'Screens are judged after they’re clicked, not just at first load.', 'audit-04.webp'),
     ('feature', 'Check', 'It reads the real page', 'Styles, positions and the element tree come straight from the browser.', 'audit-03.webp'),
     ('feature', 'Report', 'Every problem tied to its element', 'Severity, rule, plain title, a copy-paste fix and a confidence score.', 'audit-05.webp'),
+    ('clip', 'assistantly-report.mp4', 'The real report: each finding with its rule, element and a fix to copy.'),
     ('feature', 'Hand-off', 'What the engineer receives', 'The rule, the element, the measured colours and the fix.', 'audit-pr-handoff.webp'),
     ('feature', 'Roles', 'Each reader sees their own list', 'Content designers get copy issues; QA gets the log of every state opened.', ['audit-06.webp', 'audit-07.webp']),
     ('feature', 'Dashboard', 'One run across four products', 'Findings per product, open blockers with an owner, and a release gate.', 'audit-fleet-dashboard.webp'),
@@ -288,7 +315,7 @@ dict(
 # ------------------------------------------------------------------ PETSY
 dict(
  slug='petsy', name='Petsy', tags=['E-commerce', '3D + motion', 'Design + code'], read=8,
- cover='assets/img/cover/petsy.webp',
+ cover='assets/img/cover/petsy.webp', tint=('#f3d3bd', '#e9dcc4', '#f6f0e8'),
  video=('petsy.mp4', 'video-poster.webp', 'A 99-second walkthrough, from the Figma wireframe to the live store.'),
  title='Petsy: a pet clothing store where a 3D dog or cat tries the coat on before you buy.',
  lede='Pet clothes get bought on a guess. You can’t hold a jumper up to a cat, and size charts ask for a chest measurement nobody has taken. I designed and built a full store around removing that guess.',
@@ -302,9 +329,25 @@ dict(
   ('Why I built it', 'Buying clothes for a pet fails at one moment: “will it fit?”', [
     ('pipeline', 'current', 'Today', 'Size chart → guess → return', ['Photo of another breed', 'Guess from a size chart', 'Order', 'It doesn’t fit', 'Send it back'], 'try another size'),
     ('pipeline', 'proposed', 'With Petsy', 'Try it on → right size → keep it', ['Pick dog or cat', 'See it on a 3D model', 'Size finder gives a reason', 'Order once', 'Keep it']),
-    ('cards', [('The UX problem', 'The shopper has no way to check fit before paying, so the doubt lands on the buy button.'),
-               ('The UI problem', 'Most pet stores are loud grids of discounts. Nothing signals quality or care.'),
-               ('The product problem', 'A return costs the shop more than the jumper earns. Fit is a business problem too.')]),
+    ('quote', '“Will it fit?” is the question every pet owner asks, and no product photo can answer it.'),
+    ('story', 'Buying a jumper for a beagle, before Petsy', [
+      'An owner finds a nice knit, photographed on a French bulldog.',
+      'The size chart asks for chest girth. They’ve never measured their dog.',
+      'They guess “M” from the dog’s weight and order it.',
+      'It arrives tight across the chest and long in the back.',
+      'They print a return label and drive to the post office.',
+      'The dog still has no jumper, and they don’t trust the shop again.']),
+    ('problem', 1, 'Fit is invisible', 'Photos show a model breed, not your pet, and a size chart can’t show shape.', 'Shoppers hesitate at the buy button or order two sizes and send one back.'),
+    ('problem', 2, 'Sizing asks for data nobody has', 'Charts ask for chest girth and back length in centimetres.', 'People guess from weight, which is the least reliable signal for clothing.'),
+    ('problem', 3, 'Pet stores feel like discount bins', 'Most pet shops are dense grids of offers with no sense of care or quality.', 'A premium jumper looks no different from a cheap one, so price wins.'),
+  ]),
+  ('What I wanted to achieve', 'Goals for the store, and for the owner shopping it.', [
+    ('goals', [('Fewer returns.', 'Every avoided return is margin a small brand keeps.'),
+               ('Look premium.', 'Make the product feel worth its price before anyone reads it.'),
+               ('Prove it in one build.', 'A full, working store, not a mock-up.')],
+              [('See the fit.', 'On a dog or a cat, in the colour they want.'),
+               ('Pick a size with a reason.', 'Using things they actually know about their pet.'),
+               ('Browse calmly.', 'A store that’s pleasant to wander, on a phone too.')]),
   ]),
   ('Design principles', 'Three rules I held every screen to.', [
     ('rows', [('Show it on the pet', 'Every page leads toward the fitting room. The 3D model answers what a photo can’t.'),
@@ -332,11 +375,20 @@ dict(
                   ('brand-spotlight.webp', 'Brands: who makes it?', 'Each brand gets a banner and a rail you can drag.'),
                   ('tryon-teaser.webp', 'Try-on: will it suit my pet?', 'A live 3D preview on the home page, so the key feature isn’t hidden on a product page.')]),
   ]),
-  ('Product page', 'The page that answers “will it fit?”', [
-    ('gallery', [('fit-dog.webp', 'A rigged Shiba Inu wears the knit.'), ('fit-cat.webp', 'Switch to a cat and the same coat refits.'), ('fit-walk.webp', 'Make it walk and the knit moves with the body.'), ('fit-moss.webp', 'Change the colour without a reload.')], 2),
-    ('feature', 'Size finder', 'A size, and the reason for it', 'Breed, chest and weight go in. The answer comes back as a size you can select in one tap.', 'size-finder.webp'),
-    ('feature', 'Buy panel', 'Everything needed to decide stays in view', 'Price, colour, size and the button sit beside the model. The button confirms in place.', 'product-live.webp'),
-    ('feature', 'Proof', 'Reviews that name the breed and the size', 'A shopper with a corgi can find another corgi.', 'product-reviews.webp'),
+  ('The solution', 'Four moments in the live store.', [
+    ('solution', 1, 'A 3D model wears the coat', 'Switch between a dog and a cat, make it walk, and change the colour without a reload.', 'petsy-tryon.mp4',
+     ['The same knit is rigged to both skeletons, so it refits when the pet changes.', 'Walking shows how the fabric moves, which a still photo can’t.', 'Colour swatches update the model in place.'],
+     'The owner sees fit and colour on their kind of pet before paying.'),
+    ('solution', 2, 'A size, and the reason for it', 'The size finder asks for breed and, optionally, chest and weight, then picks a size and explains why.', 'petsy-size.mp4',
+     ['Breed comes first because everyone knows it.', 'Measurements are optional, with a how-to right in the form.', 'The answer selects the size in one tap.'],
+     'Sizing stops being a guess from weight.'),
+    ('solution', 3, 'Browse in place', 'New In filters by dogs or cats without leaving the grid, and cards rise in as you scroll.', 'new-in.webp',
+     ['Filters reorder the grid with motion, so you see what changed.', 'Every card carries price, brand and colourways.'],
+     'The store feels considered from the first scroll, not like a list of offers.'),
+    ('solution', 4, 'A lookbook that opens into the outfit', 'Click a photo and it grows into the full look, with every product in it.', 'petsy-lookbook.mp4',
+     ['The photo morphs from its grid position, so you never lose your place.', 'Each look links straight to its products.'],
+     'People shop the outfit they like instead of hunting for each piece.'),
+    ('feature', 'Proof', 'Reviews that name the breed and the size', 'A shopper with a corgi can find another corgi owner’s verdict.', 'product-reviews.webp'),
   ]),
   ('Every page', 'The rest of the store, on the same system.', [
     ('gallery', [('page-dogs.webp', 'Dogs: the catalogue for one kind of pet.'), ('page-cats.webp', 'Cats: the same layout, its own range.'), ('page-lookbook.webp', 'Lookbook: outfits worn outdoors.'),
@@ -365,6 +417,11 @@ dict(
   ('The full pages', 'Scroll through the two key pages.', [
     ('browser', 'home-full.webp', 'Petsy · home', 'The full home page.'),
     ('browser', 'product-full.webp', 'Petsy · product', 'The full product page.'),
+  ]),
+  ('What I’d do next', 'If Petsy became a real shop.', [
+    ('rows', [('Measure returns by size', 'Compare return rates for orders that used the size finder against those that didn’t.'),
+              ('Test the fitting room', 'Watch owners use it and check whether the 3D fit matches what arrives.'),
+              ('More breeds', 'Add body shapes beyond one dog and one cat, starting with the most common breeds.')], None),
   ]),
   ('Looking back', 'What Petsy taught me.', [
     ('rows', [('Solve the real doubt', 'Shoppers didn’t need more photos. They needed to see it on their kind of pet.'),
@@ -804,7 +861,7 @@ dict(
 ),
 # ------------------------------------------------------------------ AVATARLY
 dict(
- slug='avatarly', name='Avatarly', tags=['Figma plugin', 'Design + code'], read=3, compact=True,
+ slug='avatarly', name='Avatarly', tags=['Figma plugin', 'Design + code'], read=3, compact=True, hero_clip='avatarly-quick.mp4', tint=('#f1c9f5', '#e3d4ff', '#f7f1fa'),
  cover='assets/img/cs/avatarly/store-01.webp',
  title='Avatarly: I got tired of pasting the same six faces into every mockup.',
  lede='Every user list, chat and table I design needs faces. Finding them, cropping them and pasting them one by one was eating real time. So I built the plugin I wanted: select the shapes, pick a style, done.',
@@ -828,6 +885,7 @@ dict(
                   ('store-06.webp', 'Beyond faces', 'Company logos, abstract marks, bots and pixel avatars for any placeholder.')]),
   ]),
   ('The plugin', 'Three tabs, each with one job.', [
+    ('clip', 'avatarly-gallery.mp4', 'Gallery: each collection is one tap, and every image ships with the plugin.'),
     ('gallery', [('quick-add.webp', 'Quick Add: pick a style and fill the selection.'), ('gallery.webp', 'Gallery: browse and place one avatar.'), ('components.webp', 'Components: generate a full component set.')], 3),
     ('p', 'For speed, 14 Quick Fill commands run straight from the Figma menu, with no window at all.'),
   ]),
@@ -838,7 +896,7 @@ dict(
 ),
 # ------------------------------------------------------------------ BLOBBY
 dict(
- slug='blobby', name='Blobby', tags=['Figma plugin', 'Design + code'], read=3, compact=True,
+ slug='blobby', name='Blobby', tags=['Figma plugin', 'Design + code'], read=3, compact=True, hero_clip='blobby-shuffle.mp4', tint=('#c9d7ff', '#e2d6ff', '#f1f3fb'),
  cover='assets/img/cs/blobby/shot-7.webp',
  title='Blobby: every blob plugin gave me a dead vector. I wanted one I could keep editing.',
  lede='I use blobs for hero backgrounds and illustration. Every plugin I tried inserted a flat path and forgot it, so one small change meant starting over. Blobby keeps the recipe on the layer.',
