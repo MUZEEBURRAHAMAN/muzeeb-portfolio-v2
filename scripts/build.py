@@ -30,9 +30,12 @@ ARTICLES = [  # (year, mm/dd, title, url, thumb, topic, claps, read min, views o
 
 PROJECTS = [  # (name, domain, desc, cover, url); same order as CASES in case_studies.py
  ('GoFully','chrome web store','A screenshot extension rebuilt around privacy: new brand, token system, 70+ screens and a site that says nothing leaves your device.','gofully','projects/gofully.html'),
- ('Jobly','chrome extension · web','Fresh jobs from 2,000+ company career pages, with the real posting date on every card. No account, no server.','jobly','projects/jobly.html'),
+ ('Jobly','chrome extension · web','Fresh jobs with real posting dates, plus apply assist, resume tailoring and cover letters. Founded, designed and built solo.','jobly','projects/jobly.html'),
  ('Assistantly','ai design qa','Clicks through every state of a web app and reports each design problem with its exact code fix, for about $0.30 a screen.','assistantly','projects/assistantly.html'),
- ('Careway Landing Page','healthcare · landing page','A landing page that sells cancer navigation software to clinical leaders and nurse navigators, with two heroes for an A/B test.','careway','projects/careway.html'),
+ ('Careway Landing Page','healthcare · competitor audit','I audited a competitor’s oncology software page, found 13 problems, and designed a landing page that answers each one.','careway','projects/careway.html'),
+ ('Petsy','e-commerce · 3d','A pet clothing store with a 3D fitting room, so a dog or cat tries the coat on before you buy.','petsy','projects/petsy.html'),
+ ('Avatarly','figma plugin','Fills every avatar in a mockup from 12 collections, straight from the Figma menu, without breaking the layout.','avatarly','projects/avatarly.html'),
+ ('Blobby','figma plugin','A blob generator where every blob stays editable: re-select it weeks later and keep tweaking.','blobby','projects/blobby.html'),
 ]
 
 
@@ -459,6 +462,8 @@ def case_page(i, c):
     slug = c['slug']
     secs = list(c['sections']) + ([('Questions I expect', None, None)] if c.get('faq') else [])
     toc = ''.join(f'<a href="#s{n}"><span>{n:02d}</span>{E(t)}</a>' for n, (t, _, _) in enumerate(secs, 1))
+    tldr_html = ('<section class="sec" aria-label="Summary"><div class="eyebrow">TL;DR</div><div class="cs-tldr">'
+                 + ''.join(f'<div><small>{E(k)}</small><p>{md(v)}</p></div>' for k, v in c['tldr']) + '</div></section>') if c.get('tldr') else ''
     body = [f'''<header class="cs-head">
   <nav class="crumb" aria-label="Breadcrumb"><a href="projects.html">← Projects</a><span aria-hidden="true">/</span><span aria-current="page">{E(c["name"])}</span></nav>
   <div class="eyebrow"><span class="slash">//</span> Case study {"".join(tag(t) for t in c["tags"])}<span class="more">{c["read"]} min read</span></div>
@@ -467,10 +472,10 @@ def case_page(i, c):
 </header>
 <dl class="cs-meta">{"".join(f'<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>' for k, v in c["meta"])}</dl>
 <figure class="cs-fig cs-hero"><button type="button" class="zoom" data-full="{c["cover"]}" aria-label="Open cover image full size"><img src="{c["cover"]}" alt="{E(c["name"])} cover" width="{img_size(c["cover"])[0]}" height="{img_size(c["cover"])[1]}" decoding="async" fetchpriority="high"></button></figure>
-{block(slug, ('stats', c['stats']))}
-<section class="sec" aria-label="Summary"><div class="eyebrow">TL;DR</div><div class="cs-tldr">{"".join(f'<div><small>{E(k)}</small><p>{md(v)}</p></div>' for k, v in c["tldr"])}</div></section>
+{block(slug, ('stats', c['stats'])) if c.get('stats') else ''}
+{tldr_html}
 {block(slug, ('links', c['links'])) if c.get('links') else ''}
-<nav class="sec" aria-label="Contents"><div class="eyebrow">Contents</div><div class="cs-toc">{toc}</div></nav>''']
+{'' if c.get('compact') else f'<nav class="sec" aria-label="Contents"><div class="eyebrow">Contents</div><div class="cs-toc">{toc}</div></nav>'}''']
     for n, (eb, h, blocks) in enumerate(c['sections'], 1):
         body.append(f'<section class="sec cs-sec" id="s{n}" aria-labelledby="h{n}"><div class="eyebrow"><span class="n">{n:02d}</span> {E(eb)}</div>'
                     f'<h2 class="cs-h" id="h{n}">{E(h)}</h2>' + ''.join(block(slug, b) for b in blocks) + '</section>')

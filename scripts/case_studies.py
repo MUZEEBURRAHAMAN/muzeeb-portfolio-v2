@@ -285,5 +285,111 @@ dict(
  faq=[('Why audit a competitor instead of starting from a blank page?', 'Buyers compare pages side by side. Knowing exactly where the category falls short showed me what Careway had to say first.'),
       ('Why only one call to action?', 'Health software is sold through demos. Their page shows six competing actions; I kept one primary action.')],
 ),
+# ------------------------------------------------------------------ PETSY
+dict(
+ slug='petsy', name='Petsy', tags=['E-commerce', '3D + motion', 'Design + code'], read=5,
+ cover='assets/img/cover/petsy.webp',
+ title='Petsy: a pet clothing store where a 3D dog or cat tries the coat on before you buy.',
+ lede='Pet clothes get bought on a guess. You can’t hold a jumper up to a cat, and size charts ask for a chest measurement nobody has taken. I designed and built Petsy so the pet tries it on first.',
+ meta=[('Role', 'Solo designer and developer'), ('Product', 'Online store · home + product'), ('Built with', 'React, GSAP, three.js, then Base44'), ('Status', 'Live on Base44 · #Base44Challenge')],
+ stats=[('3D', 'Fitting room', 'A rigged dog and cat wear the coat'), ('18', 'Pages', 'On one design system'), ('1', 'Motion scale', 'For every hover and reveal')],
+ tldr=[('The problem', 'Pet clothes are sized from charts and photos of a breed your pet isn’t, so they often go back.'),
+       ('The solution', 'A store with a 3D fitting room, an AI size finder that explains its answer, and motion that makes browsing feel like a boutique.'),
+       ('My role', 'Reference analysis, wireframes, design system, motion, 3D, front-end code, and the rebuild in Base44 with its automations.')],
+ links=[('Open the live store', 'https://petsy-style-edit.base44.app')],
+ sections=[
+  ('How pet clothes are bought', 'Today it’s a guess and a return.', [
+    ('pipeline', 'current', 'Today', 'Size chart → guess → return', ['See a photo of another breed', 'Guess from a size chart', 'Order', 'It doesn’t fit', 'Send it back'], 'try another size'),
+    ('pipeline', 'proposed', 'With Petsy', 'Try it on → right size → keep it', ['Pick your pet', 'See the coat on a 3D model', 'Size finder explains its pick', 'Order once', 'Keep it']),
+  ]),
+  ('My role', 'From reference to live store.', [
+    ('chips', ['Reference analysis', 'Wireframes', 'Design tokens', 'Type and colour', 'Motion design (GSAP)', '3D fitting room (three.js)', 'React front end', 'Base44 rebuild', 'Checkout and automations']),
+    ('p', 'I measured a real boutique store’s structure and type, then kept its section order and replaced its fonts and colours with a softer pet-friendly system: Fraunces, DM Sans, oat and terracotta.'),
+  ]),
+  ('Home', 'A boutique feel, built from motion.', [
+    ('feature', 'Hero', 'A full-screen video hero', 'One headline, two clear paths: Shop dogs or Shop cats.', 'hero.webp'),
+    ('feature', 'Browse', 'Shop by kind, then what’s new', 'Arched category tiles, and a New In grid that staggers in on scroll with Dogs and Cats filters.', ['categories.webp', 'new-in.webp']),
+    ('feature', 'Lookbook', 'A lookbook that opens into the full outfit', 'Click a photo and it morphs into the look, with every product in it.', 'lookbook.webp'),
+    ('feature', 'Brands', 'Brand rails you can drag', 'Each brand gets a banner and a product rail with inertia.', 'brand-spotlight.webp'),
+    ('feature', 'Try-on', 'See it on them', 'Spin and switch colourways on a 3D Shiba Inu or cat, then open the fitting room.', 'tryon-teaser.webp'),
+  ]),
+  ('Product page', 'The page that answers “will it fit?”', [
+    ('feature', 'Fitting room', 'A 3D model wears the coat', 'Switch dog or cat, change the colour and make it walk; the knit moves with the skeleton. Size chips and “Find my size” sit beside it.', 'product-top.webp'),
+    ('feature', 'Proof', 'Complete the look, and reviews with pet photos', 'Reviews show the breed and size each owner bought.', 'product-reviews.webp'),
+  ]),
+  ('Automations', 'What I added when I rebuilt it in Base44.', [
+    ('cards', [('AI size finder', 'Breed, chest and weight in; the right size and the reason out.'),
+               ('Ask Petsy', 'An assistant that picks products, fills the bag and tracks orders.'),
+               ('Real checkout', 'Server functions end in a paid, pending or failed receipt with a transaction ID.')]),
+  ]),
+  ('The full pages', 'Scroll through the store.', [
+    ('browser', 'home-full.webp', 'Petsy · home', 'The full home page.'),
+    ('browser', 'product-full.webp', 'Petsy · product', 'The full product page.'),
+  ]),
+  ('Looking back', 'What Petsy taught me.', [
+    ('rows', [('Solve the real doubt', 'Shoppers didn’t need more photos. They needed to see it on their kind of pet.'),
+              ('Borrow structure, not style', 'A proven section order saved time; the type and colour made it Petsy.'),
+              ('Prompt one section at a time', 'Rebuilding in Base44 worked because each prompt carried one finished section.')], None),
+    ('honest', 'A challenge project.', 'Petsy is live but isn’t a real shop yet. The photos come from Unsplash.'),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ AVATARLY
+dict(
+ slug='avatarly', name='Avatarly', tags=['Figma plugin', 'Design + code'], read=3, compact=True,
+ cover='assets/img/cover/avatarly.webp',
+ title='Avatarly: fill every avatar in a Figma mockup in one click, without breaking the layout.',
+ lede='Designers fill user lists, chats and tables with placeholder faces over and over. Avatarly fills the shapes you already drew, from 12 collections, straight from the Figma menu.',
+ meta=[('Role', 'Solo designer and developer'), ('Product', 'Figma plugin'), ('Library', '12 collections · 1,198 images'), ('Built with', 'Figma Plugin API, JavaScript')],
+ tldr=[('The problem', 'Avatar plugins insert new images, which breaks auto layout, and most pull faces from third-party services that change or disappear.'),
+       ('The idea', 'Fill the shapes already on the canvas, keep the layout intact, and serve every image from my own open library.'),
+       ('My role', 'Product idea, plugin UI and brand, the avatar library, and the code.')],
+ links=[('Source on GitHub', 'https://github.com/MUZEEBURRAHAMAN/avatarly-figma-plugin')],
+ sections=[
+  ('What makes it different', 'Three things other avatar plugins don’t do.', [
+    ('cards', [('Fill, don’t insert', 'Select frames, tables or a whole screen; every shape gets a unique avatar and the layout stays put.'),
+               ('No window needed', '14 Quick Fill commands run straight from the Figma menu, plus an instant re-shuffle.'),
+               ('Components, not just images', 'One click builds an avatar component set with default, hover, active, selected and disabled states.')]),
+  ]),
+  ('First run', 'Three slides explain the whole plugin.', [
+    ('gallery', [('onboard-1.webp', 'Welcome: what Avatarly does.'), ('onboard-2.webp', 'How it works: select, pick a style, fill.'), ('onboard-3.webp', 'Twelve built-in collections.')], 3),
+  ]),
+  ('The plugin', 'Quick Add, Gallery and Components.', [
+    ('gallery', [('quick-add.webp', 'Quick Add: filter by vibe, pick a style, fill the selection.'), ('gallery.webp', 'Gallery: browse each collection and place one avatar.'), ('components.webp', 'Components: generate a full avatar component set.')], 3),
+  ]),
+  ('How it works', 'Select, pick a style, fill.', [
+    ('pipeline', 'proposed', 'Quick Fill', 'Selection → style → every shape filled', ['Select shapes or a frame', 'Pick a collection', 'Avatars fill each shape', 'Shuffle without repeats', 'Layout untouched']),
+  ]),
+ ],
+),
+# ------------------------------------------------------------------ BLOBBY
+dict(
+ slug='blobby', name='Blobby', tags=['Figma plugin', 'Design + code'], read=3, compact=True,
+ cover='assets/img/cover/blobby.webp',
+ title='Blobby: a blob generator for Figma where every blob stays editable.',
+ lede='Most blob plugins drop a flat vector and forget it. Blobby stores each blob’s settings on the layer, so you can select it weeks later and keep editing.',
+ meta=[('Role', 'Solo designer and developer'), ('Product', 'Figma plugin · v0.4'), ('Built with', 'TypeScript, esbuild, Playwright'), ('Status', '59 of 59 tests passing')],
+ tldr=[('The problem', 'Blob plugins create dead vectors. To try three variations, you start from zero three times.'),
+       ('The idea', 'Keep the recipe on the blob. Re-select it and the plugin reopens with its exact settings.'),
+       ('My role', 'Product idea, UI, brand, the shape algorithm, tests and the Community listing.')],
+ sections=[
+  ('Why another blob plugin', 'Other tools stop at “insert”. Blobby starts there.', [
+    ('fig', 'store-vs.webp', 'Blobby against four popular blob plugins: more shape styles, re-editing and code export.'),
+  ]),
+  ('The plugin', 'Pick a shape, shuffle, insert.', [
+    ('gallery', [('ui-home.webp', 'Home: preview, shuffle, insert or generate a set.'), ('ui-liquid.webp', 'Liquid styles: wave, droplet, melt, goo, splash.'), ('ui-geometric.webp', 'Geometric styles: soft geo, polygon, ring, donut.')], 3),
+  ]),
+  ('Features', 'One recipe, many uses.', [
+    ('feature', 'Shapes', 'Seven families of shapes', 'Organic, soft, liquid, geometric, expressive, natural and abstract.', 'store-shapes.webp'),
+    ('feature', 'Re-edit', 'Change it later, not from scratch', 'Complexity, gradient, stroke and shadow stay adjustable on the canvas.', 'store-edit.webp'),
+    ('feature', 'Variations', 'One shape, endless siblings', 'Duplicate as a variation keeps the style and changes the seed.', 'store-variations.webp'),
+    ('feature', 'Hand-off', 'From blob to design in seconds', 'Copy any blob as SVG, CSS clip-path or a React component.', 'store-before-after.webp'),
+  ]),
+  ('Under the hood', 'An algorithm that never clips.', [
+    ('pipeline', 'proposed', 'Shape', 'Seeded points → smooth curve → exact fit', ['Points on a circle', 'Seeded noise', 'Smooth curve', 'Exact bounding box', 'Fills its frame']),
+    ('p', 'Settings live on the layer through Figma’s plugin data. 100% offline: no account and no network.'),
+  ]),
+ ],
+),
 ]
 
