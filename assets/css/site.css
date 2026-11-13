@@ -736,5 +736,14 @@ html:has(dialog.pop[open]) .dock,html:has(.lb:not([hidden])) .dock{opacity:0;poi
 .cs-sol-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:6px}
 @media (max-width:640px){.cs-goals,.cs-sol-grid{grid-template-columns:minmax(0,1fr)}.cs-story{padding:16px}}
 
-/* clips may run wider than the text column on large screens */
-@media (min-width:1000px){.cs-clip{margin-inline:calc((100% - min(880px, 100vw - 120px)) / 2)}}
+
+/* skill benchmark */
+.bm{display:grid;gap:8px;margin:4px 0 14px}
+.bm-row{display:grid;grid-template-columns:minmax(0,190px) 1fr 52px;gap:12px;align-items:center;font-size:14px}
+.bm-lbl{color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bm-bar{height:10px;border-radius:5px;background:var(--wash);overflow:hidden}
+.bm-bar i{display:block;height:100%;border-radius:5px;background:var(--line-2)}
+.bm-row.is-this .bm-lbl{color:var(--ink);font-weight:600}.bm-row.is-this .bm-bar i{background:var(--ink)}
+.bm-val{font:600 13px var(--mono);text-align:right}
+.bm-notes{margin:14px 0 4px}.bm-method{color:var(--mute);font-size:13px}
+@media (max-width:540px){.bm-row{grid-template-columns:1fr 46px}.bm-lbl{grid-column:1/-1}.bm-bar{grid-column:1}}

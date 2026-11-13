@@ -13,10 +13,12 @@ Readers stop trusting text the moment they spot AI tells, even when the ideas ar
 
 ## Workflow
 
+0. **Make a fact ledger.** Before editing, list every fact in the draft: names, numbers, dates, versions, prices, features and claims. After rewriting, tick each one off. Nothing on the list may disappear, and nothing new may be added.
 1. **Read the whole draft first.** Note the author's point, audience and voice (formal, casual, technical). Your rewrite must keep all three.
 2. **Mark the tells.** Go through `references/patterns.md` and mark every instance. In review mode (when the user asks "what's wrong" or "check this"), show them with the category.
 3. **Rewrite.** Fix each tell with the move listed for its category. The aim is fewer words, more specifics, and natural rhythm.
-4. **Check facts didn't change.** Every number, name and claim in the original survives, unless it was itself filler.
+4. **Check the fact ledger.** Every fact on the list is still there, worded accurately; no new numbers or claims crept in.
+4b. **Check facts didn't change.** Every number, name and claim in the original survives, unless it was itself filler.
 5. **Score** the before and after (see Scoring) and show both.
 
 ## The core moves

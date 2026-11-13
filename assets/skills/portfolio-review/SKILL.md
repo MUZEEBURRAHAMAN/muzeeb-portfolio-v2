@@ -40,16 +40,25 @@ For each case study (or the best two, if there are many), check:
 
 Flag filler and buzzwords ("passionate", "user-centric", "seamless"), walls of text, images without captions, inconsistent naming, and typos. Check it on a phone.
 
+## Red flags to name explicitly
+
+These sink case studies in screening. When you see one, make it a ranked fix and quote the text:
+- **Hidden ownership:** "we" throughout with no sentence saying what the designer personally did.
+- **No problem statement:** the case study never says what was wrong for users or the business before the work.
+- **Process theatre:** sections named after method steps (Empathise, Define, Ideate, Prototype, Test) with no decision, trade-off or finding inside them.
+- **Unbacked outcomes:** "improved engagement significantly", "users loved it", percentages with no source, scope or timeframe.
+- **Mismatch with the target role:** the featured work doesn't show what that role is hired for.
+
 ## Output format
 
 ```
 ## Portfolio review: <name or URL>
 **Target role assumed:** <role, level, company type>
-**60-second verdict:** <Would interview / Maybe / Would pass> — <one reason>
+**60-second verdict:** <Would interview | Maybe | Would pass>. <one reason>
 **Positioning as I read it:** "<one sentence>"
 
 ### Top fixes (ranked by impact on getting interviews)
-1. <fix> — why it matters — how to do it, with an example rewrite where useful
+1. **<fix>.** Why it matters: … How: … (with an example rewrite where useful)
 2. …
 
 ### Case study notes
@@ -59,7 +68,7 @@ Flag filler and buzzwords ("passionate", "user-centric", "seamless"), walls of t
 - Rewrite suggestion: <e.g. a sharper title or summary paragraph>
 
 ### Scorecard
-Positioning x/5 · Project choice x/5 · Role clarity x/5 · Process & decisions x/5 · Evidence & outcomes x/5 · Craft x/5 · Writing x/5 — total xx/35
+Positioning x/5 · Project choice x/5 · Role clarity x/5 · Process & decisions x/5 · Evidence & outcomes x/5 · Craft x/5 · Writing x/5 · **Total xx/35**
 ```
 
 ## Rules
@@ -67,5 +76,7 @@ Positioning x/5 · Project choice x/5 · Role clarity x/5 · Process & decisions
 - Be specific: quote the exact sentence or name the exact image you mean.
 - Rank by impact on interviews, not by how easy the fix is to describe.
 - Offer example rewrites for titles, summaries and outcome statements; designers act faster on an example than on advice.
-- Don't invent metrics for them. If a case study lacks numbers, suggest what to measure or how to describe qualitative outcomes honestly.
+- Don't invent metrics for them. If a case study lacks numbers, suggest what to measure, write any number in a rewrite as a `[placeholder]`, or show how to describe a qualitative outcome honestly.
+- Show every rewrite as **Before:** (their exact words) and **After:** (your version), so the change is obvious.
+- Always include the verdict, the positioning sentence, at least three ranked fixes and the scorecard, even for a short case study.
 - Respect what's already strong. If a case study is excellent, say what makes it work so they can repeat it.

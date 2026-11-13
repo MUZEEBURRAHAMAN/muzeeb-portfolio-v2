@@ -634,16 +634,37 @@ def demo_html(k):
     cap = f'<p class="sk-demo-cap">{md(d["caption"])}</p>' if d.get('caption') else ''
     return f'<section class="sec" aria-labelledby="h-demo"><div class="eyebrow" id="h-demo"><span class="n">✦</span> {E(d["title"])}</div>{body}{cap}</section>'
 
+
+_BENCH_F = os.path.join(os.path.dirname(__file__), 'bench_results.json')
+BENCH = _json.load(open(_BENCH_F)) if os.path.exists(_BENCH_F) else {}
+
+def bench_html(k):
+    """Benchmark table: no skill vs the closest installed skill vs this skill before and after the update."""
+    b = BENCH.get(k['slug'])
+    if not b: return ''
+    arms = [('none', 'No skill'), ('competitor', b['competitor']), ('before', f'This skill, v{b["v_before"]}'), ('after', f'This skill, v{b["v_after"]}')]
+    pct = lambda a: round(100 * a[0] / a[1]) if a and a[1] else 0
+    tot = {a: [sum(c[a][0] for c in b['cases'] if c.get(a)), sum(c[a][1] for c in b['cases'] if c.get(a))] for a, _ in arms}
+    bars = ''.join(
+        f'<div class="bm-row{" is-this" if a == "after" else ""}"><span class="bm-lbl">{E(l)}</span>'
+        f'<span class="bm-bar" aria-hidden="true"><i style="width:{pct(tot[a])}%"></i></span><b class="bm-val">{tot[a][0]}/{tot[a][1]}</b></div>'
+        for a, l in arms)
+    head = ''.join(f'<th scope="col">{E(l)}</th>' for _, l in arms)
+    rows = ''.join('<tr><th scope="row">' + E(c['title']) + '</th>' + ''.join(f'<td>{c[a][0]}/{c[a][1]}</td>' if c.get(a) else '<td>–</td>' for a, _ in arms) + '</tr>' for c in b['cases'])
+    changes = ''.join(f'<li>{md(x)}</li>' for x in b.get('changes', []))
+    fixed = ''.join(f'<li>{md(x)}</li>' for x in b.get('fixed', []))
+    return (f'<section class="sec" aria-labelledby="h-test"><div class="eyebrow" id="h-test"><span class="n">✓</span> Benchmark</div>'
+            f'<p class="cs-p">{md(b["summary"])}</p>'
+            f'<div class="bm" role="img" aria-label="Checks passed: ' + '; '.join(f'{l} {tot[a][0]} of {tot[a][1]}' for a, l in arms) + f'">{bars}</div>'
+            f'<div class="cs-tbl" tabindex="0" role="region" aria-label="Benchmark by test case"><table><thead><tr><th scope="col">Test case</th>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
+            + (f'<div class="cs-sol-grid bm-notes"><div><small>What changed in v{b["v_after"]}</small><ul>{changes}</ul></div><div><small>Checks it now passes</small><ul>{fixed}</ul></div></div>' if changes else '')
+            + f'<p class="cs-p bm-method">{md(b["method"])}</p></section>')
+
 def skill_page(i, k):
     slug = k['slug']; text = bundle_skill(slug)
     install = f'mkdir -p ~/.claude/skills && curl -fsSL {SKILL_REPO}/raw/main/dist/{slug}.zip -o /tmp/{slug}.zip && unzip -oq /tmp/{slug}.zip -d ~/.claude/skills/'
     meta = [('Level', k['level']), ('Saves', k['saves']), ('Version', k['version']), ('Updated', k['updated']), ('Available in', 'Claude Code · Claude.ai')]
-    tested = k.get('tested')
-    test_html = ''
-    if tested:
-        test_html = (f'<section class="sec" aria-labelledby="h-test"><div class="eyebrow" id="h-test"><span class="n">✓</span> Tested</div>'
-                     f'<div class="stats"><div><b>{E(tested["with"])}</b><small>Checks passed with the skill</small></div><div><b>{E(tested["without"])}</b><small>Same task without it</small></div><div><b>{E(tested["checks"])}</b><small>Checks in the test</small></div></div>'
-                     f'<p class="cs-p">{md(tested["note"])}</p></section>')
+    test_html = bench_html(k)
     others = [SKILLS[(i + n) % len(SKILLS)] for n in (1, 2)]
     body = f'''<header class="cs-head">
 <nav class="crumb" aria-label="Breadcrumb"><a href="skills.html">← AI Skills</a><span aria-hidden="true">/</span><span aria-current="page">{E(k["name"])}</span></nav>

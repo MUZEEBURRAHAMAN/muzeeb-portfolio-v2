@@ -35,6 +35,7 @@ Founders often get a logo and then build a deck in a default template, so the st
    8. Traction or proof (real numbers only; otherwise milestones)
    9. Team
    10. Ask / next step and contact
+   **Adapt the outline to the audience.** The list above is for investors. For a sales or partner deck, swap Market, Business model and Team for what a buyer needs to decide: the offer, pricing tiers or order minimums, delivery and logistics, samples or a trial, and how to start. Every slide should answer a question that audience actually has.
    Use one idea per slide, a headline that states the takeaway, and large type. Never invent traction, customers, logos or quotes; use clearly marked placeholders instead.
 7. **Assemble** using `assets/brand-template.html`: it contains the brand-board layout and a slide system (`.slide` sections at 16:9 with print styles). Replace the example tokens and content with yours.
 
@@ -52,6 +53,12 @@ Founders often get a logo and then build a deck in a default template, so the st
 ## Output
 
 One self-contained HTML file (default `brand-kit.html`) with the brand board followed by the deck slides, plus a short text spec in chat: positioning, colour table (HEX, job, contrast), fonts with licence, logo rationale, 3 don'ts, and the list of placeholders the user needs to fill.
+
+## Before you finish
+
+- Count the `.slide` sections in the file. There must be exactly ten.
+- Check every text pairing on the board has its contrast ratio and a pass/fail mark.
+- Search the file for numbers, prices and names. Each one is either from the brief or marked `[placeholder]`.
 
 ## Facts in the deck
 

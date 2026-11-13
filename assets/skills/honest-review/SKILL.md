@@ -58,11 +58,11 @@ Use this structure:
 ```
 ## Honest Review: <what was reviewed>
 
-**Verdict:** <one sentence: ship / ship after fixes / rework, and the main reason>
+**Verdict:** <Ship | Ship after fixes | Rework>. <the main reason, in the same sentence>
 **Assumed context:** <product, audience, screen's job, in one line>
 
 ### What works (only if worth protecting)
-- <decision> — <why to keep it>
+- <decision>: <why to keep it>
 
 ### Findings
 1. **[Blocker] <short title>**
@@ -75,11 +75,18 @@ Use this structure:
 <the 1–3 changes that buy the most improvement for the least effort>
 
 ### Score
-Clarity x/10 · Hierarchy x/10 · Copy x/10 · Accessibility x/10 · Craft x/10 — total xx/50
+Clarity x/10 · Hierarchy x/10 · Copy x/10 · Accessibility x/10 · Craft x/10 · **Total xx/50**
 ```
 
 A total below 30/50 means rework; 30–39 ship after fixes; 40+ ship.
 
-## Verdict length
+## Rules the report must pass
 
-The verdict is one sentence. Put the reasons in the findings. Give each craft issue its own finding instead of grouping them in a catch-all.
+Check these before you send the review:
+
+- **Verdict:** the line starts with exactly one of three labels, written as shown: `Ship`, `Ship after fixes` or `Rework`. Never paraphrase it ("Don't ship yet", "Needs work"). One sentence; the reasons belong in the findings.
+- **Every finding has all three parts**, labelled `What I see`, `Why it matters` and `What to do`. Quote the evidence (a line of code, a hex value, the exact label) in `What I see`.
+- **Evidence is real.** Only cite what you read in the file or saw in the screenshot. Measure contrast from the actual colours when they're in the code, and give the ratio.
+- **Score block is always last**, even for a short review, and its total matches the verdict band.
+- **No em dashes** anywhere in the review, and no praise used as padding.
+- **One issue per finding.** Give each craft issue its own finding instead of grouping them in a catch-all.

@@ -13,7 +13,7 @@ Generic UI isn't ugly; it's forgettable, and visitors read it as low effort. The
 
 ## Workflow
 
-1. **Name the subject.** In one line: what the product is, who it's for, and the page's single job. Distinctive choices come from the subject's own world (its materials, tools, vocabulary), not from trends.
+1. **Name the subject.** Read the whole page first, including the footer, meta tags and any small print: that is often the only place the real product is described. Then, in one line: what the product is, who it's for, and the page's single job. Distinctive choices come from the subject's own world (its materials, tools, vocabulary), not from trends.
 2. **Scan for tells** using `references/ui-patterns.md`. For each, record where it is (selector, component or screen area) and why it reads as generic here.
 3. **Separate real problems from taste.** A tell is a problem when it weakens hierarchy, trust or identity, or hurts accessibility. Leave choices the user clearly made on purpose.
 4. **Propose a direction** in 3–5 lines: palette (4–6 named tokens), type pairing (a display face with character plus a readable body face), layout idea, and one signature detail drawn from the subject.
@@ -36,7 +36,7 @@ Generic UI isn't ugly; it's forgettable, and visitors read it as low effort. The
 **Generic score:** x/10 (10 = indistinguishable from a template)
 
 ### Tells found
-1. <tell> — where: <selector/area> — why it reads generic here — fix
+1. **<tell>.** Where: <selector/area>. Why it reads generic here: … Fix: …
 2. …
 
 ### Direction
@@ -50,6 +50,19 @@ Generic UI isn't ugly; it's forgettable, and visitors read it as low effort. The
 
 **After:** generic score y/10 · contrast checked · states kept
 ```
+
+## Always check for these
+
+Each of these is a tell in almost every AI-made page. Look for them by name:
+- Social proof nobody can verify: logo walls of placeholder brands (Acme, Globex), "Trusted by 10,000+ teams", uptime or rating badges, testimonials without a real name and company.
+- Feature grids of identical cards with emoji or generic icons.
+- Gradient or glassmorphism backgrounds (blurred blobs, frosted panels) used as decoration.
+- Gradient text on the headline, and vague headlines ("Supercharge your workflow").
+- Light grey body text that fails contrast.
+
+## Deliver the rebuild
+
+Always return working code: the full revised file when the input is one file, or complete replacement blocks. Advice alone is not a finished answer.
 
 ## Stay honest in the rebuild
 

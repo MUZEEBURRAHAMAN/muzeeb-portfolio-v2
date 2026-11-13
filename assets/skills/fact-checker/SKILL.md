@@ -34,6 +34,14 @@ A confident wrong verdict is worse than no verdict. Language models tend to "ver
 - Watch for manipulated or out-of-context quotes, images and screenshots; say when you can't confirm provenance.
 - Keep your own opinions out of verdicts.
 
+## Rules the report must pass
+
+- Every row in the table has at least one source the user can open. If you have no link for a claim, say so in the row and use "Can't verify" unless the fact is widely documented, in which case name the reference work you rely on.
+- Every Incorrect or Partly correct verdict states the right value (the real year, the real figure, what actually happened).
+- Superlatives and big numbers ("over 90%", "the first", "the largest") get the actual figure with its date and source, because they are wrong most often.
+- If something was true at one point and later changed (a deal announced then abandoned, a rule replaced), say both parts and the dates.
+- Before sending, re-read each verdict against its source line. Change the verdict if the quote doesn't support it.
+
 ## Output format
 
 ```

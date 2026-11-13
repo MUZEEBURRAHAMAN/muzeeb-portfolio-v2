@@ -23,8 +23,10 @@ Most flow diagrams are tangled boxes and arrows that only their author can read.
    - `.flow-pipeline` containing `.flow-stage` items separated by `.flow-connector` elements.
    - `.flow-return` with a `.flow-return-label` for loops back to an earlier stage.
    - `.flow-branch` under a stage for an alternative or error path.
+5b. **Explain the comparison.** Under the diagrams, add a short "What changed" list: each step you removed, merged or automated, and why it can go. A reader should see the reason, not just a shorter line.
+5c. **Cover the domain's risks.** Flows in money, health, identity or legal products must show the safeguards: identity checks, rate limits and lockouts, confirmation messages, and notifying the user after sensitive changes. Show them as stages or branches, not footnotes.
 6. **Add the step table** below the diagrams: number, stage, actor, what they see, what they do, failure case.
-7. **List edge cases and open questions** you didn't decide.
+7. **List edge cases and open questions** you didn't decide. Every flow gets its failure paths: what happens when a message never arrives, a link expires, the user gives up halfway, or the system is down.
 8. **Check** the result: stage names match between diagram and table, no dead ends, each diagram has a title that states an outcome, and it reads well at 375 px (the template stacks stages vertically on small screens).
 
 ## Writing rules for stages
