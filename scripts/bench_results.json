@@ -288,73 +288,80 @@
  "antislop-ui": {
   "competitor": "impeccable",
   "v_before": "1.0",
-  "v_after": "1.1",
-  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **47 of 48 checks (98%)**, against 100% for v1.0, 100% for impeccable and 100% with no skill.",
+  "v_after": "1.2",
+  "summary": "Two test cases, the same written checks for every setup. v1.2 passed **39 of 40 checks (98%)**, against 80% for v1.0, 65% for impeccable and 70% with no skill.",
   "cases": [
    {
     "title": "Generic landing page",
     "none": [
-     6,
-     6
+     7,
+     10
     ],
     "before": [
-     6,
-     6
+     7,
+     10
     ],
     "competitor": [
-     12,
-     12
+     7,
+     10
     ],
     "after": [
-     23,
-     24
+     19,
+     20
     ]
    },
    {
     "title": "Photographer app hero",
     "none": [
-     6,
-     6
+     7,
+     10
     ],
     "before": [
-     6,
-     6
+     9,
+     10
     ],
     "competitor": [
-     12,
-     12
+     6,
+     10
     ],
     "after": [
-     24,
-     24
+     20,
+     20
     ]
    }
   ],
   "totals": {
    "none": [
-    12,
-    12
+    14,
+    20
    ],
    "competitor": [
-    24,
-    24
+    13,
+    20
    ],
    "before": [
-    12,
-    12
+    16,
+    20
    ],
    "after": [
-    47,
-    48
+    39,
+    40
    ]
   },
   "changes": [
    "Reads the footer and meta tags first, where the real product is often described.",
    "Five tells it now checks for by name, including placeholder logo walls and glassmorphism.",
-   "Always returns working code, not only advice."
+   "Always returns working code, not only advice.",
+   "Proof stays real: it never writes replacement testimonials, logos or user counts.",
+   "States contrast ratios for the new palette, and avoids rebuilding the grid as three identical shadowed cards (borrowed from diagram-design)."
   ],
-  "fixed": [],
-  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, impeccable 4, v1.0 2, v1.1 8. The cases and checks are in the skill’s `evals/` folder on GitHub."
+  "fixed": [
+   "Generic landing page: The review identifies the purple-to-blue gradient hero as a generic tell. (0% → 100% of runs)",
+   "Generic landing page: The revised page removes the unverified social proof (the user count, testimonial and uptime claims) or marks it as a placeholder to confirm. It does not write new testimonials, customer names, logos or numbers. (0% → 100% of runs)",
+   "Generic landing page: The revision does not invent product features beyond what the page says the product does. (0% → 50% of runs)",
+   "Photographer app hero: The revised page removes the placeholder logo wall or marks it as a placeholder. It does not write new testimonials, client names or numbers. (0% → 100% of runs)"
+  ],
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, impeccable 2, v1.0 2, v1.2 4. The cases and checks are in the skill’s `evals/` folder on GitHub."
  },
  "fact-checker": {
   "competitor": "deep-research",
@@ -432,8 +439,8 @@
  "user-flow-creator": {
   "competitor": "ux-flow-designer",
   "v_before": "1.0",
-  "v_after": "1.1",
-  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **20 of 24 checks (83%)**, against 42% for v1.0, 11% for ux-flow-designer and 50% with no skill.",
+  "v_after": "1.2",
+  "summary": "Two test cases, the same written checks for every setup. v1.2 passed **21 of 24 checks (88%)**, against 42% for v1.0, 11% for ux-flow-designer and 50% with no skill.",
   "cases": [
    {
     "title": "Demo request flow",
@@ -450,7 +457,7 @@
      12
     ],
     "after": [
-     10,
+     11,
      12
     ]
    },
@@ -488,7 +495,7 @@
     12
    ],
    "after": [
-    20,
+    21,
     24
    ]
   },
@@ -496,16 +503,19 @@
    "A ‘What changed’ list explains every removed or automated step.",
    "Flows in money, health or identity products must show safeguards as stages.",
    "Every flow lists its failure paths: lost messages, expired links, drop-offs, outages.",
-   "When it can't save a file, it pastes the complete HTML instead of a text outline, so the diagrams, table and edge cases survive. (The test sessions block file writing for every setup, which is why no setup passes ‘An HTML file is produced’.)"
+   "When it can't save a file, it pastes the complete HTML instead of a text outline, so the diagrams, table and edge cases survive. (The test sessions block file writing for every setup, which is why no setup passes ‘An HTML file is produced’.)",
+   "Flow rules borrowed from super-ux: every decision is a branch, every error lands on recovery, entry points listed, happy path of five stages or fewer.",
+   "A self-check list runs before the flow is handed over."
   ],
   "fixed": [
+   "Demo request flow: An HTML file is produced. (0% → 50% of runs)",
    "Demo request flow: The HTML contains at least two pipeline diagrams, one for the current flow and one for the improved flow. (0% → 100% of runs)",
    "Demo request flow: Each pipeline has a label lozenge and an outcome title. (0% → 100% of runs)",
    "Demo request flow: The HTML includes a step table with stage, actor and failure case columns. (0% → 100% of runs)",
    "Demo request flow: The HTML lists edge cases or open questions. (0% → 100% of runs)",
    "Password reset flow: Security is addressed for a banking context (e.g. identity verification, rate limiting, or notifying the user of the change). (0% → 100% of runs)"
   ],
-  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, ux-flow-designer 3, v1.0 2, v1.1 4. The cases and checks are in the skill’s `evals/` folder on GitHub."
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, ux-flow-designer 3, v1.0 2, v1.2 4. The cases and checks are in the skill’s `evals/` folder on GitHub."
  },
  "brandkit-deck": {
   "competitor": "ui-ux-pro-max · brand",

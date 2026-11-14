@@ -29,6 +29,22 @@ Most flow diagrams are tangled boxes and arrows that only their author can read.
 7. **List edge cases and open questions** you didn't decide. Every flow gets its failure paths: what happens when a message never arrives, a link expires, the user gives up halfway, or the system is down.
 8. **Check** the result: stage names match between diagram and table, no dead ends, each diagram has a title that states an outcome, and it reads well at 375 px (the template stacks stages vertically on small screens).
 
+## Flow rules
+
+- Every decision is an explicit branch, and every error path lands on a recovery step or a clear exit. No dead ends.
+- List the entry points (where users arrive from) above the diagram.
+- Keep the happy path to five stages or fewer, or say in one line why it needs more.
+- Put the accent colour on one or two stages only: the change that matters most. Everything else stays neutral.
+- Borders, not shadows. The template already does this; don't add `box-shadow`.
+
+## Self-check before you hand it over
+
+- [ ] Stage names match between diagram and table.
+- [ ] Each branch ends in recovery or an exit.
+- [ ] The comparison has a "What changed" list with a reason per removed step.
+- [ ] Domain safeguards (identity, limits, notifications) appear where money, health or identity is involved.
+- [ ] It reads at 375 px.
+
 ## Writing rules for stages
 
 - 2–6 words, verb first or actor + verb ("Designer creates styleguide", "AI reads specs").

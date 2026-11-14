@@ -64,6 +64,13 @@ Each of these is a tell in almost every AI-made page. Look for them by name:
 
 Always return working code: the full revised file when the input is one file, or complete replacement blocks. Advice alone is not a finished answer.
 
+## Rebuild rules
+
+- **Proof stays real.** Delete unverifiable social proof, or keep the slot with a visible `[confirm: real customer quote]` placeholder. Never write a replacement testimonial, logo, user count or uptime figure, however plausible.
+- **State the numbers.** Give the contrast ratio of every text and background pair in the new palette (e.g. `#1F2A24 on #F4EFE6 = 13.1:1`), computed from the HEX values.
+- **No card soup.** Don't rebuild the grid as three identical cards. Vary the treatment (unequal columns, a list, one featured item), use a 1px border instead of `box-shadow`, and keep the accent on one or two focal elements only.
+- **Headline says the product.** Plain text colour, no gradient text, and words that name what the product does for whom.
+
 ## Stay honest in the rebuild
 
 - Write the review itself without the tells you are removing: no em dashes, no buzzwords.
