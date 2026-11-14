@@ -44,6 +44,8 @@ Save one self-contained HTML file (default name `user-flow.html`) with:
 3. The step table.
 4. Edge cases and open questions.
 
+**If you can't save files** (writing is turned off, or you're in a chat without file tools), don't fall back to a text outline. Paste the complete, self-contained HTML in one ```html code block so the user can save it as `user-flow.html`. It must contain everything a saved file would: both diagrams with their lozenges and outcome titles, the step table, the "What changed" list and the edge cases.
+
 Then summarise in chat: the flow in one line, the number of stages, and the key change if you drew a comparison. Offer Mermaid or Figma-ready text if the user needs to edit it elsewhere.
 
 ## Consistency
