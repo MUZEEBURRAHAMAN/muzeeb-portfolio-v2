@@ -92,4 +92,4 @@ When colours are in the code, compute the ratio instead of estimating: relative 
 
 ## Fix rule
 
-Every finding, including Minor and Nit, ends with a concrete fix: code for code issues, exact replacement wording for copy issues. A finding without a fix is not finished.
+Every finding, including Minor and Nit, ends with a concrete fix written as code. For a copy issue, show the element with its new text (`<button type="submit">Save settings</button>`), not just the words. For layout or order issues, show the CSS or the reordered markup. A finding without a code fix is not finished.

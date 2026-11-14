@@ -1,0 +1,577 @@
+{
+ "honest-review": {
+  "competitor": "design-critique",
+  "v_before": "1.0",
+  "v_after": "1.1",
+  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **56 of 56 checks (100%)**, against 100% for v1.0, 68% for design-critique and 64% with no skill. design-critique only switched itself on in 2 of 4 runs.",
+  "cases": [
+   {
+    "title": "Checkout page",
+    "none": [
+     6,
+     7
+    ],
+    "before": [
+     7,
+     7
+    ],
+    "competitor": [
+     11,
+     14
+    ],
+    "after": [
+     28,
+     28
+    ]
+   },
+   {
+    "title": "Pricing page",
+    "none": [
+     3,
+     7
+    ],
+    "before": [
+     7,
+     7
+    ],
+    "competitor": [
+     8,
+     14
+    ],
+    "after": [
+     28,
+     28
+    ]
+   }
+  ],
+  "totals": {
+   "none": [
+    9,
+    14
+   ],
+   "competitor": [
+    19,
+    28
+   ],
+   "before": [
+    14,
+    14
+   ],
+   "after": [
+    56,
+    56
+   ]
+  },
+  "changes": [
+   "The verdict must start with one of three fixed labels: Ship, Ship after fixes or Rework.",
+   "Every finding needs all three labelled parts, with quoted evidence from the file.",
+   "Contrast is measured from the real colours and reported as a ratio.",
+   "The score block is always the last thing in the review, and em dashes are banned."
+  ],
+  "fixed": [],
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, design-critique 4, v1.0 2, v1.1 8. The cases and checks are in the skill’s `evals/` folder on GitHub."
+ },
+ "ux-assistant": {
+  "competitor": "accessibility-auditor",
+  "v_before": "1.0",
+  "v_after": "1.1",
+  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **26 of 26 checks (100%)**, against 100% for v1.0, 77% for accessibility-auditor and 69% with no skill.",
+  "cases": [
+   {
+    "title": "Settings modal",
+    "none": [
+     5,
+     6
+    ],
+    "before": [
+     6,
+     6
+    ],
+    "competitor": [
+     10,
+     12
+    ],
+    "after": [
+     12,
+     12
+    ]
+   },
+   {
+    "title": "Sign-up form",
+    "none": [
+     4,
+     7
+    ],
+    "before": [
+     7,
+     7
+    ],
+    "competitor": [
+     10,
+     14
+    ],
+    "after": [
+     14,
+     14
+    ]
+   }
+  ],
+  "totals": {
+   "none": [
+    9,
+    13
+   ],
+   "competitor": [
+    20,
+    26
+   ],
+   "before": [
+    13,
+    13
+   ],
+   "after": [
+    26,
+    26
+   ]
+  },
+  "changes": [
+   "New step: check every custom control (div buttons, CSS switches, icon buttons, modals, toasts) against its native equivalent.",
+   "Exact contrast formula, so ratios are computed, not estimated.",
+   "A pass/fail checklist for the report: WCAG numbers, selectors, a numeric ratio and the states checked."
+  ],
+  "fixed": [],
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, accessibility-auditor 4, v1.0 2, v1.1 4. The cases and checks are in the skill’s `evals/` folder on GitHub."
+ },
+ "portfolio-review": {
+  "competitor": "design-critique",
+  "v_before": "1.0",
+  "v_after": "1.1",
+  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **22 of 24 checks (92%)**, against 92% for v1.0, 79% for design-critique and 75% with no skill. design-critique only switched itself on in 0 of 4 runs.",
+  "cases": [
+   {
+    "title": "Jobly case study",
+    "none": [
+     4,
+     6
+    ],
+    "before": [
+     6,
+     6
+    ],
+    "competitor": [
+     8,
+     12
+    ],
+    "after": [
+     12,
+     12
+    ]
+   },
+   {
+    "title": "Thin case study",
+    "none": [
+     5,
+     6
+    ],
+    "before": [
+     5,
+     6
+    ],
+    "competitor": [
+     11,
+     12
+    ],
+    "after": [
+     10,
+     12
+    ]
+   }
+  ],
+  "totals": {
+   "none": [
+    9,
+    12
+   ],
+   "competitor": [
+    19,
+    24
+   ],
+   "before": [
+    11,
+    12
+   ],
+   "after": [
+    22,
+    24
+   ]
+  },
+  "changes": [
+   "Names five red flags by name: hidden ownership, no problem statement, process theatre, unbacked outcomes, role mismatch.",
+   "Every rewrite is shown as Before and After, with numbers left as placeholders.",
+   "Verdict, positioning, three fixes and the scorecard are now required, even for short case studies."
+  ],
+  "fixed": [],
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, design-critique 4, v1.0 2, v1.1 4. The cases and checks are in the skill’s `evals/` folder on GitHub."
+ },
+ "antislop-content": {
+  "competitor": "stop-slop",
+  "v_before": "1.0",
+  "v_after": "1.1",
+  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **22 of 24 checks (92%)**, against 92% for v1.0, 92% for stop-slop and 75% with no skill.",
+  "cases": [
+   {
+    "title": "LinkedIn post",
+    "none": [
+     3,
+     5
+    ],
+    "before": [
+     5,
+     5
+    ],
+    "competitor": [
+     8,
+     10
+    ],
+    "after": [
+     8,
+     10
+    ]
+   },
+   {
+    "title": "Product update email",
+    "none": [
+     6,
+     7
+    ],
+    "before": [
+     6,
+     7
+    ],
+    "competitor": [
+     14,
+     14
+    ],
+    "after": [
+     14,
+     14
+    ]
+   }
+  ],
+  "totals": {
+   "none": [
+    9,
+    12
+   ],
+   "competitor": [
+    22,
+    24
+   ],
+   "before": [
+    11,
+    12
+   ],
+   "after": [
+    22,
+    24
+   ]
+  },
+  "changes": [
+   "New first step: a fact ledger listing every name, number, date and feature before editing.",
+   "The rewrite is checked against the ledger, so nothing is lost and nothing new is added."
+  ],
+  "fixed": [
+   "Product update email: The rewrite does not add new claims or numbers that were not in the original. (0% → 100% of runs)"
+  ],
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, stop-slop 4, v1.0 2, v1.1 4. The cases and checks are in the skill’s `evals/` folder on GitHub."
+ },
+ "antislop-ui": {
+  "competitor": "impeccable",
+  "v_before": "1.0",
+  "v_after": "1.1",
+  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **47 of 48 checks (98%)**, against 100% for v1.0, 100% for impeccable and 100% with no skill.",
+  "cases": [
+   {
+    "title": "Generic landing page",
+    "none": [
+     6,
+     6
+    ],
+    "before": [
+     6,
+     6
+    ],
+    "competitor": [
+     12,
+     12
+    ],
+    "after": [
+     23,
+     24
+    ]
+   },
+   {
+    "title": "Photographer app hero",
+    "none": [
+     6,
+     6
+    ],
+    "before": [
+     6,
+     6
+    ],
+    "competitor": [
+     12,
+     12
+    ],
+    "after": [
+     24,
+     24
+    ]
+   }
+  ],
+  "totals": {
+   "none": [
+    12,
+    12
+   ],
+   "competitor": [
+    24,
+    24
+   ],
+   "before": [
+    12,
+    12
+   ],
+   "after": [
+    47,
+    48
+   ]
+  },
+  "changes": [
+   "Reads the footer and meta tags first, where the real product is often described.",
+   "Five tells it now checks for by name, including placeholder logo walls and glassmorphism.",
+   "Always returns working code, not only advice."
+  ],
+  "fixed": [],
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, impeccable 4, v1.0 2, v1.1 8. The cases and checks are in the skill’s `evals/` folder on GitHub."
+ },
+ "fact-checker": {
+  "competitor": "deep-research",
+  "v_before": "1.0",
+  "v_after": "1.1",
+  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **51 of 52 checks (98%)**, against 92% for v1.0, 85% for deep-research and 85% with no skill. deep-research only switched itself on in 0 of 4 runs.",
+  "cases": [
+   {
+    "title": "Mixed claims",
+    "none": [
+     5,
+     6
+    ],
+    "before": [
+     5,
+     6
+    ],
+    "competitor": [
+     10,
+     12
+    ],
+    "after": [
+     23,
+     24
+    ]
+   },
+   {
+    "title": "Tech claims",
+    "none": [
+     6,
+     7
+    ],
+    "before": [
+     7,
+     7
+    ],
+    "competitor": [
+     12,
+     14
+    ],
+    "after": [
+     28,
+     28
+    ]
+   }
+  ],
+  "totals": {
+   "none": [
+    11,
+    13
+   ],
+   "competitor": [
+    22,
+    26
+   ],
+   "before": [
+    12,
+    13
+   ],
+   "after": [
+    51,
+    52
+   ]
+  },
+  "changes": [
+   "Every row needs a source the reader can open.",
+   "Wrong claims must state the right value; superlatives and big numbers get the real figure and date.",
+   "Claims that were true and later changed are reported with both dates."
+  ],
+  "fixed": [
+   "Mixed claims: The Medicare G0023/G0024 claim is judged correct or partly correct. (0% → 75% of runs)"
+  ],
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, deep-research 4, v1.0 2, v1.1 8. The cases and checks are in the skill’s `evals/` folder on GitHub."
+ },
+ "user-flow-creator": {
+  "competitor": "ux-flow-designer",
+  "v_before": "1.0",
+  "v_after": "1.1",
+  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **12 of 24 checks (50%)**, against 42% for v1.0, 11% for ux-flow-designer and 50% with no skill.",
+  "cases": [
+   {
+    "title": "Demo request flow",
+    "none": [
+     1,
+     6
+    ],
+    "before": [
+     1,
+     6
+    ],
+    "competitor": [
+     2,
+     12
+    ],
+    "after": [
+     2,
+     12
+    ]
+   },
+   {
+    "title": "Password reset flow",
+    "none": [
+     5,
+     6
+    ],
+    "before": [
+     4,
+     6
+    ],
+    "competitor": [
+     0,
+     6
+    ],
+    "after": [
+     10,
+     12
+    ]
+   }
+  ],
+  "totals": {
+   "none": [
+    6,
+    12
+   ],
+   "competitor": [
+    2,
+    18
+   ],
+   "before": [
+    5,
+    12
+   ],
+   "after": [
+    12,
+    24
+   ]
+  },
+  "changes": [
+   "A ‘What changed’ list explains every removed or automated step.",
+   "Flows in money, health or identity products must show safeguards as stages.",
+   "Every flow lists its failure paths: lost messages, expired links, drop-offs, outages."
+  ],
+  "fixed": [
+   "Password reset flow: Security is addressed for a banking context (e.g. identity verification, rate limiting, or notifying the user of the change). (0% → 100% of runs)"
+  ],
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, ux-flow-designer 3, v1.0 2, v1.1 4. The cases and checks are in the skill’s `evals/` folder on GitHub."
+ },
+ "brandkit-deck": {
+  "competitor": "ui-ux-pro-max · brand",
+  "v_before": "1.0",
+  "v_after": "1.1",
+  "summary": "Two test cases, the same written checks for every setup. v1.1 passed **24 of 28 checks (86%)**, against 86% for v1.0, 86% for ui-ux-pro-max · brand and 64% with no skill.",
+  "cases": [
+   {
+    "title": "Hearth & Crumb (sales deck)",
+    "none": [
+     5,
+     7
+    ],
+    "before": [
+     6,
+     7
+    ],
+    "competitor": [
+     6,
+     7
+    ],
+    "after": [
+     13,
+     14
+    ]
+   },
+   {
+    "title": "Tidewell (investor deck)",
+    "none": [
+     4,
+     7
+    ],
+    "before": [
+     6,
+     7
+    ],
+    "competitor": [
+     6,
+     7
+    ],
+    "after": [
+     11,
+     14
+    ]
+   }
+  ],
+  "totals": {
+   "none": [
+    9,
+    14
+   ],
+   "competitor": [
+    12,
+    14
+   ],
+   "before": [
+    12,
+    14
+   ],
+   "after": [
+    24,
+    28
+   ]
+  },
+  "changes": [
+   "The deck outline adapts to the audience: buyers get pricing, delivery and samples instead of market size.",
+   "A final check counts exactly ten slides, contrast marks and placeholders."
+  ],
+  "fixed": [
+   "Hearth & Crumb (sales deck): An HTML file is produced containing both a brand board and the deck. (0% → 50% of runs)"
+  ],
+  "method": "Method: every setup ran each case in a clean Claude Code session with no other skills installed (`claude plugin eval`), and an independent model graded each run against the same written checks (three votes per check). Runs per setup across both cases: no skill 2, ui-ux-pro-max · brand 2, v1.0 2, v1.1 4. The cases and checks are in the skill’s `evals/` folder on GitHub."
+ }
+}

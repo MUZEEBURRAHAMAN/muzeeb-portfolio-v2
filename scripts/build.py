@@ -603,7 +603,7 @@ def skill_row(k):
             f'<a class="btn sm" href="assets/skills/{k["slug"]}/{k["slug"]}.zip" download>{svg("download")}Download</a></span></div>')
 
 sk = f'''<header class="pagehead"><div class="eyebrow"><span class="slash">//</span> AI Skills <a class="more" href="{SKILL_REPO}" rel="noopener">GitHub ↗</a><h1 class="visually-hidden">AI Skills</h1></div>
-<p class="lede">Claude skills I built from the reviews and checks I repeat. Each one is tested against a baseline, free to download, and installs in one command.</p></header>
+<p class="lede">Claude skills I built from the reviews and checks I repeat. Each one is benchmarked against plain Claude and the closest comparable skill, free to download, and installs in one command.</p></header>
 <div class="sk-list">{''.join(skill_row(k) for k in SKILLS)}</div>
 <section class="sec" aria-labelledby="h-how"><div class="eyebrow" id="h-how"><span class="n">?</span> How to install</div>
 <div class="cs-rows"><div class="cs-row"><span>01</span><div><h3>Claude Code</h3><p class="cs-p">Open a skill and copy its install command. It drops the skill into <code>~/.claude/skills/</code>.</p></div></div>
