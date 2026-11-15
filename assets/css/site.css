@@ -747,3 +747,8 @@ html:has(dialog.pop[open]) .dock,html:has(.lb:not([hidden])) .dock{opacity:0;poi
 .bm-val{font:600 13px var(--mono);text-align:right}
 .bm-notes{margin:14px 0 4px}.bm-method{color:var(--mute);font-size:13px}
 @media (max-width:540px){.bm-row{grid-template-columns:1fr 46px}.bm-lbl{grid-column:1/-1}.bm-bar{grid-column:1}}
+
+/* skill real output: long screenshots shown in a capped frame */
+.sk-out{margin:4px 0 12px}.sk-out .zoom{display:block;width:100%;max-height:760px;overflow:hidden;border:1px solid var(--line);border-radius:12px;padding:0;background:#fff;cursor:zoom-in;position:relative}
+.sk-out .zoom::after{content:"";position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(transparent,rgba(255,255,255,.95))}
+.sk-out img{display:block;width:100%;height:auto}

@@ -660,6 +660,35 @@ def bench_html(k):
             + (f'<div class="cs-sol-grid bm-notes"><div><small>What changed in v{b["v_after"]}</small><ul>{changes}</ul></div><div><small>Checks it now passes</small><ul>{fixed}</ul></div></div>' if changes else '')
             + f'<p class="cs-p bm-method">{md(b["method"])}</p></section>')
 
+
+OUTPUT = {
+ 'honest-review': (['honest-review'], 'The pricing page review', 'The full review it wrote for the pricing-page test: a verdict, then every finding with what it saw, why it matters and the fix.'),
+ 'ux-assistant': (['ux-assistant'], 'The settings modal audit', 'The audit of the settings-modal test: each finding names the element, the WCAG rule, the measured value and a code fix.'),
+ 'portfolio-review': (['portfolio-review'], 'A review of my Jobly case study', 'The review it wrote for my own Jobly case study: the 60-second verdict, ranked fixes and example rewrites.'),
+ 'antislop-content': (['antislop-content'], 'A product update email, before and after', 'The original email on the left, the skill’s rewrite on the right. Every date, number and feature survived; nothing new was added.'),
+ 'antislop-ui': (['antislop-ui-before', 'antislop-ui-after'], 'A generic hero, rebuilt for the real product', 'Top: the test page. Bottom: the skill’s rebuild for the product named in the footer, invoicing for freelance photographers.'),
+ 'fact-checker': (['fact-checker'], 'Six tech claims, checked', 'The fact check it returned for six newsletter claims: a verdict per claim, the evidence and a corrected version of the wrong ones.'),
+ 'user-flow-creator': (['user-flow-creator'], 'Password reset in a banking app', 'The current flow and the improved one on the v1.3 canvas: colour by role, a dashed zone, decisions, labelled arrows and red recovery paths.'),
+ 'brandkit-deck': (['brandkit-deck'], 'Hearth & Crumb brand kit', 'The brand board it built for a sourdough bakery: positioning, attributes and a colour system with a job for each colour.'),
+}
+OUTPUT_LINK = {'user-flow-creator': ('Open the full flow (HTML)', 'assets/skills/examples/password-reset-flow.html')}
+
+def output_html(k):
+    o = OUTPUT.get(k['slug'])
+    if not o: return ''
+    files, title, cap = o
+    imgs = ''.join(cs_img_any(f'assets/img/skills/{f}.webp', title) for f in files)
+    link = OUTPUT_LINK.get(k['slug'])
+    lk = f'<div class="cs-links"><a class="btn" href="{link[1]}" target="_blank" rel="noopener">{E(link[0])} ↗</a></div>' if link else ''
+    return (f'<section class="sec" aria-labelledby="h-out"><div class="eyebrow" id="h-out"><span class="n">✦</span> Real output</div>'
+            f'<h2 class="cs-h">{E(title)}</h2><p class="cs-p">{md(cap)}</p>{imgs}{lk}'
+            f'<p class="cs-p bm-method">Unedited output from the benchmark run, rendered as a screenshot.</p></section>')
+
+def cs_img_any(src, alt):
+    w, h = img_size(src)
+    return (f'<figure class="cs-fig sk-out"><button type="button" class="zoom" data-full="{src}" aria-label="Open full size: {E(alt)}">'
+            f'<img src="{src}" alt="{E(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async"></button></figure>')
+
 def skill_page(i, k):
     slug = k['slug']; text = bundle_skill(slug)
     install = f'mkdir -p ~/.claude/skills && curl -fsSL {SKILL_REPO}/raw/main/dist/{slug}.zip -o /tmp/{slug}.zip && unzip -oq /tmp/{slug}.zip -d ~/.claude/skills/'
@@ -677,6 +706,7 @@ def skill_page(i, k):
 <section class="sec" aria-labelledby="h-use"><div class="eyebrow" id="h-use"><span class="n">02</span> Use cases</div><ul class="cs-list">{"".join(f"<li>{md(u)}</li>" for u in k["uses"])}</ul></section>
 <section class="sec" aria-labelledby="h-say"><div class="eyebrow" id="h-say"><span class="n">03</span> Say this to activate it</div>
 <div class="sk-says">{"".join(f'<button type="button" class="sk-say" data-copy="{E(t)}" data-done="Copied">“{E(t)}”</button>' for t in k["triggers"])}</div></section>
+{output_html(k)}
 {demo_html(k)}
 <section class="sec" aria-labelledby="h-inst"><div class="eyebrow" id="h-inst"><span class="n">04</span> Install</div>
 <div class="sk-code"><pre><code>{E(install)}</code></pre><button type="button" class="btn sm" data-copy="{E(install)}" data-done="Copied">{svg("copy")}<span class="lbl">Copy</span></button></div>
