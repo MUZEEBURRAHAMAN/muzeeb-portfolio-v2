@@ -97,7 +97,7 @@ SKILLS = [
     slug='user-flow-creator', icon='sk-flow', name='User Flow Creator', category='Design', tone='accent',
     tagline='Turns a brief into clean pipeline flows, with the current and better way stacked.',
     description='Designs user flows and draws them as calm HTML pipelines: a label, a title that states the outcome, stages joined by connectors, return loops and error branches. It can stack the current flow over a proposed one, then adds a step table and open questions.',
-    level='Beginner', saves='1–2 hours per flow', version='1.2.0', updated=UPDATED,
+    level='Beginner', saves='1–2 hours per flow', version='1.3.0', updated=UPDATED,
     who='Product designers mapping a feature, PMs explaining a process to stakeholders, and founders sketching how their product works.',
     uses=['Show a before and after flow in a design review',
           'Map onboarding, checkout or booking with every error path',

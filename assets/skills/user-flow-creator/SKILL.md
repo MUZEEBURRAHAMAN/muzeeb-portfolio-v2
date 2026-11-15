@@ -17,12 +17,13 @@ Most flow diagrams are tangled boxes and arrows that only their author can read.
 2. **Write the happy path** as 4–7 stages. Each stage is a short verb phrase from the user's or system's point of view ("Uploads the document", "AI suggests fields"). Merge or cut stages that don't change what the user knows or decides.
 3. **Find the loops and branches.** Where does the flow repeat (sync, retry, review cycle)? Where does it split (error, abandonment, approval)? Every error branch must lead back into the flow or to a clear exit.
 4. **Decide if a comparison helps.** If the request is about improving something, draw the current flow ("Traditional method") and the proposed one, with titles that name the outcome of each ("One-time styleguide → drift" vs "Continuous spec → audit → enforce").
-5. **Build the HTML** from `assets/flow-template.html`. Copy the whole file, keep its CSS, and replace the example diagrams with yours. Use:
-   - `.flow-diagram` with the modifier `flow-diagram--current` (muted) or `flow-diagram--proposed` (accent).
-   - `.flow-label` → a `.lozenge` with the method name and a `.flow-title` with the outcome.
-   - `.flow-pipeline` containing `.flow-stage` items separated by `.flow-connector` elements.
-   - `.flow-return` with a `.flow-return-label` for loops back to an earlier stage.
-   - `.flow-branch` under a stage for an alternative or error path.
+5. **Build the HTML** from `assets/flow-canvas.html`, an Excalidraw-style canvas. Copy the whole file and edit only the `FLOWS` data block and the HTML sections under it; the renderer draws everything. For each flow give:
+   - `tag` ("Current flow" / "Improved flow"), `kind` (`current` or `proposed`) and a `title` that states the outcome with arrows.
+   - `nodes` on a grid (`col`, `row`), each with a `role` that sets its colour: `user` (blue), `system` (yellow), `ai` (orange), `decision` (purple diamond), `success` (green), `error` (red), `external` (grey). Give the one or two nodes that matter most `focal: true`.
+   - `edges` with short labels; use `kind: 'error'` for failure branches, `'loop'` for retries that return to an earlier step (drawn below the row), `'async'` for background work.
+   - `zones` to group related steps in a dashed box with a title (for example "Verify identity").
+   **Layout rules:** the happy path runs left to right on row 0; branches sit directly below the step they come from (row 1, same column); one node per cell; never route an edge through another node, so merge two errors from the same step into one recovery node if needed. Keep titles under four words and node lines short.
+   For a very simple linear comparison you may use `assets/flow-template.html` (plain pipelines) instead.
 5b. **Explain the comparison.** Under the diagrams, add a short "What changed" list: each step you removed, merged or automated, and why it can go. A reader should see the reason, not just a shorter line.
 5c. **Cover the domain's risks.** Flows in money, health, identity or legal products must show the safeguards: identity checks, rate limits and lockouts, confirmation messages, and notifying the user after sensitive changes. Show them as stages or branches, not footnotes.
 6. **Add the step table** below the diagrams: number, stage, actor, what they see, what they do, failure case.
@@ -35,7 +36,7 @@ Most flow diagrams are tangled boxes and arrows that only their author can read.
 - List the entry points (where users arrive from) above the diagram.
 - Keep the happy path to five stages or fewer, or say in one line why it needs more.
 - Put the accent colour on one or two stages only: the change that matters most. Everything else stays neutral.
-- Borders, not shadows. The template already does this; don't add `box-shadow`.
+- Hand-drawn strokes, colour by role, no shadows. Don't restyle the canvas.
 
 ## Self-check before you hand it over
 
