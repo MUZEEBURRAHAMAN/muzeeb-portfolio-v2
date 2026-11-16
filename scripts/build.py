@@ -702,11 +702,11 @@ def skill_page(i, k):
 <div class="sk-links"><a class="btn" href="assets/skills/{slug}/{slug}.zip" download>{svg("download")}Download .zip</a><a class="btn" href="#skill-md">View SKILL.md</a><a class="btn" href="{SKILL_REPO}/tree/main/{slug}" rel="noopener" target="_blank">GitHub ↗</a></div>
 </header>
 <dl class="cs-meta sk-dl">{"".join(f'<div><dt>{E(a)}</dt><dd>{E(b)}</dd></div>' for a, b in meta)}</dl>
+{output_html(k)}
 <section class="sec" aria-labelledby="h-who"><div class="eyebrow" id="h-who"><span class="n">01</span> Who it is for</div><p class="cs-lead">{E(k["who"])}</p></section>
 <section class="sec" aria-labelledby="h-use"><div class="eyebrow" id="h-use"><span class="n">02</span> Use cases</div><ul class="cs-list">{"".join(f"<li>{md(u)}</li>" for u in k["uses"])}</ul></section>
 <section class="sec" aria-labelledby="h-say"><div class="eyebrow" id="h-say"><span class="n">03</span> Say this to activate it</div>
 <div class="sk-says">{"".join(f'<button type="button" class="sk-say" data-copy="{E(t)}" data-done="Copied">“{E(t)}”</button>' for t in k["triggers"])}</div></section>
-{output_html(k)}
 {demo_html(k)}
 <section class="sec" aria-labelledby="h-inst"><div class="eyebrow" id="h-inst"><span class="n">04</span> Install</div>
 <div class="sk-code"><pre><code>{E(install)}</code></pre><button type="button" class="btn sm" data-copy="{E(install)}" data-done="Copied">{svg("copy")}<span class="lbl">Copy</span></button></div>
